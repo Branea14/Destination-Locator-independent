@@ -64,9 +64,5 @@ router.post('/test', (req, res) => {
 //     }
 // })
 
-// router.post('/logout', async (req, res, next) => {
-//     res.clearCookie('token');
-//     res.json("Logout successful")
-// })
 
 module.exports = router;
