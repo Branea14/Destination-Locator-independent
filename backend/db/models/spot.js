@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Spot.hasMany(models.Review, {
+        foreignKey: 'spot',
+        onDelete: 'CASCADE'
+      })
     }
   }
   Spot.init({
@@ -88,7 +91,7 @@ module.exports = (sequelize, DataTypes) => {
         isInt: true
       }
     },
-    previewImage: DataTypes.STRING
+    previewImage: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Spot',

@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model, Validator
+  Model, Validator,
+  Sequelize
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -58,8 +59,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [60,60]
       }
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',

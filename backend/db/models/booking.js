@@ -3,55 +3,52 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Review extends Model {
+  class Booking extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Review.belongsTo(models.User, {
-        foreignKey: 'user'
-      })
-
-      Review.belongsTo(models.Spot, {
-        foreignKey: 'spot'
-      })
+      // define association here
     }
   }
-  Review.init({
-    userId: {
-      type: DataTypes.INTEGER,
-      unique: true,
-      validate: {
-        isNumeric: true,
-        min: 1
-      }
-    },
+  Booking.init({
     spotId: {
       type: DataTypes.INTEGER,
       unique: true,
+      allowNull: false,
       validate: {
-        isNumeric: true,
-        min: 1
-      }
-    },
-    review: {
-      type: DataTypes.STRING,
-      validate: {
-        isAlphanumeric: true
-      }
-    },
-    stars: {
-      type: DataTypes.INTEGER,
-      validate: {
-        len: [1,1],
+        min: 1,
         isInt: true
+      }
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      unique: true,
+      allowNull: false,
+      validate: {
+        min: 1,
+        isInt: true
+      }
+    },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isBefore: endDate
+      }
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isAfter: startDate
       }
     },
   }, {
     sequelize,
-    modelName: 'Review',
+    modelName: 'Booking',
   });
-  return Review;
+  return Booking;
 };
