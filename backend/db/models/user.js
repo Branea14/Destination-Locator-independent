@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.Review, {
-        foreignKey: 'user',
+        foreignKey: 'userId',
         onDelete: 'CASCADE'
-      })
+      });
     }
   }
   User.init({

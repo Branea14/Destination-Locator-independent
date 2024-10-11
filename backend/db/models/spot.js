@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Spot.hasMany(models.Review, {
-        foreignKey: 'spot',
+        foreignKey: 'spotId',
         onDelete: 'CASCADE'
       });
 
       Spot.belongsTo(models.Booking, {
-        foreignKey: 'spot'
+        foreignKey: 'spotId'
       })
     }
   }
@@ -95,7 +95,20 @@ module.exports = (sequelize, DataTypes) => {
         isInt: true
       }
     },
-    previewImage: DataTypes.STRING,
+    previewImage: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isUrl: true
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+      }
+    }
   }, {
     sequelize,
     modelName: 'Spot',
