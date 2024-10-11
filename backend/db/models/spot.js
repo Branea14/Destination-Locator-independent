@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.Review, {
         foreignKey: 'spot',
         onDelete: 'CASCADE'
+      });
+
+      Spot.belongsTo(models.Booking, {
+        foreignKey: 'spot'
       })
     }
   }
