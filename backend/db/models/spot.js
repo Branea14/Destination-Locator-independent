@@ -14,16 +14,80 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    price: DataTypes.FLOAT,
-    avgRating: DataTypes.DECIMAL,
+    ownerId: {
+      type: DataTypes.INTEGER,
+      unique: true,
+      allowNull: false,
+      validate: {
+        isInt: true,
+      }
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlpha: true
+      }
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        len: [2,2]
+      }
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlpha: true
+      }
+    },
+    lat: {
+      type: DataTypes.DECIMAL(10,7),
+      unique: true,
+      validate: {
+        isDecimal: true
+      }
+    },
+    lng: {
+      type: DataTypes.DECIMAL(10,7),
+      unique: true,
+      validate: {
+        isDecimal: true
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        min: 3
+      }
+    },
+    price: {
+      type: DataTypes.DECIMAL(10,2),
+      allowNull: false,
+      validate: {
+        isDecimal: true
+      }
+    },
+    avgRating: {
+      type: DataTypes.DECIMAL(1,1),
+      allowNull: true,
+      validate: {
+        // isDecimal: true,
+        isInt: true
+      }
+    },
     previewImage: DataTypes.STRING
   }, {
     sequelize,
