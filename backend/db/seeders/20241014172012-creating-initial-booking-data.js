@@ -18,7 +18,6 @@ module.exports = {
     {
       startDate: "10/08/2025",
       endDate: "10/15/2025"
-
     },
     {
       startDate: "04/01/2025",

@@ -20,7 +20,7 @@ module.exports = {
       stars: 2
     },
     {
-      review: "All aroiund great, I will be coming back!",
+      review: "All around great, I will be coming back!",
       stars: 5
     }
    ], {validate: true})

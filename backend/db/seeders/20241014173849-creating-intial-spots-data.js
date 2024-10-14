@@ -16,10 +16,10 @@ module.exports = {
       city: "Memphis",
       state: "TN",
       country: "United States of America",
-      lat: 28.0825,
-      lon: -155.24578,
+      lat: 280.0825000,
+      lng: -155.2457809,
       name: "Country Cabin Near Beale St",
-      price: 68,
+      price: 68.00,
       avgRating: 4.8,
       previewImage: "http://cabinimage.com",      
       description: "A cute wooden cabin near Beale St."
@@ -31,10 +31,10 @@ module.exports = {
       city: "Minneapolis",
       state: "MN",
       country: "United States of America",
-      lat: 50.101019,
-      lon: -18.101882,
+      lat: 950.1010190,
+      lng: -108.1018829,
       name: "High rise near metropolitan area",
-      price: 152,
+      price: 152.00,
       avgRating: 4.3,
       previewImage: "http://skylineview.com",      
       description: "High rise near the Arts District."
@@ -45,10 +45,10 @@ module.exports = {
       city: "Las Vegas",
       state: "NV",
       country: "United States of America",
-      lat: 100.124124,
-      lon: -101.11919,
+      lat: 100.1241249,
+      lng: -101.1191904,
       name: "Condo near the Strip",
-      price: 128,
+      price: 128.00,
       avgRating: 4.9,
       previewImage: "http://viewofvegasstrip.com",      
       description: "Lively night life and clean stay."
@@ -60,7 +60,7 @@ module.exports = {
     options.tableName = "Spots";
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      lat: {[Op.in]: [28.0825, 50.101019, 100.124124]}
+      lat: {[Op.in]: [280.0825000, 950.1010190, 100.1241249]}
     }, {})
   }
 };
