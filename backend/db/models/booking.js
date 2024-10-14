@@ -12,11 +12,29 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Booking.hasMany(models.Spot, {
         foreignKey: 'spotId',
-        onDelete: 'CASCADE'
+        as: "Spot"
       })
     }
   }
   Booking.init({
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Spots",
+        key: "id"
+      },
+      onDelete: "CASCADE"
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Users",
+        key: "id"
+      },
+      onDelete: "CASCADE"
+    },
     startDate: {
       type: DataTypes.DATE,
       allowNull: false,

@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Spot.hasMany(models.Review, {
-        foreignKey: 'spotId',
-        onDelete: 'CASCADE'
+        foreignKey: 'spotId'
       });
 
       Spot.belongsTo(models.Booking, {
@@ -113,6 +112,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    tableName: "Spots"
   });
   return Spot;
 };
