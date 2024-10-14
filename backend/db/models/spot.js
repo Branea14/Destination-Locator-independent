@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Spot.init({
+    // Should be assigned an ownerId if the user is owner
     ownerId: {
       type: DataTypes.INTEGER,
       unique: true,
@@ -88,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     avgRating: {
-      type: DataTypes.DECIMAL(1,1),
+      type: DataTypes.DECIMAL(2,1),
       allowNull: true,
       validate: {
         // isDecimal: true,
