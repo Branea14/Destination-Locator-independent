@@ -47,13 +47,13 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
-      avgRating: {
-        type: Sequelize.DECIMAL(2, 1),
-        allowNull: true
-      },
-      previewImage: {
-        type: Sequelize.STRING
-      },
+      // avgRating: {
+      //   type: Sequelize.DECIMAL(2, 1),
+      //   allowNull: true
+      // },
+      // previewImage: {
+      //   type: Sequelize.STRING
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

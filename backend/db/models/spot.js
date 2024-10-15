@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Spot.hasMany(models.Review, {
         foreignKey: 'spotId',
-        onDelete: 'CASCADE',  
+        onDelete: 'CASCADE',
         hooks: true
       });
 
@@ -96,21 +96,21 @@ module.exports = (sequelize, DataTypes) => {
         isDecimal: true
       }
     },
-    avgRating: {
-      type: DataTypes.DECIMAL(2,1),
-      allowNull: true,
-      validate: {
-        // isDecimal: true,
-        isInt: true
-      }
-    },
-    previewImage: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
-    },
+    // avgRating: {
+    //   type: DataTypes.DECIMAL(2,1),
+    //   allowNull: true,
+    //   validate: {
+    //     // isDecimal: true,
+    //     isInt: true
+    //   }
+    // },
+    // previewImage: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   validate: {
+    //     isUrl: true
+    //   }
+    // },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
