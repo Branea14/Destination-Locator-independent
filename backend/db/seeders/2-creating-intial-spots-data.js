@@ -20,8 +20,8 @@ module.exports = {
       lng: -155.2457809,
       name: "Country Cabin Near Beale St",
       price: 68.00,
-      avgRating: 4.8,
-      previewImage: "http://cabinimage.com",      
+      // avgRating: 4.8,
+      // previewImage: "http://cabinimage.com",
       description: "A cute wooden cabin near Beale St."
 
     },
@@ -35,8 +35,8 @@ module.exports = {
       lng: -108.1018829,
       name: "High rise near metropolitan area",
       price: 152.00,
-      avgRating: 4.3,
-      previewImage: "http://skylineview.com",      
+      // avgRating: 4.3,
+      // previewImage: "http://skylineview.com",
       description: "High rise near the Arts District."
     },
     {
@@ -49,8 +49,8 @@ module.exports = {
       lng: -101.1191904,
       name: "Condo near the Strip",
       price: 128.00,
-      avgRating: 4.9,
-      previewImage: "http://viewofvegasstrip.com",      
+      // avgRating: 4.9,
+      // previewImage: "http://viewofvegasstrip.com",
       description: "Lively night life and clean stay."
     }
    ], {validate: true})
