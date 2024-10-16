@@ -16,7 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     allowNull: false,
     validate: {
       isInt: true
-      }
+    },
+    references: {
+      model: "Spots",
+      key: "id"
+    },
+    onDelete: "CASCADE"
     },
     url: {
      type: DataTypes.STRING,

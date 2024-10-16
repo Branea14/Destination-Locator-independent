@@ -32,25 +32,30 @@ module.exports = (sequelize, DataTypes) => {
     // Should be assigned an ownerId if the user is owner
     ownerId: {
       type: DataTypes.INTEGER,
-      unique: true,
+      // unique: true,
       allowNull: false,
       validate: {
         isInt: true,
-      }
+      },
+      references: {
+        model: "Users",
+        key: "id"
+      },
+      onDelete: "CASCADE"
     },
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlphanumeric: true,
-      }
+      // validate: {
+      //   isAlphanumeric: true,
+      // }
     },
     city: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true
-      }
+      // validate: {
+      //   isAlpha: true
+      // }
     },
     state: {
       type: DataTypes.STRING,
@@ -63,38 +68,38 @@ module.exports = (sequelize, DataTypes) => {
     country: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true
-      }
+      // validate: {
+      //   isAlpha: true
+      // }
     },
     lat: {
       type: DataTypes.DECIMAL(10,7),
       unique: true,
-      validate: {
-        isDecimal: true
-      }
+      // validate: {
+        // isDecimal: true
+      // }
     },
     lng: {
       type: DataTypes.DECIMAL(10,7),
       unique: true,
-      validate: {
-        isDecimal: true
-      }
+      // validate: {
+        // isDecimal: true
+      // }
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlphanumeric: true,
+        // isAlphanumeric: true,
         min: 3
       }
     },
     price: {
       type: DataTypes.DECIMAL(10,2),
       allowNull: false,
-      validate: {
-        isDecimal: true
-      }
+      // validate: {
+        // isDecimal: true
+      // }
     },
     // avgRating: {
     //   type: DataTypes.DECIMAL(2,1),
@@ -114,9 +119,9 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlphanumeric: true,
-      }
+      // validate: {
+      //   // isAlphanumeric: true,
+      // }
     }
   }, {
     sequelize,
