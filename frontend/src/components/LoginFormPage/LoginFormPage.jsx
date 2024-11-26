@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
 import { Navigate } from "react-router-dom";
-
+import './LoginForm.css';
 
 const LoginFormPage = () => {
     const [credential, setCredential] = useState('');

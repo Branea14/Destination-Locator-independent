@@ -31,13 +31,13 @@ export const login = (user) => async dispatch => {
         return response;
     }
 }
-
-// export const restoreUser = () => async dispatch => {
-//     const response = await csrfFetch('/api/session');
-//     const data = await response.json();
-//     dispatch(loginUser(data));
-//     return response;
-// }
+// retains session user info on an refresh
+export const restoreUser = () => async dispatch => {
+    const response = await csrfFetch('/api/session');
+    const data = await response.json();
+    dispatch(loginUser(data));
+    return response;
+}
 
 
 const initialState = {user: null};
