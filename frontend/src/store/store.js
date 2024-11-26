@@ -1,18 +1,20 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import sessionReducer from './session';
 
 
-const placeholderReducer = (state = {}, action) => {
-  switch (action.type) {
-    case 'TEST_ACTION':
-      return { ...state, test: action.payload };
-    default:
-      return state;
-  }
-};
+// const placeholderReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case 'TEST_ACTION':
+//       return { ...state, test: action.payload };
+//     default:
+//       return state;
+//   }
+// };
 
 const rootReducer = combineReducers({
-  placeholderReducer
+  // placeholderReducer,
+  session: sessionReducer
 });
 
 

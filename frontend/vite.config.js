@@ -17,6 +17,6 @@ export default defineConfig(({ mode }) => ({
     proxy: {
       '/api': 'http://localhost:8000'
     },
-    open: true
+    // open: true
   }
 }));
