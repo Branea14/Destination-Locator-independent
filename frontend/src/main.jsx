@@ -18,7 +18,6 @@ if (import.meta.env.MODE !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
 }
