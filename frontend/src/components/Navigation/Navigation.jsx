@@ -1,45 +1,70 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import * as sessionActions from '../../store/session';
 import ProfileButton from "./ProfileButton";
+import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({isLoaded}) => {
     const user = useSelector((state) => state.session.user);
-    const dispatch = useDispatch()
 
-    const logoutButton = () => {
-        dispatch(sessionActions.logout())
-    }
+    const sessionLinks = user ? (
+        <li>
+            <ProfileButton user={user} />
+        </li>
+    ) : (
+        <>
+            <li>
+                <NavLink to="/login">Log In</NavLink>
+            </li>
+            <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+            </li>
+        </>
+    );
 
     return (
-        <>
         <ul>
             <li>
                 <NavLink to='/'>Home</NavLink>
             </li>
-            {!user ? (
-                <>
-                    <li>
-                        <NavLink to='/login'>Log In</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='signup'>Sign Up</NavLink>
-                    </li>
-                </>
-            ) : (
-                <>
-                    <li>
-                        <ProfileButton user={ProfileButton} />
-                    </li>
-                    <li>
-                        <button onClick={logoutButton}>Log out</button>
-                    </li>
-
-                </>
-            )}
+            {isLoaded && sessionLinks}
         </ul>
-        </>
     )
 }
 
 export default Navigation;
+
+// frontend/src/components/Navigation/Navigation.jsx
+
+// import { NavLink } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import ProfileButton from './ProfileButton';
+
+// function Navigation({ isLoaded }){
+//   const sessionUser = useSelector(state => state.session.user);
+
+//   const sessionLinks = sessionUser ? (
+//     <li>
+//       <ProfileButton user={sessionUser} />
+//     </li>
+//   ) : (
+//     <>
+//       <li>
+//         <NavLink to="/login">Log In</NavLink>
+//       </li>
+//       <li>
+//         <NavLink to="/signup">Sign Up</NavLink>
+//       </li>
+//     </>
+//   );
+
+//   return (
+//     <ul>
+//       <li>
+//         <NavLink to="/">Home</NavLink>
+//       </li>
+//       {isLoaded && sessionLinks}
+//     </ul>
+//   );
+// }
+
+// export default Navigation;
