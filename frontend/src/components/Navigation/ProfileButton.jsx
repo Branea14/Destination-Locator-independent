@@ -2,9 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { FaRedditAlien } from "react-icons/fa6";
 import * as sessionActions from '../../store/session';
-import { OpenModalButton } from "../OpenModalButton/OpenModalButton";
+// import { OpenModalButton } from "../OpenModalButton/OpenModalButton";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import OpenModalMenuItem from "./OpenModelMenuItem";
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
@@ -54,16 +55,16 @@ const ProfileButton = ({user}) => {
                 ) : (
                     <>
                         <li>
-                            <OpenModalButton
-                                buttonText='Log In'
-                                onButtonClick={closeMenu}
+                            <OpenModalMenuItem
+                                itemText='Log In'
+                                onItemClick={closeMenu}
                                 modalComponent={<LoginFormModal />}
                             />
                         </li>
                         <li>
-                            <OpenModalButton
-                                buttonText='Sign Up'
-                                onButtonClick={closeMenu}
+                            <OpenModalMenuItem
+                                itemText='Sign Up'
+                                onItemClick={closeMenu}
                                 modalComponent={<SignupFormModal />}
                             />
                         </li>
