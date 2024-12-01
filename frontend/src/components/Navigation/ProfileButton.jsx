@@ -1,7 +1,10 @@
-import { FaRedditAlien } from "react-icons/fa6";
-import { useDispatch } from "react-redux";
-import * as sessionActions from '../../store/session';
 import { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { FaRedditAlien } from "react-icons/fa6";
+import * as sessionActions from '../../store/session';
+import { OpenModalButton } from "../OpenModalButton/OpenModalButton";
+import LoginFormModal from "../LoginFormModal/LoginFormModal";
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
@@ -17,7 +20,7 @@ const ProfileButton = ({user}) => {
         if (!showMenu) return;
 
         const closeMenu = (e) => {
-            if (ulRef.current && !ulRef.current.contains(e.target)) setShowMenu(false);
+            if (!ulRef.current.contains(e.target)) setShowMenu(false);
         };
 
         document.addEventListener('click', closeMenu);
@@ -34,16 +37,33 @@ const ProfileButton = ({user}) => {
 
     return (
         <>
-            <button onClick={toggleMenu}>
-                <FaRedditAlien />
-            </button>
+            <button onClick={toggleMenu}><FaRedditAlien /></button>
             <ul className={ulClassName} ref={ulRef}>
-                <li>{user.username}</li>
-                <li>{user.firstName} {user.lastName}</li>
-                <li>{user.email}</li>
-                <li>
-                    <button onClick={logout}>Logout</button>
-                </li>
+                {user ? (
+                    <>
+                        <li>{user.username}</li>
+                        <li>{user.firstName} {user.lastName}</li>
+                        <li>{user.email}</li>
+                        <li>
+                            <button onClick={logout}>Logout</button>
+                        </li>
+                    </>
+                ) : (
+                    <>
+                        <li>
+                            <OpenModalButton
+                                buttonText='Log In'
+                                modalComponent={<LoginFormModal />}
+                            />
+                        </li>
+                        <li>
+                            <OpenModalButton
+                                buttonText='Sign Up'
+                                modalComponent={<SignupFormModal />}
+                            />
+                        </li>
+                    </>
+                )}
             </ul>
         </>
     )
