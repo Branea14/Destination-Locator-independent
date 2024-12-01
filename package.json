@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "per-env": "^1.0.2"
+    "per-env": "^1.0.2",
+    "sequelize": "^6.37.5",
+    "toposort-class": "^1.0.1"
   }
 }
