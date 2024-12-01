@@ -55,7 +55,7 @@ export const signup = (user) => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data', data)
+        // console.log('data', data)
         dispatch(loginUser(data.user));
         return response;
     }

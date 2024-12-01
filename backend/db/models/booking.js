@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         // isBefore: endDate
         validStartDate(value) {
-          console.log(this.endDate)
+          // console.log(this.endDate)
           if (!this.endDate) {
               throw new Error("End date is required to validate start date.")
           }
