@@ -1,9 +1,9 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 import Navigation from "./components/Navigation";
 import * as sessionActions from './store/session';
+// import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 // import LoginFormPage from "./components/LoginFormPage";
 // import { Greeting } from "./components/OpenModalButton/OpenModalButton";
 
@@ -38,10 +38,13 @@ const router = createBrowserRouter([
       //   path: '/login',
       //   element: <LoginFormPage />
       // },
-      {
-        path: '/signup',
-        element: <SignupFormPage />
-      },
+
+      //removed/refactor to turn into modal
+      // {
+      //   path: '/signup',
+      //   element: <SignupFormPage />
+      // },
+
       //testing purposes
       // {
       //   path: '/greeting',
