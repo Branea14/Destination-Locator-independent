@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
+import spotReducer from './spots';
 
 
 // const placeholderReducer = (state = {}, action) => {
@@ -14,7 +15,8 @@ import sessionReducer from './session';
 
 const rootReducer = combineReducers({
   // placeholderReducer,
-  session: sessionReducer
+  session: sessionReducer,
+  spot: spotReducer
 });
 
 

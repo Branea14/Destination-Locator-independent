@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import * as sessionActions from './store/session';
+import SpotsBrowser from "./components/Spots/SpotsBrowser";
 // import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 // import LoginFormPage from "./components/LoginFormPage";
 // import { Greeting } from "./components/OpenModalButton/OpenModalButton";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <h1>Welcome!</h1>
       },
+      {
+        path: '/spots',
+        element: <SpotsBrowser />
+      }
       //removed/refactor to turn into modal
       // {
       //   path: '/login',
