@@ -21,7 +21,7 @@ const SpotDetails = () => {
 
     return (
         <>
-            <h1>{singleSpot.address}</h1>
+            <h1>{singleSpot.name}</h1>
             <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
             {singleSpot.SpotImages.map((spotImageDetails, index) => (
                 <div key={index}>
@@ -35,15 +35,19 @@ const SpotDetails = () => {
                 ${singleSpot.price} <span className="night">night</span>
             </h3>
             <button type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
-            <h4>{singleSpot.avgStarRating
+            <h4>{singleSpot.avgStarRating && singleSpot.numReviews == 1
+                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} review`
+                    : singleSpot.avgStarRating && singleSpot.numReviews > 1
                     ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} reviews`
-                    : 'NEW!'
+                    : `⭐NEW!`
                 }
             </h4>
             <h3>
-                {singleSpot.avgStarRating
+                {singleSpot.avgStarRating && singleSpot.numReviews == 1
+                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} review`
+                    : singleSpot.avgStarRating && singleSpot.numReviews > 1
                     ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} reviews`
-                    : 'NEW!'
+                    : `⭐NEW!`
                 }
             </h3>
             <Outlet />
