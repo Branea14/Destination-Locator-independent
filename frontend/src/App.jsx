@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import * as sessionActions from './store/session';
 import SpotsBrowser from "./components/Spots/SpotsBrowser";
+import SpotDetails from "./components/Spots/SpotDetails";
+import Reviews from './components/Reviews/Reviews'
 // import SignupFormPage from "./components/SignupFormPage/SignupFormPage";
 // import LoginFormPage from "./components/LoginFormPage";
 // import { Greeting } from "./components/OpenModalButton/OpenModalButton";
@@ -37,6 +39,16 @@ const router = createBrowserRouter([
       {
         path: '/spots',
         element: <SpotsBrowser />
+      },
+      {
+        path: '/spots/:spotId',
+        element: <SpotDetails />,
+        children: [
+          {
+            path: '',
+            element: <Reviews />
+          }
+        ]
       }
       //removed/refactor to turn into modal
       // {
