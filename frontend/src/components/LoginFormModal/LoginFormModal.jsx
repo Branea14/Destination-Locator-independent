@@ -40,6 +40,21 @@ const LoginFormModal = () => {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setErrors({});
+    try {
+        await dispatch(sessionActions.login({
+            credential: 'Demo-lition',
+            password: 'password'
+        }));
+        closeModal();
+    } catch (res) {
+        const data = await res.json();
+        if (data?.errors) setErrors(data.errors);
+    }
+  }
+
+  const disableButton = () => credential.length < 4 || password.length < 6;
 
     return (
         <div className="modal-background">
@@ -65,7 +80,9 @@ const LoginFormModal = () => {
                         />
                     </label>
                     {errors.credential && <p>{errors.credential}</p>}
-                    <button type="submit">Log In</button>
+                    <button type="submit" disabled={disableButton}>Log In</button>
+                    <a href="#" onClick={handleDemoLogin}>Log in as Demo</a>
+                    {/* <button type="submit" onClick={handleDemoLogin}>Log in as Demo-User</button> */}
                 </form>
             </div>
         </div>
