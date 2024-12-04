@@ -7,12 +7,12 @@ export const loadReviews = allReviews => ({
     allReviews
 })
 
-export const getAllReviews = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${id}/reviews`);
+export const getAllReviews = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(loadReviews(data));
+        dispatch(loadReviews(data.Reviews));
         return data;
     }
 }

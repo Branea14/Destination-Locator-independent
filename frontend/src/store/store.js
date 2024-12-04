@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import spotReducer from './spots';
+import reviewReducer from './reviews';
 
 
 // const placeholderReducer = (state = {}, action) => {
@@ -16,7 +17,8 @@ import spotReducer from './spots';
 const rootReducer = combineReducers({
   // placeholderReducer,
   session: sessionReducer,
-  spot: spotReducer
+  spot: spotReducer,
+  reviews: reviewReducer
 });
 
 

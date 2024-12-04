@@ -7,7 +7,7 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const singleSpot = useSelector(state => state.spot.singleSpot)
-    console.log(singleSpot)
+    // console.log(singleSpot)
 
     useEffect(() => {
         spotId && dispatch(getSingleSpot(spotId))
