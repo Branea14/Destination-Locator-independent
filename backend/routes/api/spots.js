@@ -719,7 +719,12 @@ router.post("/:spotId/reviews", requireAuth,  validateReview, async (req,res,nex
     const { spotId } = req.params;
 
     const spot = await Spot.findByPk(spotId);
+    const ownerId = spot.dataValues.ownerId
     if (!spot) return res.status(404).json({ "message": "Spot couldn't be found"})
+
+    if (ownerId === userId) {
+        return res.status(403).json({message: 'Forbidden'});
+    }
 
     const existingReview = await Review.findOne({
         where: {spotId , userId}
@@ -727,14 +732,16 @@ router.post("/:spotId/reviews", requireAuth,  validateReview, async (req,res,nex
     if (existingReview) return res.status(500).json({ "message": "User already has a review for this spot" })
 
     try {
-        const newReview = await Review.create({
-            userId,
-            spotId,
-            review,
-            stars,
-        })
+        if (ownerId !== userId) {
+            const newReview = await Review.create({
+                userId,
+                spotId,
+                review,
+                stars,
+            })
 
-        return res.status(201).json(newReview);
+            return res.status(201).json(newReview);
+        }
     }
     catch(error) {
         // let options = {}
