@@ -27,7 +27,6 @@ const LoginFormModal = () => {
     //     )
     // }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
@@ -54,7 +53,9 @@ const LoginFormModal = () => {
     }
   }
 
-  const disableButton = () => credential.length < 4 || password.length < 6;
+  const disableButton = () => {
+    return credential.length < 4 || password.length < 6;
+  }
 
     return (
         <div className="modal-background">
@@ -80,7 +81,7 @@ const LoginFormModal = () => {
                         />
                     </label>
                     {errors.credential && <p>{errors.credential}</p>}
-                    <button type="submit" disabled={disableButton}>Log In</button>
+                    <button type="submit" disabled={disableButton() }>Log In</button>
                     <a href="#" onClick={handleDemoLogin}>Log in as Demo</a>
                     {/* <button type="submit" onClick={handleDemoLogin}>Log in as Demo-User</button> */}
                 </form>
