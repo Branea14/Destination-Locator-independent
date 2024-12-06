@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createSpot } from "../../store/spots";
 
-const CreateSpot = ({hideForm}) => {
+const CreateSpot = () => {
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -11,10 +11,8 @@ const CreateSpot = ({hideForm}) => {
     const [description, setDescription] = useState('');
     const [spotName, setSpotName] = useState('');
     const [price, setPrice] = useState('');
-    // const [image, setImage] = useState([])
-    const [imageUrls, setImageUrls] = useState(['']);
+    const [imageUrls, setImageUrls] = useState(['', '', '', '', '']);
     const [errors, setErrors] = useState({});
-
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,6 +24,11 @@ const CreateSpot = ({hideForm}) => {
     const updateDescription = (e) => setDescription(e.target.value);
     const updateSpotName = (e) => setSpotName(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
+    const updateUrl = (e, index) => {
+        const newUrls = [...imageUrls];
+        newUrls[index] = e.target.value;
+        setImageUrls(newUrls);
+    };
 
     const handleValidation = () => {
         const validationErrors = {};
@@ -37,6 +40,19 @@ const CreateSpot = ({hideForm}) => {
         if (description.length < 30) validationErrors.description = 'Description needs a minimum of 30 characters';
         if (!spotName) validationErrors.spotName = 'Name is required';
         if (!price || isNaN(price)) validationErrors.price = 'Price is required';
+
+        const previewImage = imageUrls[0];
+        if (!previewImage) {
+            validationErrors.previewImage = 'Preview Image is required.'
+        } else if (!(previewImage.endsWith('.jpg') || previewImage.endsWith('.jpeg') || previewImage.endsWith('.png'))) {
+            validationErrors.previewImage = 'Preview image must end in .png, .jpg, or .jpeg';
+        }
+
+        imageUrls.forEach((url, index) => {
+            if (url && !(url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'))) {
+                validationErrors[`image${index}`] = 'Image URL must end in .png, .jpg, or .jpeg';
+            }
+        })
 
         return validationErrors;
     }
@@ -57,32 +73,18 @@ const CreateSpot = ({hideForm}) => {
             description,
             name: spotName,
             price,
-            SpotImages: imageUrls.filter(url => url)
+            SpotImages: imageUrls.map((url, index) => ({
+                url,
+                preview: index === 0
+            }))
         }
 
         let newSpot = await dispatch(createSpot(payload));
         if (newSpot) {
             navigate(`spots/${newSpot.id}`);
-            hideForm();
+            // hideForm();
         }
     }
-
-    // const handleImage = (e) => {
-    //     const newImage = e.target.value;
-    //     if (newImage) {
-    //         setImage(prevImages => [...prevImages, newImage]);
-    //     }
-    // }
-
-    const handleImageChange = (index, e) => {
-        const newImageUrls = [...imageUrls];
-        newImageUrls[index] = e.target.value;
-        setImageUrls(newImageUrls);
-    };
-
-    // const addImageField = () => {
-    //     setImageUrls([...imageUrls, '']);
-    // };
 
     return (
         <section className="new-form-holder centered middled">
@@ -176,24 +178,62 @@ const CreateSpot = ({hideForm}) => {
                 {errors.price &&
                     <p>{errors.price}</p>
                 }
-                 <h2>Liven up your spot with photos</h2>
-                 <p>Submit a link to at least one photo to publish your spot.</p>
+                <h2>Liven up your spot with photos</h2>
+                <p>Submit a link to at least one photo to publish your spot.</p>
+                <input
+                    type="text"
+                    placeholder="Preview Image URL"
+                    value={imageUrls[0]}
+                    onChange={(e) => updateUrl(e, 0)}
+                />
+                {errors.previewImage &&
+                    <p>{errors.previewImage}</p>
+                }
+
+                {[1, 2, 3, 4].map(index => (
+                    <input key={index}
+                        type="text"
+                        placeholder="Image URL"
+                        value={imageUrls[index]}
+                        onChange={(e) => updateUrl(e, index)}
+                        />
+                ))}
+
                 {/* <input
                     type="text"
-                    value={image}
-                    onChange={handleImage}
-                /> */}
-                {imageUrls.map((url, index) => (
-                    <div key={index}>
-                        <input
-                            type="text"
-                            value={url}
-                            onChange={(e) => handleImageChange(index, e)}
-                            placeholder={`Image URL #${index + 1}`}
-                        />
-                    </div>
-                ))}
+                    placeholder="Image URL"
+                    value={imageUrls[1]}
+                    onChange={(e) => updateUrl(e, 1)}
+                    />
+
+                <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={imageUrls[2]}
+                    onChange={(e) => updateUrl(e, 2)}
+                    />
+
+                <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={imageUrls[3]}
+                    onChange={(e) => updateUrl(e, 3)}
+                    />
+
+                <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={imageUrls[4]}
+                    onChange={(e) => updateUrl(e, 4)}
+                    />  */}
+
+                {errors.image1 && <p>{errors.image1}</p>}
+                {errors.image2 && <p>{errors.image2}</p>}
+                {errors.image3 && <p>{errors.image3}</p>}
+                {errors.image4 && <p>{errors.image4}</p>}
+                {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
                 <button type="submit">Create Spot</button>
+
             </form>
         </section>
     )

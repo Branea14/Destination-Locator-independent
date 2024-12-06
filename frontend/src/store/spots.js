@@ -41,10 +41,10 @@ export const getSingleSpot = (id) => async dispatch => {
 }
 
 export const createSpot = (newSpot) => async dispatch => {
-    const response = await csrfFetch('/api/spots/new', {
+    const response = await csrfFetch('/api/spots', {
         method: 'POST',
         // headers: {
-        //     'Content-Type': 'application/json'
+        //     // 'Content-Type': 'application/json'
         // },
         body: JSON.stringify(newSpot)
     });
@@ -70,19 +70,17 @@ const spotReducer = (state = initialState, action) => {
             return {...state, singleSpot: action.spot};
         case CREATE_SPOT:
             return {
-
                 ...state,
                 singleSpot: {
                     ...action.newSpot,
                     SpotImages: action.newSpot.SpotImages
                 },
                 spots: [...state.spots, action.newSpot],
-                newSpot: state.newSpot ? [...state.newSpot, action.newSpot] : [action.newSpot]
+                newSpot: !state.newSpot ? [action.newSpot] : [...state.newSpot, action.newSpot]
             };
         default:
             return state
     }
-
 }
 
 export default spotReducer;

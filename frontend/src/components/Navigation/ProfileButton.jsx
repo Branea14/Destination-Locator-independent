@@ -6,9 +6,11 @@ import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import OpenModalMenuItem from "./OpenModalMenuItem";
+import { useNavigate } from "react-router-dom";
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -45,9 +47,10 @@ const ProfileButton = ({user}) => {
             <ul className={ulClassName} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>{user.username}</li>
-                        <li>{user.firstName} {user.lastName}</li>
+                        <li>Hello, {user.username}</li>
+                        {/* <li>{user.firstName} {user.lastName}</li> */}
                         <li>{user.email}</li>
+                        <li>Manage Spots</li>
                         <li>
                             <button onClick={logout}>Logout</button>
                         </li>

@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/spots/new',
+        path: '/spots',
         element: <CreateSpot />
       }
       //removed/refactor to turn into modal
