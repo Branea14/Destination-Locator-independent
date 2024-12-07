@@ -14,9 +14,9 @@ export const loadSingleSpot = spot => ({
     spot
 });
 
-export const createNewSpot = newSpot => ({
+export const createNewSpot = spot => ({
     type: CREATE_SPOT,
-    newSpot
+    spot
 })
 
 
@@ -58,8 +58,8 @@ export const createSpot = (newSpot) => async dispatch => {
 
 const initialState = {
     spots: [],
-    singleSpot: null,
-    newSpot: []
+    singleSpot: null
+    // newSpot: []
 };
 
 const spotReducer = (state = initialState, action) => {
@@ -71,12 +71,13 @@ const spotReducer = (state = initialState, action) => {
         case CREATE_SPOT:
             return {
                 ...state,
-                singleSpot: {
-                    ...action.newSpot,
-                    SpotImages: action.newSpot.SpotImages
-                },
-                spots: [...state.spots, action.newSpot],
-                newSpot: !state.newSpot ? [action.newSpot] : [...state.newSpot, action.newSpot]
+                // singleSpot: {
+                //     ...action.newSpot,
+                //     SpotImages: action.newSpot.SpotImages
+                // },
+                singleSpot: action.spot,
+                spots: [...state.spots, action.spot]
+                // newSpot: !state.newSpot ? [action.spot] : [...state.newSpot, action.spot]
             };
         default:
             return state

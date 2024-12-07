@@ -79,9 +79,10 @@ const CreateSpot = () => {
             }))
         }
 
-        let newSpot = await dispatch(createSpot(payload));
+        let newSpot = dispatch(createSpot(payload));
         if (newSpot) {
             navigate(`spots/${newSpot.id}`);
+
             // hideForm();
         }
     }
@@ -232,7 +233,7 @@ const CreateSpot = () => {
                 {errors.image3 && <p>{errors.image3}</p>}
                 {errors.image4 && <p>{errors.image4}</p>}
                 {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
-                <button type="submit">Create Spot</button>
+                <button type="submit" onClick={handleSubmit}>Create Spot</button>
 
             </form>
         </section>

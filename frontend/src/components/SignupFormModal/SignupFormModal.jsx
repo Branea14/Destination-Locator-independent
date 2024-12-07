@@ -35,8 +35,11 @@ const SignupFormModal = () => {
     }
 
     return (
-        <div className="modal-backdrop">
-            <div className="signup-modal">
+        <div className="modal-background">
+            <div
+                className="signup-modal"
+                onClick={(e) => e.stopPropagation()}
+            >
                 <h1>Sign Up</h1>
                 <form onSubmit={handleSubmit}>
                     <label>
