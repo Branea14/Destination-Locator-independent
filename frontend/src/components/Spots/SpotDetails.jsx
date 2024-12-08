@@ -1,24 +1,45 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getSingleSpot } from "../../store/spots";
-
+import { useModal } from "../../context/Modal";
+import ReviewsFormModal from "../Reviews/ReviewsFormModal";
 
 const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
+    const {openModal} = useModal();
 
-    const singleSpot = useSelector(state => state.spots.singleSpot)
+    const singleSpot = useSelector(state => state.spots.singleSpot);
+    const currentUser = useSelector(state => state.session.user);
 
-    console.log('singleSpt', singleSpot)
+    const isLoading = !singleSpot || !singleSpot.id
 
     useEffect(() => {
-        if (spotId) {
-            dispatch(getSingleSpot(spotId));
-        }
+        if (spotId) dispatch(getSingleSpot(spotId));
     }, [spotId, dispatch]);
 
+    if (isLoading) return <p>Loading...</p>
+
+    const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
+    const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
+
     if (!singleSpot) return null;
+
+    const handlePostReviewButton = async (e) => {
+        e.preventDefault();
+        if (showReviewButton) openModal(<ReviewsFormModal spotId={spotId}/>);
+    }
+
+    const reviewCount = (avgStarRating, numReviews) => {
+        if (avgStarRating && numReviews == 1) {
+            return `★ ${avgStarRating} • ${numReviews} review`
+        } else if (avgStarRating && numReviews > 1) {
+            return `★ ${avgStarRating} • ${numReviews} reviews`
+        } else {
+            return '★ NEW!'
+        }
+    }
 
     return (
         <>
@@ -36,22 +57,31 @@ const SpotDetails = () => {
                 ${singleSpot.price} <span className="night">night</span>
             </h3>
             <button type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
-            <h4>{singleSpot.avgStarRating && singleSpot.numReviews == 1
-                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} review`
-                    : singleSpot.avgStarRating && singleSpot.numReviews > 1
-                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} reviews`
-                    : `⭐NEW!`
+            <h4>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h4>
+
+            <section>
+                <h2>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h2>
+                {showReviewButton && (
+                    <button onClick={handlePostReviewButton}>Post Your Review</button>
+                )}
+                {!singleSpot.Review && showReviewButton && (<p>Be the first to post a review!</p>)}
+                {singleSpot.Reviews.map((review, index) => {
+                        console.log(review)
+                        const createdAt = new Date(review.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                        });
+
+                        return (
+                            <div key={index} className="review">
+                                <div>{review.User.firstName}</div>
+                                <div>{createdAt}</div>
+                                <div>{review.review}</div>
+                            </div>
+                        );
+                    })
                 }
-            </h4>
-            <h3>
-                {singleSpot.avgStarRating && singleSpot.numReviews == 1
-                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} review`
-                    : singleSpot.avgStarRating && singleSpot.numReviews > 1
-                    ? `⭐${singleSpot.avgStarRating} • ${singleSpot.numReviews} reviews`
-                    : `⭐NEW!`
-                }
-            </h3>
-            <Outlet />
+            </section>
         </>
     )
 }

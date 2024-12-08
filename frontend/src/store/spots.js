@@ -44,7 +44,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
 }
 
 export const createSpot = (newSpot) => async dispatch => {
-    // console.log('spotData', newSpot)
+    console.log('spotData', newSpot)
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         // headers: {
@@ -72,8 +72,6 @@ const spotReducer = (state = initialState, action) => {
         case GET_ALL_SPOTS:
             return { ...state, spots: action.spots };
         case GET_SINGLE_SPOT:
-            // const {...spot} = action.payload;
-            console.log('action.payload', action.payload)
             return {...state, singleSpot: action.payload};
         case CREATE_SPOT:
             return {

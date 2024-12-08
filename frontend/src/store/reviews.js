@@ -40,18 +40,33 @@ export const postAReview = (newReview) => async dispatch => {
 
 const initialState = {
     reviews: [],
-    // newReview: []
+    singleSpot: null
 };
+
+const calculateNewAverage = (currAverage, totalReviews, newStarRating) => {
+    const newTotal = totalReviews + 1;
+    const updatedStarRating = currAverage * totalReviews + newStarRating;
+    return updatedStarRating / newTotal;
+}
 
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_REVIEWS:
             return {...state, reviews: action.allReviews};
         case POST_A_REVIEW:
+            console.log('action', action)
+            if (!state.singleSpot) return state;
+            const updatedSpot = {
+                ...state.singleSpot,
+                numReviews: state.singleSpot.numReviews + 1,
+                avgStarRating: calculateNewAverage(state.singleSpot.avgStarRating, state.singleSpot.numReviews, action.review.stars),
+            };
+
+            console.log('updated singleSpot', updatedSpot)
             return {
                 ...state,
-                reviews: [...state.reviews, action.review]
-                // newReview: [...state.newReview, action.review]
+                reviews: [...state.reviews, action.review],
+                singleSpot: updatedSpot
             };
         default:
             return state;

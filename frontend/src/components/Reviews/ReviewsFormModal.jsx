@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { postAReview } from "../../store/reviews";
 import './ReviewsFormModal.css';
+import { getSingleSpot } from "../../store/spots";
 
 const ReviewsFormModal = ({spotId}) => {
     const dispatch = useDispatch();
@@ -20,18 +21,32 @@ const ReviewsFormModal = ({spotId}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("Submit button clicked");
+
         const validationErrors = handleValidation();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
+
+            console.log("Validation errors:", validationErrors);
             return;
         }
 
         try {
+            console.log("Dispatching postAReview with:", {
+                spotId,
+                review: textArea,
+                stars: starRating,
+            });
+
             await dispatch(postAReview({spotId, review: textArea, stars: starRating}));
+            await dispatch(getSingleSpot(spotId));
+            console.log("Review successfully posted");
             closeModal();
         } catch (res) {
+            console.error("Error during review submission:", res);
             const data = await res.json();
             if (data?.errors) setErrors(data.errors)
+                console.error("Server returned validation errors:", data.errors);
         }
     }
 
