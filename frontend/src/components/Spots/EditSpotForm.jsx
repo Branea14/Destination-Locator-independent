@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createSpot } from "../../store/spots";
+import { editSpot } from "../../store/spots";
 
-const CreateSpot = () => {
+const EditSpotForm = ({spot}) => {
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -16,6 +16,19 @@ const CreateSpot = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (spot) {
+            setCountry(spot.country || "");
+            setAddress(spot.address || "");
+            setCity(spot.city || "");
+            setState(spot.state || "");
+            setDescription(spot.description || "");
+            setSpotName(spot.name || "");
+            setPrice(spot.price || "");
+            setImageUrls(spot.SpotImages?.map((img) => img.url) || ["", "", "", "", ""]);
+        }
+    }, [spot]);
 
     const updateCountry = (e) => setCountry(e.target.value);
     const updateAddress = (e) => setAddress(e.target.value);
@@ -77,26 +90,26 @@ const CreateSpot = () => {
             description,
             name: spotName,
             price,
-            SpotImages: imageUrls.map((url, index) => ({
-                url,
-                preview: index === 0
-            }))
+            SpotImages: imageUrls
+                .filter(url => url)
+                .map((url, index) => ({ url, preview: index === 0 }))
         }
 
         console.log('payload', payload)
 
-        const newSpot = await dispatch(createSpot(payload));
-        console.log('newSpot', newSpot)
-        if (newSpot) {
-            navigate(`/spots/${newSpot.id}`);
-
-            // hideForm();
+        const updatedSpot = await dispatch(editSpot(payload));
+        console.log('newSpot', updatedSpot)
+        if (updatedSpot?.id) {
+            navigate(`/spots/${updatedSpot.id}`);
         }
     }
 
+    if (!spot) return <p>Loading spot detail...</p>
+
+
     return (
         <section className="new-form-holder centered middled">
-                <h1>Create a New Spot</h1>
+                <h1>Update Your Spot</h1>
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <h2>Where&apos;s your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
@@ -104,9 +117,9 @@ const CreateSpot = () => {
                     Country
                     <input
                         type="text"
-                        placeholder="Country"
+                        // placeholder="Country"
                         // required
-                        value={country}
+                        value={country || ""}
                         onChange={updateCountry} />
                 </label>
                 {errors.country &&
@@ -118,7 +131,7 @@ const CreateSpot = () => {
                         type="text"
                         placeholder="Address"
                         // required
-                        value={address}
+                        value={address || ""}
                         onChange={updateAddress}
                     />
                 </label>
@@ -131,7 +144,7 @@ const CreateSpot = () => {
                         type="text"
                         placeholder="City"
                         // required
-                        value={city}
+                        value={city || ""}
                         onChange={updateCity}
                     />
                 </label> ,
@@ -144,7 +157,7 @@ const CreateSpot = () => {
                         type="text"
                         placeholder="STATE"
                         // required
-                        value={state}
+                        value={state || ""}
                         onChange={updateState}
                     />
                 </label>
@@ -156,7 +169,7 @@ const CreateSpot = () => {
                 <textarea
                     placeholder="Please write at least 30 characters"
                     // required
-                    value={description}
+                    value={description || ""}
                     onChange={updateDescription}
                 />
                 {errors.description &&
@@ -168,7 +181,7 @@ const CreateSpot = () => {
                     type="text"
                     placeholder="Name of your spot"
                     // required
-                    value={spotName}
+                    value={spotName || ""}
                     onChange={updateSpotName}
                 />
                 {errors.spotName &&
@@ -180,7 +193,7 @@ const CreateSpot = () => {
                     type="number"
                     placeholder="Price per night (USD)"
                     // required
-                    value={price}
+                    value={price || ""}
                     onChange={updatePrice}
                 />
                 {errors.price &&
@@ -191,7 +204,7 @@ const CreateSpot = () => {
                 <input
                     type="text"
                     placeholder="Preview Image URL"
-                    value={imageUrls[0]}
+                    value={imageUrls[0] || ""}
                     onChange={(e) => updateUrl(e, 0)}
                 />
                 {errors.previewImage &&
@@ -202,49 +215,22 @@ const CreateSpot = () => {
                     <input key={index}
                         type="text"
                         placeholder="Image URL"
-                        value={imageUrls[index]}
+                        value={imageUrls[index] || ""}
                         onChange={(e) => updateUrl(e, index)}
                         />
                 ))}
 
-                {/* <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[1]}
-                    onChange={(e) => updateUrl(e, 1)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[2]}
-                    onChange={(e) => updateUrl(e, 2)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[3]}
-                    onChange={(e) => updateUrl(e, 3)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[4]}
-                    onChange={(e) => updateUrl(e, 4)}
-                    />  */}
 
                 {errors.image1 && <p>{errors.image1}</p>}
                 {errors.image2 && <p>{errors.image2}</p>}
                 {errors.image3 && <p>{errors.image3}</p>}
                 {errors.image4 && <p>{errors.image4}</p>}
                 {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
-                <button type="submit" >Create Spot</button>
+                <button type="submit" >Update Spot</button>
 
             </form>
         </section>
     )
 }
 
-export default CreateSpot;
+export default EditSpotForm;

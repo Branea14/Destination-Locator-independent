@@ -1,8 +1,9 @@
 import { csrfFetch } from "./csrf";
 
 export const GET_ALL_SPOTS = 'spots/getAllSpots';
-export const GET_SINGLE_SPOT = 'spots/getSingleSpot'
-export const CREATE_SPOT =  'spots/createSpot'
+export const GET_SINGLE_SPOT = 'spots/getSingleSpot';
+export const CREATE_SPOT =  'spots/createSpot';
+export const EDIT_SPOT = 'spots/editSpot';
 
 export const loadSpots = (spots) => ({
     type: GET_ALL_SPOTS,
@@ -19,6 +20,10 @@ export const createNewSpot = spot => ({
     spot
 })
 
+export const editSpotAction = spot => ({
+    type: EDIT_SPOT,
+    spot
+})
 
 export const getAllSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots');
@@ -47,9 +52,6 @@ export const createSpot = (newSpot) => async dispatch => {
     console.log('spotData', newSpot)
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        // headers: {
-        //     // 'Content-Type': 'application/json'
-        // },
         body: JSON.stringify(newSpot)
     });
 
@@ -61,10 +63,34 @@ export const createSpot = (newSpot) => async dispatch => {
     }
 }
 
+export const editSpot = (spot) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            'country': spot.country,
+            'address': spot.address,
+            'city': spot.city,
+            'state': spot.state,
+            'description': spot.description,
+            'name': spot.spotName,
+            'price': spot.price,
+            'SpotImages': spot.imageUrls?.map((url, index) => ({
+                url,
+                preview: index === 0
+            }))
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editSpotAction(data));
+        return data;
+    }
+}
+
 const initialState = {
     spots: [],
     singleSpot: null
-    // newSpot: []
 };
 
 const spotReducer = (state = initialState, action) => {
@@ -83,6 +109,12 @@ const spotReducer = (state = initialState, action) => {
                 singleSpot: action.spot,
                 spots: [...state.spots, action.spot]
                 // newSpot: !state.newSpot ? [action.spot] : [...state.newSpot, action.spot]
+            };
+        case EDIT_SPOT:
+            return {
+                ...state,
+                singleSpot: action.spot,
+                spots: state.spots.map(spot => spot.id === action.spot.id ? action.spot : spot)
             };
         default:
             return state

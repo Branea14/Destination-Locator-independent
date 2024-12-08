@@ -22,7 +22,7 @@ const ManageSpots = () => {
     if (!allSpots) return <p>Loading...</p>
     // console.log(allSpots)
 
-    const userSpots = allSpots?.Spots?.filter(spot => spot.id === currUser)
+    const userSpots = allSpots?.Spots?.filter(spot => spot.ownerId === currUser)
 
     return (
 
@@ -42,7 +42,7 @@ const ManageSpots = () => {
                                 : 'NEW!'
                             }
                         </p>
-                        <button>Update</button>
+                        <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
                         <button>Delete</button>
                     </div>
                 ))
