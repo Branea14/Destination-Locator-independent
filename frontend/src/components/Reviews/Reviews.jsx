@@ -13,7 +13,7 @@ const Reviews = () => {
 
     const reviews = useSelector(state => state.reviews.reviews)
     const currentUser = useSelector(state => state.session.user);
-    const spotOwnerId = useSelector(state => state.spot.singleSpot?.ownerId)
+    const spotOwnerId = useSelector(state => state.spots.singleSpot?.ownerId)
 
     const hasReviewed = reviews?.some((review) => review.userId === currentUser?.id);
     const showReviewButton = currentUser && !hasReviewed && (spotOwnerId !== currentUser.id);

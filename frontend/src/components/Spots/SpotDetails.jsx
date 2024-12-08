@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
 import { getSingleSpot } from "../../store/spots";
 
+
 const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
-    const singleSpot = useSelector(state => state.spot.singleSpot)
-    // console.log(singleSpot)
+
+    const singleSpot = useSelector(state => state.spots.singleSpot)
+
+    console.log('singleSpt', singleSpot)
 
     useEffect(() => {
-        spotId && dispatch(getSingleSpot(spotId))
-    }, [spotId, dispatch])
-
-    // alertbutton = () => {
-    //     alert('Feature Coming soon')
-    // }
+        if (spotId) {
+            dispatch(getSingleSpot(spotId));
+        }
+    }, [spotId, dispatch]);
 
     if (!singleSpot) return null;
 
@@ -23,7 +24,7 @@ const SpotDetails = () => {
         <>
             <h1>{singleSpot.name}</h1>
             <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-            {singleSpot.SpotImages.map((spotImageDetails, index) => (
+            {singleSpot?.SpotImages.map((spotImageDetails, index) => (
                 <div key={index}>
                     {/* need to add more images */}
                     <img src={spotImageDetails.url} alt="" ></img>

@@ -33,10 +33,7 @@ const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
-      // {
-      //   path: '/',
-      //   element: <h1>Welcome!</h1>
-      // },
+
       {
         path: '/',
         element: <SpotsBrowser />
@@ -52,7 +49,7 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/spots',
+        path: '/spots/new',
         element: <CreateSpot />
       }
       //removed/refactor to turn into modal

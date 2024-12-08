@@ -4,14 +4,14 @@ export const GET_ALL_SPOTS = 'spots/getAllSpots';
 export const GET_SINGLE_SPOT = 'spots/getSingleSpot'
 export const CREATE_SPOT =  'spots/createSpot'
 
-export const loadSpots = (allSpots) => ({
+export const loadSpots = (spots) => ({
     type: GET_ALL_SPOTS,
-    allSpots
+    spots
 });
 
 export const loadSingleSpot = spot => ({
     type: GET_SINGLE_SPOT,
-    spot
+    payload: spot
 });
 
 export const createNewSpot = spot => ({
@@ -30,17 +30,21 @@ export const getAllSpots = () => async dispatch => {
     }
 }
 
-export const getSingleSpot = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${id}`);
+export const getSingleSpot = (spotId) => async dispatch => {
+    console.log(`erika ${spotId}`)
+    const response = await csrfFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
         const data = await response.json();
         dispatch(loadSingleSpot(data))
         return data;
+    } else {
+        console.error('failed to fetch single spot', response)
     }
 }
 
 export const createSpot = (newSpot) => async dispatch => {
+    // console.log('spotData', newSpot)
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         // headers: {
@@ -51,6 +55,7 @@ export const createSpot = (newSpot) => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log('data', data)
         dispatch(createNewSpot(data));
         return data;
     }
@@ -65,9 +70,11 @@ const initialState = {
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_SPOTS:
-            return { ...state, spots: action.allSpots };
+            return { ...state, spots: action.spots };
         case GET_SINGLE_SPOT:
-            return {...state, singleSpot: action.spot};
+            // const {...spot} = action.payload;
+            console.log('action.payload', action.payload)
+            return {...state, singleSpot: action.payload};
         case CREATE_SPOT:
             return {
                 ...state,

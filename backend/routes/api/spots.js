@@ -25,12 +25,14 @@ const validateSpot = [
         .notEmpty()
         .withMessage('Country is required'),
     check('lat')
+        .optional()
         .notEmpty()
         .withMessage('Latitude is required')
         // .bail()
         .isFloat({ min: -90, max: 90 })
         .withMessage('Latitude must be within -90 and 90'),
     check('lng')
+        .optional()
         .notEmpty()
         .withMessage('Longitude is required')
         // .bail()
@@ -282,7 +284,7 @@ router.get("/", async (req, res, next) => {
 });
 /***************************CREATE A SPOT *****************************/
 router.post("/", requireAuth, validateSpot, async (req,res,next) => {
-
+    console.log('received data', req.body)
     const { address, city, state, country, lat, lng, name, price, description} = req.body;
     const ownerId = req.user.id;
     try {
@@ -352,59 +354,52 @@ router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
 
     try {
-        if (!await Spot.findByPk(spotId)) {
-            return res.status(404).json({ message: "Spot couldn't be found"})
-        }
-
-        const spot = await Spot.findAll({
-            where: {id: spotId},
+        const spot = await Spot.findByPk(spotId, {
             include: [
                 { model: Review, attributes: ['review', 'stars'] },
                 { model: SpotImage, attributes: ['id', 'url', 'preview'] },
-                { model: User, attributes: ['id', 'firstName', 'lastName'] }
+                { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
             ]
         })
 
-        const newFormat = spot.map(spotElements => {
-            const reviews = spotElements.dataValues.Reviews;
+        if (!spot) {
+            return res.status(404).json({ message: "Spot couldn't be found"})
+        }
 
-            const spotRatings = reviews.map(reviewStars => reviewStars.stars);
-            const spotReviews = reviews.map(review => review.dataValues.review)
+            const reviews = spot.Reviews || [];
+            const starRatings = reviews.map(review => review.stars);
+            const reviewTexts = reviews.map(review => review.review)
 
-            const avgRating = getAverage(spotRatings);
-            const countingReviews = countReviews(spotReviews)
+            const avgStarRating = getAverage(starRatings);
+            const numReviews = countReviews(reviewTexts)
 
-            const image = spotElements.dataValues.SpotImages;
-            const imageElements = image.map(elements => elements.dataValues);
+            const spotImages = spot.SpotImages || [];
+            const owner = spot.Owner || {};
 
-            const owner = spotElements.dataValues.User.dataValues
-
-            return {
-                id: spotElements.id,
-                ownerId: spotElements.ownerId,
-                address: spotElements.address,
-                city: spotElements.city,
-                state: spotElements.state,
-                country: spotElements.country,
-                lat: spotElements.lat,
-                lng: spotElements.lng,
-                name: spotElements.name,
-                description: spotElements.description,
-                price: spotElements.price,
-                createdAt: spotElements.createdAt,
-                updatedAt: spotElements.updatedAt,
-                numReviews: countingReviews,
-                avgStarRating: avgRating,
-                SpotImages: imageElements,
+            const formattedSpot = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                price: spot.price,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                numReviews,
+                avgStarRating,
+                SpotImages: spotImages,
                 Owner: owner
             }
-        });
 
-    for (let el in newFormat) {
-        if (spotId == newFormat[el].id) {
-            return res.status(200).json(newFormat[el]);
-        }
-    }
+
+
+            return res.status(200).json(formattedSpot);
+
 
     }
     catch (error) {

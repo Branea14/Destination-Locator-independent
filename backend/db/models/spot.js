@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       })
 
       Spot.belongsTo(models.User, {
-        foreignKey: "ownerId"
+        foreignKey: "ownerId",
+        as: 'Owner'
       })
 
       Spot.hasMany(models.SpotImage, {
@@ -75,6 +76,7 @@ module.exports = (sequelize, DataTypes) => {
     lat: {
       type: DataTypes.DECIMAL(10,7),
       unique: true,
+      allowNull: true
       // validate: {
         // isDecimal: true
       // }
@@ -82,6 +84,7 @@ module.exports = (sequelize, DataTypes) => {
     lng: {
       type: DataTypes.DECIMAL(10,7),
       unique: true,
+      allowNull: true
       // validate: {
         // isDecimal: true
       // }

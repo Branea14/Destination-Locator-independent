@@ -3,7 +3,7 @@ import { getAllSpots } from "../../store/spots"
 import { useEffect } from "react";
 
 const SpotsBrowser = () => {
-    const allSpots = useSelector(state => state.spot.spots)
+    const allSpots = useSelector(state => state.spots.spots)
     const dispatch = useDispatch();
 
     useEffect(() => {

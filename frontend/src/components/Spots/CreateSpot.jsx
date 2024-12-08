@@ -59,7 +59,10 @@ const CreateSpot = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log('form submitted')
         const validationErrors = handleValidation();
+        console.log('validationErrors', validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
@@ -79,9 +82,12 @@ const CreateSpot = () => {
             }))
         }
 
-        let newSpot = dispatch(createSpot(payload));
+        console.log('payload', payload)
+
+        const newSpot = await dispatch(createSpot(payload));
+        console.log('newSpot', newSpot)
         if (newSpot) {
-            navigate(`spots/${newSpot.id}`);
+            navigate(`/spots/${newSpot.id}`);
 
             // hideForm();
         }
@@ -233,7 +239,7 @@ const CreateSpot = () => {
                 {errors.image3 && <p>{errors.image3}</p>}
                 {errors.image4 && <p>{errors.image4}</p>}
                 {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
-                <button type="submit" onClick={handleSubmit}>Create Spot</button>
+                <button type="submit" >Create Spot</button>
 
             </form>
         </section>
