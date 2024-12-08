@@ -9,6 +9,7 @@ const { Model, json } = require('sequelize');
 const { requireAuth, requireAuthorization } = require('../../utils/auth');
 const { parse } = require('dotenv');
 const review = require('../../db/models/review');
+const spot = require('../../db/models/spot');
 // router.use('/api', apiRouter);
 
 const validateSpot = [
@@ -285,10 +286,10 @@ router.get("/", async (req, res, next) => {
 /***************************CREATE A SPOT *****************************/
 router.post("/", requireAuth, validateSpot, async (req,res,next) => {
     console.log('received data', req.body)
-    const { address, city, state, country, lat, lng, name, price, description} = req.body;
+    const { address, city, state, country, lat, lng, name, price, description, SpotImages} = req.body;
     const ownerId = req.user.id;
     try {
-            const newSpot = await Spot.create({
+            const spot = await Spot.create({
                 ownerId,
                 address,
                 city,
@@ -299,8 +300,28 @@ router.post("/", requireAuth, validateSpot, async (req,res,next) => {
                 name,
                 price,
                 description,
+            });
+
+            if (SpotImages && SpotImages.length > 0) {
+                const images = SpotImages.map((image) => ({
+                    spotId: spot.id,
+                    url: image.url,
+                    preview: image.preview
+                }))
+
+                await SpotImage.bulkCreate(images)
+            }
+
+            const fullSpot = await Spot.findByPk(spot.id, {
+                include: [
+                    {model: SpotImage, attributes: ['id', 'url', 'preview']},
+                    {model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName']}
+                ]
             })
-            res.status(201).json(newSpot)
+            res.status(201).json({
+                ...fullSpot.toJSON(),
+                Reviews: []
+            })
     } catch(error) {
             next(error)
     }
@@ -356,7 +377,9 @@ router.get('/:spotId', async (req, res, next) => {
     try {
         const spot = await Spot.findByPk(spotId, {
             include: [
-                { model: Review, attributes: ['review', 'stars'] },
+                { model: Review, attributes: ['id', 'review', 'stars', 'createdAt', 'updatedAt'], include: [
+                    {model: User, as: 'User', attributes: ['id', 'firstName', 'lastName']}
+                ] },
                 { model: SpotImage, attributes: ['id', 'url', 'preview'] },
                 { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
             ]
@@ -393,7 +416,8 @@ router.get('/:spotId', async (req, res, next) => {
                 numReviews,
                 avgStarRating,
                 SpotImages: spotImages,
-                Owner: owner
+                Owner: owner,
+                Reviews: reviews
             }
 
 
