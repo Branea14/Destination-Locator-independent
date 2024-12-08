@@ -246,7 +246,7 @@ router.get("/", async (req, res, next) => {
         const spots = await Spot.findAll({
             include: [
                 { model: Review, attributes: ['stars'] },
-                { model: SpotImage, attributes: ['url'] }
+                { model: SpotImage, attributes: ['id', 'url'] }
             ],
             where,
             ...pagination
@@ -255,11 +255,13 @@ router.get("/", async (req, res, next) => {
         const spotList = spots.map(spot => {
 
             const spotData = spot.toJSON();
+            // console.log('look here', spot.toJSON())
 
             const avgRating = spotData.Reviews && spotData.Reviews.length > 0
             ? spotData.Reviews.reduce((acc, review) => acc + review.stars, 0) / spotData.Reviews.length
             : 0;
 
+            const spotImages = spotData.SpotImages || [];
             const previewImage = spot.SpotImages[0] ? spot.SpotImages[0].url : null;
 
             delete spotData.SpotImages;
@@ -272,7 +274,8 @@ router.get("/", async (req, res, next) => {
                 lng: parseFloat(spotData.lng), // cast to number
                 price: parseFloat(spotData.price), // cast to number
                 avgRating,
-                previewImage
+                previewImage,
+                SpotImages: spotImages
             };
         });
 
