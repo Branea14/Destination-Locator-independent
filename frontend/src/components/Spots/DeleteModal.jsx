@@ -6,7 +6,7 @@ const DeleteModal = ({spotId, handleDelete}) => {
     // const dispatch = useDispatch();
     const {closeModal} = useModal();
 
-    const handleDeleteButton = () => {
+    const handleDeleteButton =  () => {
         handleDelete(spotId);
         closeModal();
     }

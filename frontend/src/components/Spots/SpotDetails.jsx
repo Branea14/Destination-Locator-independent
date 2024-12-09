@@ -34,8 +34,9 @@ const SpotDetails = () => {
         if (showReviewButton) openModal(<ReviewsFormModal spotId={spotId}/>);
     }
 
-    const handleDeleteButton = reviewId => {
-        dispatch(removeReview(reviewId))
+    const handleDeleteButton = async (reviewId) => {
+        await dispatch(removeReview(reviewId))
+        dispatch(getSingleSpot(spotId))
     }
 
     const reviewCount = (avgStarRating, numReviews) => {
@@ -71,7 +72,7 @@ const SpotDetails = () => {
                 {showReviewButton && (
                     <button onClick={handlePostReviewButton}>Post Your Review</button>
                 )}
-                {!singleSpot.Review && showReviewButton && (<p>Be the first to post a review!</p>)}
+                {singleSpot.Reviews.length === 0 ? (<p>Be the first to post a review!</p>) : null}
                 {singleSpot.Reviews.map((review, index) => {
                         console.log(review)
                         const createdAt = new Date(review.createdAt).toLocaleDateString("en-US", {

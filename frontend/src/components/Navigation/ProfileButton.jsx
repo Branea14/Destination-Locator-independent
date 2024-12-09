@@ -6,11 +6,10 @@ import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import OpenModalMenuItem from "./OpenModalMenuItem";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 

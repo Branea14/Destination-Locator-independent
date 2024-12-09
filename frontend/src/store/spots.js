@@ -55,7 +55,6 @@ export const getSingleSpot = (spotId) => async dispatch => {
 }
 
 export const createSpot = (newSpot) => async dispatch => {
-    console.log('spotData', newSpot)
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(newSpot)
@@ -63,7 +62,6 @@ export const createSpot = (newSpot) => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data', data)
         dispatch(createNewSpot(data));
         return data;
     }
@@ -122,29 +120,30 @@ const spotReducer = (state = initialState, action) => {
 
         case GET_SINGLE_SPOT:
             return {...state, singleSpot: action.payload};
+
         case CREATE_SPOT:
             return {
                 ...state,
-
                 singleSpot: action.spot,
                 spots: {...state.spots, [action.spot.id]: action.spot}
             };
+
         case EDIT_SPOT:
             return {
                 ...state,
                 singleSpot: action.spot,
                 spots: { ...state.spots, [action.spot.id]: action.spot }
             };
+
         case DELETE_SPOT:
-            console.log("Before delete:", state.spots);
             const updatedSpots = {...state.spots}
             delete updatedSpots[action.spotId]
-            console.log("after delete:", state.spots);
             return {
                 ...state,
                 spots: updatedSpots,
                 singleSpot: state.singleSpot?.id === action.spotId ? null : state.singleSpot
             }
+
         default:
             return state
     }
