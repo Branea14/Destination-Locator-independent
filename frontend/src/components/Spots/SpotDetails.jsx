@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getSingleSpot } from "../../store/spots";
 import { useModal } from "../../context/Modal";
 import ReviewsFormModal from "../Reviews/ReviewsFormModal";
+import { removeReview } from "../../store/reviews";
+import DeleteReviewModal from "./DeleteReviewModal";
 
 const SpotDetails = () => {
     const {spotId} = useParams();
@@ -12,6 +14,7 @@ const SpotDetails = () => {
 
     const singleSpot = useSelector(state => state.spots.singleSpot);
     const currentUser = useSelector(state => state.session.user);
+    console.log('current User', currentUser)
 
     const isLoading = !singleSpot || !singleSpot.id
 
@@ -29,6 +32,10 @@ const SpotDetails = () => {
     const handlePostReviewButton = async (e) => {
         e.preventDefault();
         if (showReviewButton) openModal(<ReviewsFormModal spotId={spotId}/>);
+    }
+
+    const handleDeleteButton = reviewId => {
+        dispatch(removeReview(reviewId))
     }
 
     const reviewCount = (avgStarRating, numReviews) => {
@@ -77,6 +84,7 @@ const SpotDetails = () => {
                                 <div>{review.User.firstName}</div>
                                 <div>{createdAt}</div>
                                 <div>{review.review}</div>
+                                {review.User.id === currentUser.id ? <button onClick={() => openModal(<DeleteReviewModal reviewId={review.id} handleDelete={() => handleDeleteButton(review.id)}/>)}>Delete</button> : null}
                             </div>
                         );
                     })

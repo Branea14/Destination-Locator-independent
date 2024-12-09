@@ -136,6 +136,8 @@ router.delete("/:reviewId", requireAuth, async (req, res, next) => {
     try {
         const reviewId = req.params.reviewId;
         const review = await Review.findByPk(reviewId);
+        console.log('review', review)
+        console.log(req.user)
 
         if (!review) return res.status(404).json({message: "Review couldn't be found"});
         if (req.user.id !== review.userId) return res.status(403).json({message: "Forbidden"})

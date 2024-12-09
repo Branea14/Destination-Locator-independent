@@ -694,11 +694,20 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
     try {
     const spotId = req.params.spotId;
+    console.log("Attempting to delete spot with ID:", spotId);
+
     const findSpotId = await Spot.findByPk(spotId);
-    if (!findSpotId) return res.status(404).json({"message": "Spot couldn't be found"});
-    if (req.user.id !== findSpotId.ownerId) return res.status(403).json({message: "Forbidden"})
+    if (!findSpotId) {
+        console.log("Spot not found:", spotId);
+        return res.status(404).json({"message": "Spot couldn't be found"});
+    }
+    if (req.user.id !== findSpotId.ownerId) {
+        console.log("Unauthorized attempt by user:", req.user.id);
+        return res.status(403).json({message: "Forbidden"})
+    }
 
     await findSpotId.destroy();
+    console.log("Spot deleted successfully:", spotId);
 
     res.json({
     "message": "Successfully deleted"

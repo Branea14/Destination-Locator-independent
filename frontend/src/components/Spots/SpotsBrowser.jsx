@@ -1,20 +1,25 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getAllSpots } from "../../store/spots"
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const SpotsBrowser = () => {
-    const allSpots = useSelector(state => state.spots.spots)
+
+    const spotsObjects = useSelector((state) => state.spots.spots)
+    const allSpots = useMemo(() => Object.values(spotsObjects) , [spotsObjects])
+    // const allSpots = useSelector(state => Object.values(state.spots.spots))
+    console.log(allSpots)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch])
 
-    if (!allSpots || !allSpots.Spots) return <p>Loading spots...</p>
+    if (!allSpots ) return <p>Loading spots...</p>
 
     return (
         <>
-            {allSpots.Spots.map((spot, index) => (
+        {/* <>hello</> */}
+            {allSpots?.map((spot, index) => (
                 <div className='spot-container' key={index}>
                     <p className="spot-name-hover">{spot.name}</p>
                     <img src={spot.previewImage} alt=''></img>
@@ -29,7 +34,7 @@ const SpotsBrowser = () => {
                     <button>Update</button>
                     <button>Delete</button>
                 </div>
-            ))}
+             ))}
         </>
     )
 }

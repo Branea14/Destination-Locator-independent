@@ -4,6 +4,7 @@ export const GET_ALL_SPOTS = 'spots/getAllSpots';
 export const GET_SINGLE_SPOT = 'spots/getSingleSpot';
 export const CREATE_SPOT =  'spots/createSpot';
 export const EDIT_SPOT = 'spots/editSpot';
+export const DELETE_SPOT = 'spots/deleteSpot'
 
 export const loadSpots = (spots) => ({
     type: GET_ALL_SPOTS,
@@ -23,6 +24,11 @@ export const createNewSpot = spot => ({
 export const editSpotAction = spot => ({
     type: EDIT_SPOT,
     spot
+})
+
+export const deleteSpotAction = (spotId) => ({
+    type: DELETE_SPOT,
+    spotId
 })
 
 export const getAllSpots = () => async dispatch => {
@@ -88,34 +94,57 @@ export const editSpot = (spot) => async dispatch => {
     }
 }
 
+export const removeSpot = (spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        dispatch(deleteSpotAction(spotId));
+        return spotId;
+    }
+}
+
 const initialState = {
-    spots: [],
+    spots: {},
     singleSpot: null
 };
 
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_SPOTS:
-            return { ...state, spots: action.spots };
+            const normalizedSpots = {};
+            const spotsArray = Array.isArray(action.spots) ? action.spots : action.spots.Spots;
+            spotsArray.forEach((spot) => {
+                normalizedSpots[spot.id] = spot;
+            });
+            return { ...state, spots: normalizedSpots };
+
         case GET_SINGLE_SPOT:
             return {...state, singleSpot: action.payload};
         case CREATE_SPOT:
             return {
                 ...state,
-                // singleSpot: {
-                //     ...action.newSpot,
-                //     SpotImages: action.newSpot.SpotImages
-                // },
+
                 singleSpot: action.spot,
-                spots: [...state.spots, action.spot]
-                // newSpot: !state.newSpot ? [action.spot] : [...state.newSpot, action.spot]
+                spots: {...state.spots, [action.spot.id]: action.spot}
             };
         case EDIT_SPOT:
             return {
                 ...state,
                 singleSpot: action.spot,
-                spots: state.spots.map(spot => spot.id === action.spot.id ? action.spot : spot)
+                spots: { ...state.spots, [action.spot.id]: action.spot }
             };
+        case DELETE_SPOT:
+            console.log("Before delete:", state.spots);
+            const updatedSpots = {...state.spots}
+            delete updatedSpots[action.spotId]
+            console.log("after delete:", state.spots);
+            return {
+                ...state,
+                spots: updatedSpots,
+                singleSpot: state.singleSpot?.id === action.spotId ? null : state.singleSpot
+            }
         default:
             return state
     }
