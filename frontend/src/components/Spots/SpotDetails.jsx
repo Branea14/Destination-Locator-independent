@@ -14,7 +14,7 @@ const SpotDetails = () => {
 
     const singleSpot = useSelector(state => state.spots.singleSpot);
     const currentUser = useSelector(state => state.session.user);
-    console.log('current User', currentUser)
+    // console.log('current User', currentUser)
 
     const isLoading = !singleSpot || !singleSpot.id
 
@@ -46,9 +46,9 @@ const SpotDetails = () => {
 
     const reviewCount = (avgStarRating, numReviews) => {
         if (avgStarRating && numReviews == 1) {
-            return `★ ${avgStarRating} • ${numReviews} review`
+            return `★ ${avgStarRating} • ${numReviews} Review`
         } else if (avgStarRating && numReviews > 1) {
-            return `★ ${avgStarRating} • ${numReviews} reviews`
+            return `★ ${avgStarRating} • ${numReviews} Reviews`
         } else {
             return '★ NEW!'
         }

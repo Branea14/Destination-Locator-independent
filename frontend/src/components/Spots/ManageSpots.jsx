@@ -30,8 +30,7 @@ const ManageSpots = () => {
 
     // if (!allSpots ) return <p>Loading manage spots</p>
     const userSpots = allSpots?.filter(spot => spot.ownerId === currUser)
-    console.log('user Spts', userSpots) //array of objects
-    console.log('all spots', allSpots)
+
 
     return (
 
@@ -41,16 +40,19 @@ const ManageSpots = () => {
             {userSpots?.length > 0 ? (
                 userSpots.map((spot, index) => (
                     <div className='spot-container' key={index}>
-                        {/* <p className="spot-name-hover">{spot.name}</p> */}
-                        <img src={spot.previewImage} alt=''></img>
-                        <p>{spot.city}, {spot.state}</p>
-                        <p>${spot.price} night</p>
-                        <p>
-                            {spot.avgRating
-                                ? `⭐${spot.avgRating}`
-                                : 'NEW!'
-                            }
-                        </p>
+                        <div onClick={() => navigate(`/spots/${spot.id}`)}>
+                            {/* <p className="spot-name-hover">{spot.name}</p> */}
+                            <img src={spot.previewImage} alt=''></img>
+                            <p>
+                                {spot.avgRating
+                                    ? `⭐${spot.avgRating}`
+                                    : 'NEW!'
+                                }
+                            </p>
+                            <p>${spot.price} night</p>
+                            <p>{spot.city}, {spot.state}</p>
+
+                        </div>
                         <button onClick={() => navigate(`/spots/${spot.id}/edit`)}>Update</button>
                         <button onClick={() => openModal(<DeleteModal spotId={spot.id} handleDelete={() => handleDeleteButton(spot.id)}/>)}>Delete</button>
                     </div>

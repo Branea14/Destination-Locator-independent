@@ -6,12 +6,13 @@ import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import OpenModalMenuItem from "./OpenModalMenuItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const ProfileButton = ({user}) => {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const navigate = useNavigate();
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -36,6 +37,7 @@ const ProfileButton = ({user}) => {
         e.preventDefault();
         dispatch(sessionActions.logout())
         closeMenu();
+        navigate('/')
     }
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -46,7 +48,7 @@ const ProfileButton = ({user}) => {
             <ul className={ulClassName} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>Hello, {user.username}</li>
+                        <li>Hello, {user.firstName}</li>
                         {/* <li>{user.firstName} {user.lastName}</li> */}
                         <li>{user.email}</li>
                         <li>

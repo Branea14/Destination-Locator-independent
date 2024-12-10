@@ -21,13 +21,13 @@ const ReviewsFormModal = ({spotId}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submit button clicked");
+        // console.log("Submit button clicked");
 
         const validationErrors = handleValidation();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
 
-            console.log("Validation errors:", validationErrors);
+            // console.log("Validation errors:", validationErrors);
             return;
         }
 
@@ -82,6 +82,7 @@ const ReviewsFormModal = ({spotId}) => {
                                 ★
                             </span>
                         ))}
+                        <span>Stars</span>
 
                     </div>
                     <button type="submit" disabled={disableButton()}>Submit Your Review</button>
