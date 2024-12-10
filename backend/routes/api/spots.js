@@ -313,16 +313,26 @@ router.post("/", requireAuth, validateSpot, async (req,res,next) => {
                 }))
 
                 await SpotImage.bulkCreate(images)
+                console.log('stored images in backend', images)
             }
 
             const fullSpot = await Spot.findByPk(spot.id, {
                 include: [
-                    {model: SpotImage, attributes: ['id', 'url', 'preview']},
+                    {
+                        model: SpotImage,
+                        attributes: ['id', 'url', 'preview'],
+                        separate: true,
+                        order: [['preview', 'DESC']]
+                    },
                     {model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName']}
                 ]
             })
+
+            const spotData = fullSpot.toJSON();
+            spotData.SpotImages = spotData.SpotImages.sort((a, b) => b.preview - a.preview);
+
             res.status(201).json({
-                ...fullSpot.toJSON(),
+                ...spotData,
                 Reviews: []
             })
     } catch(error) {
@@ -657,19 +667,19 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
 
     const spotId = req.params.spotId;
-    const findSpotId = await Spot.findByPk(spotId);
+    const findSpotId = await Spot.findByPk(spotId, {
+        include: {model: SpotImage, as: 'SpotImages'}
+    });
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
 
     try {
-        if (!findSpotId) return res.status(404).json({
-            "message": "Spot couldn't be found"
-        })
+        if (!findSpotId) return res.status(404).json({ "message": "Spot couldn't be found"})
         if (req.user.id !== findSpotId.ownerId) return res.status(403).json({message: "Forbidden"})
 
-          const updateSpot = await Spot.findOne({
-            where: {id: spotId}
-          })
-          updateSpot.set({
+        //   const updateSpot = await Spot.findOne({
+        //     where: {id: spotId}
+        //   })
+          findSpotId.set({
             address,
             city,
             state,
@@ -681,13 +691,77 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
             price
           })
 
-          await updateSpot.save();
+          await findSpotId.save();
 
-          res.json(updateSpot)
+          res.json(findSpotId)
     } catch(error) {
             next(error)
     }
 })
+
+
+// router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
+
+//     const spotId = req.params.spotId;
+//     const findSpotId = await Spot.findByPk(spotId, {
+//         include: {model: SpotImage, as: 'SpotImages'}
+//     });
+//     const {address, city, state, country, lat, lng, name, description, price, SpotImages} = req.body;
+
+//     try {
+//         if (!findSpotId) return res.status(404).json({ "message": "Spot couldn't be found"})
+//         if (req.user.id !== findSpotId.ownerId) return res.status(403).json({message: "Forbidden"})
+
+//         //   const updateSpot = await Spot.findOne({
+//         //     where: {id: spotId}
+//         //   })
+//           findSpotId.set({
+//             address,
+//             city,
+//             state,
+//             country,
+//             lat,
+//             lng,
+//             name,
+//             description,
+//             price
+//           })
+
+//           await findSpotId.save();
+
+//           if (SpotImages && Array.isArray(SpotImages)) {
+//             const spotImagesPromises = SpotImages.map(async (image) => {
+//                 // Check if the image already exists
+//                 const existingImage = await SpotImage.findOne({
+//                     where: { spotId, url: image.url }
+//                 });
+
+//                 // If the image doesn't exist, create it
+//                 if (!existingImage) {
+//                     await SpotImage.create({
+//                         spotId,
+//                         url: image.url,
+//                         preview: image.preview || false
+//                     });
+//                 }
+//             });
+
+//             await Promise.all(spotImagesPromises);
+//         }
+
+//         const updatedSpot = await Spot.findByPk(spotId, {
+//             include: [
+//                 { model: SpotImage, as: "SpotImages" },
+//                 { model: User, as: "Owner" },
+//                 { model: Review }
+//             ]
+//         });
+
+//           res.json(updatedSpot)
+//     } catch(error) {
+//             next(error)
+//     }
+// })
 
 
 /***************Delete a Spot *****************************/

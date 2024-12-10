@@ -82,7 +82,11 @@ const EditSpotForm = ({spot}) => {
             return;
         }
 
+        console.log('spotName', spotName)
+        // console.log('spotId', spot.id)
+
         const payload = {
+            id: spot.id,
             country,
             address,
             city,
@@ -117,8 +121,6 @@ const EditSpotForm = ({spot}) => {
                     Country
                     <input
                         type="text"
-                        // placeholder="Country"
-                        // required
                         value={country || ""}
                         onChange={updateCountry} />
                 </label>
@@ -129,8 +131,6 @@ const EditSpotForm = ({spot}) => {
                     Street Address
                     <input
                         type="text"
-                        placeholder="Address"
-                        // required
                         value={address || ""}
                         onChange={updateAddress}
                     />
@@ -142,8 +142,6 @@ const EditSpotForm = ({spot}) => {
                     City
                     <input
                         type="text"
-                        placeholder="City"
-                        // required
                         value={city || ""}
                         onChange={updateCity}
                     />
@@ -155,8 +153,6 @@ const EditSpotForm = ({spot}) => {
                     State
                     <input
                         type="text"
-                        placeholder="STATE"
-                        // required
                         value={state || ""}
                         onChange={updateState}
                     />
@@ -167,8 +163,6 @@ const EditSpotForm = ({spot}) => {
                 <h2>Describe your place to guests</h2>
                 <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                 <textarea
-                    placeholder="Please write at least 30 characters"
-                    // required
                     value={description || ""}
                     onChange={updateDescription}
                 />
@@ -179,8 +173,6 @@ const EditSpotForm = ({spot}) => {
                 <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
                 <input
                     type="text"
-                    placeholder="Name of your spot"
-                    // required
                     value={spotName || ""}
                     onChange={updateSpotName}
                 />
@@ -191,8 +183,6 @@ const EditSpotForm = ({spot}) => {
                 <p>Competitive price can help your listing stand out and rank higher in search results.</p>
                 $ <input
                     type="number"
-                    placeholder="Price per night (USD)"
-                    // required
                     value={price || ""}
                     onChange={updatePrice}
                 />
@@ -203,7 +193,6 @@ const EditSpotForm = ({spot}) => {
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input
                     type="text"
-                    placeholder="Preview Image URL"
                     value={imageUrls[0] || ""}
                     onChange={(e) => updateUrl(e, 0)}
                 />
@@ -214,12 +203,10 @@ const EditSpotForm = ({spot}) => {
                 {[1, 2, 3, 4].map(index => (
                     <input key={index}
                         type="text"
-                        placeholder="Image URL"
                         value={imageUrls[index] || ""}
                         onChange={(e) => updateUrl(e, index)}
                         />
                 ))}
-
 
                 {errors.image1 && <p>{errors.image1}</p>}
                 {errors.image2 && <p>{errors.image2}</p>}

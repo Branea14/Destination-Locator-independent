@@ -76,7 +76,7 @@ export const editSpot = (spot) => async dispatch => {
             'city': spot.city,
             'state': spot.state,
             'description': spot.description,
-            'name': spot.spotName,
+            'name': spot.name,
             'price': spot.price,
             'SpotImages': spot.imageUrls?.map((url, index) => ({
                 url,
@@ -108,6 +108,8 @@ const initialState = {
     singleSpot: null
 };
 
+
+//remember state is 'storage' and action intends to change that storage
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_SPOTS:
@@ -131,8 +133,17 @@ const spotReducer = (state = initialState, action) => {
         case EDIT_SPOT:
             return {
                 ...state,
-                singleSpot: action.spot,
-                spots: { ...state.spots, [action.spot.id]: action.spot }
+                singleSpot: {
+                    ...state.singleSpot, //this preserves existing fields
+                    ...action.spot, //this overwrites updated fields
+                    SpotImages: action.spot.SpotImages, //replaces spotimage arr with updated array
+                    Owner: state.singleSpot.Owner, //retins owner obj
+                    Reviews: state.singleSpot.Reviews //retains reviews arr
+                },
+                spots: {
+                    ...state.spots,
+                    [action.spot.id]: action.spot //only updates specific spot in spots list
+                 }
             };
 
         case DELETE_SPOT:

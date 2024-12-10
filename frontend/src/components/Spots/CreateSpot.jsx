@@ -39,11 +39,12 @@ const CreateSpot = () => {
         if (!state) validationErrors.state = 'State is required';
         if (description.length < 30) validationErrors.description = 'Description needs a minimum of 30 characters';
         if (!spotName) validationErrors.spotName = 'Name is required';
-        if (!price || isNaN(price)) validationErrors.price = 'Price is required';
+        if (!price || isNaN(price) || price <= 0) validationErrors.price = 'Price is required';
+        if (price <= 0) validationErrors.price = 'Price must be greater than $0'
 
         const previewImage = imageUrls[0];
         if (!previewImage) {
-            validationErrors.previewImage = 'Preview Image is required.'
+            validationErrors.previewImage = 'Preview Image is required'
         } else if (!(previewImage.endsWith('.jpg') || previewImage.endsWith('.jpeg') || previewImage.endsWith('.png'))) {
             validationErrors.previewImage = 'Preview image must end in .png, .jpg, or .jpeg';
         }

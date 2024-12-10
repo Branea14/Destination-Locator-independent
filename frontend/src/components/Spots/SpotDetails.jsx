@@ -24,6 +24,11 @@ const SpotDetails = () => {
 
     if (isLoading) return <p>Loading...</p>
 
+    const sortedSpotImages = [...(singleSpot?.SpotImages || [])];
+    const previewImage = sortedSpotImages.find(image => image.preview)
+    const otherImages = previewImage ? sortedSpotImages.filter(image => image !== previewImage) : sortedSpotImages;
+    const finalImages = previewImage ? [previewImage, ...otherImages] : otherImages;
+
     const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
     const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
 
@@ -53,7 +58,7 @@ const SpotDetails = () => {
         <>
             <h1>{singleSpot.name}</h1>
             <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-            {singleSpot?.SpotImages.map((spotImageDetails, index) => (
+            {finalImages?.map((spotImageDetails, index) => (
                 <div key={index}>
                     {/* need to add more images */}
                     <img src={spotImageDetails.url} alt="" ></img>
@@ -72,7 +77,7 @@ const SpotDetails = () => {
                 {showReviewButton && (
                     <button onClick={handlePostReviewButton}>Post Your Review</button>
                 )}
-                {singleSpot.Reviews.length === 0 ? (<p>Be the first to post a review!</p>) : null}
+                {showReviewButton && singleSpot.Reviews.length === 0 ? (<p>Be the first to post a review!</p>) : null}
                 {singleSpot.Reviews.map((review, index) => {
                         console.log(review)
                         const createdAt = new Date(review.createdAt).toLocaleDateString("en-US", {

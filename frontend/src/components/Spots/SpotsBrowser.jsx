@@ -31,8 +31,8 @@ const SpotsBrowser = () => {
                             : 'NEW!'
                         }
                     </p>
-                    <button>Update</button>
-                    <button>Delete</button>
+                    {/* <button>Update</button>
+                    <button>Delete</button> */}
                 </div>
              ))}
         </>

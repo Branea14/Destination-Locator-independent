@@ -48,6 +48,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         len: [1,1],
+        // min: 1,
+        // max: 5,
         isInt: true
       }
     }
