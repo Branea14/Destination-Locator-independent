@@ -8,17 +8,23 @@ const Navigation = ({isLoaded}) => {
     // console.log('current user', typeof sessionUser);
 
     return (
-        <ul>
-            <li>
-                <NavLink to='/'>Home</NavLink>
-            </li>
-            {sessionUser && (
-                <li>
-                    <NavLink to='/spots/new'>Create a New Spot</NavLink>
+        <nav className="navigation">
+            <ul className="nav-list">
+                <li className="logo-item">
+                    <NavLink to='/'>
+                        {/* <img src='/logo-image.jpg' alt="Dimensional Dwellings Logo" className="logo"/> */}
+                        <h1>Dimensional Dwellings</h1>
+                    </NavLink>
                 </li>
-            )}
-            {isLoaded && <ProfileButton user={sessionUser} />}
-        </ul>
+                {sessionUser && (
+                    <li>
+                        <NavLink to='/spots/new'>Create a New Spot</NavLink>
+                    </li>
+                )}
+                {isLoaded && <ProfileButton user={sessionUser} />}
+            </ul>
+
+        </nav>
     )
 }
 

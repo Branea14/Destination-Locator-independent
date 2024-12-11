@@ -90,7 +90,7 @@ const SpotDetails = () => {
                                 <div>{review.User.firstName}</div>
                                 <div>{createdAt}</div>
                                 <div>{review.review}</div>
-                                {review.User.id === currentUser.id ? <button onClick={() => openModal(<DeleteReviewModal reviewId={review.id} handleDelete={() => handleDeleteButton(review.id)}/>)}>Delete</button> : null}
+                                {review.User?.id === currentUser?.id ? <button onClick={() => openModal(<DeleteReviewModal reviewId={review.id} handleDelete={() => handleDeleteButton(review.id)}/>)}>Delete</button> : null}
                             </div>
                         );
                     })
