@@ -35,9 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       // unique: true,
       allowNull: false,
-      validate: {
-        isInt: true,
-      },
+      // validate: {
+      //   isInt: true,
+      // },
       references: {
         model: "Users",
         key: "id"
@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
       // validate: {
       //   isAlphanumeric: true,
       // }
@@ -61,10 +62,10 @@ module.exports = (sequelize, DataTypes) => {
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true,
-        len: [2,2]
-      }
+      // validate: {
+      //   isAlpha: true,
+      //   // len: [2,2]
+      // }
     },
     country: {
       type: DataTypes.STRING,
@@ -75,7 +76,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.DECIMAL(10,7),
-      unique: true,
+      // unique: true,
       allowNull: true
       // validate: {
         // isDecimal: true
@@ -83,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lng: {
       type: DataTypes.DECIMAL(10,7),
-      unique: true,
+      // unique: true,
       allowNull: true
       // validate: {
         // isDecimal: true
@@ -92,10 +93,11 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        // isAlphanumeric: true,
-        min: 3
-      }
+      // validate: {
+      //   // isAlphanumeric: true,
+      //   // min: 3
+      //   len: [3]
+      // }
     },
     price: {
       type: DataTypes.DECIMAL(10,2),
