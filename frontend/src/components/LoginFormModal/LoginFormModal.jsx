@@ -63,8 +63,8 @@ const LoginFormModal = () => {
                 <h1>Log In</h1>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Username or Email
                         <input
+                            placeholder="Username or Email"
                             type='text'
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
@@ -72,8 +72,8 @@ const LoginFormModal = () => {
                         />
                     </label>
                     <label>
-                        Password
                         <input
+                            placeholder="Password"
                             type='password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +81,9 @@ const LoginFormModal = () => {
                         />
                     </label>
                     {errors.credential && <p>{errors.credential}</p>}
-                    <button type="submit" disabled={disableButton() }>Log In</button>
+                    <div className="button-container">
+                      <button type="submit" disabled={disableButton() }>Log In</button>
+                    </div>
                     <a href="#" onClick={handleDemoLogin}>Log in as Demo</a>
                     {/* <button type="submit" onClick={handleDemoLogin}>Log in as Demo-User</button> */}
                 </form>

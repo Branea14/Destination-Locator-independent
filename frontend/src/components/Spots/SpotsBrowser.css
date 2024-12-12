@@ -1,26 +1,25 @@
 body {
     background-color: #1e1e2e;
-    background-color: #1e1e2e;
 }
 
 .spots-browser {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 20px;
+    padding: 40px;
     background-color: #1e1e2e; /* Dark background inspired by Dandadan's tone */
     color: #f8f8f2; /* Light text for contrast */
 }
 
 .spot-container {
-    /* background-color: #282a36;
-    border: 2px solid #ff79c6; Neon pink border */
     border-radius: 8px;
     overflow: hidden;
-    /* padding: 10px; */
     text-align: left;
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    /* padding: 10px; */
+    /* position: relative; */
 }
 
 .spot-container:hover {
@@ -28,41 +27,6 @@ body {
     box-shadow: 0 0 15px #ff79c6; /* Glow effect */
 }
 
-/* .spot-image {
-    width: 100%;
-    height: auto;
-    /* border-radius: 4px;
-    margin-bottom: 10px;
-    border: 2px solid #8be9fd; Neon blue border */
-    /* object-fit: cover;
-    display: block; */
-/* }
-
-.spot-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #bd93f9; /* Purple for titles */
-    /* margin-bottom: 5px;
-} */
-
-/* .spot-location,
-.spot-price,
-.spot-rating {
-    margin: 5px 0;
-    font-size: 1rem;
-}
-
-.loading-text {
-    color: #ffb86c; /* Neon orange for loading text */
-    /* font-size: 1.5rem;
-    text-align: center;
-    margin-top: 50px;
-} */
-/*  */
-/* .spot-details {
-    display: flex;
-    justify-content: space-between;
-} */
 .spot-image {
     width: 100%;
     height: 180px; /* Adjust height as needed */
@@ -72,36 +36,61 @@ body {
 
 .spot-details {
     padding: 10px;
-
 }
 
 .spot-details-inside-container {
     display: flex;
     justify-content: space-between;
     font-size: 16px;
-    /* color: #222121; */
-    /* margin-bottom: 5px; */
 }
 
 .spot-location {
-    font-size: 1rem;
-    /* font-weight: bold; */
+    /* font-size: 1rem; */
+    font-size: 1.09rem;
     margin-bottom: 5px;
     color: #f8f8f2;
+    max-width: 120px; /* Adjust the width as needed */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .spot-price {
-    font-size: 0.9rem;
-    color: #ffb86c; /* Highlight price */
+    font-size: 1rem;
+    color: #ffb86c;
     margin-bottom: 5px;
-    margin-top: 0px
+    margin-top: 2px;
 }
 
+
 .spot-rating {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #50fa7b; /* Green for rating */
 }
 
 .bold-price {
     font-weight: bold;
 }
+
+/* .tooltiptext { */
+    /* visibility: hidden; /* Hide tooltip by default */
+    /* width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    top: 100%; /* Position below the container */
+    /* left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0; /* Start hidden for smoother transitions */
+    /* transition: opacity 0.3s ease-in-out;
+    height: 283px; */
+/* } */
+
+/* .spot-container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+} */

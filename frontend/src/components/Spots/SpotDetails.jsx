@@ -6,6 +6,7 @@ import { useModal } from "../../context/Modal";
 import ReviewsFormModal from "../Reviews/ReviewsFormModal";
 import { removeReview } from "../../store/reviews";
 import DeleteReviewModal from "./DeleteReviewModal";
+import "./SpotDetails.css"
 
 const SpotDetails = () => {
     const {spotId} = useParams();
@@ -55,25 +56,36 @@ const SpotDetails = () => {
     }
 
     return (
-        <>
-            <h1>{singleSpot.name}</h1>
-            <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-            {finalImages?.map((spotImageDetails, index) => (
-                <div key={index}>
-                    {/* need to add more images */}
-                    <img src={spotImageDetails.url} alt="" ></img>
+        <div className="spot-details-content">
+            <h1 className="spot-detail-name">{singleSpot.name}</h1>
+            <h2 className="spot-details-location">{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
+            <div className="images-container">
+                <div className="preview-image">
+                    <img src={singleSpot.previewImage} alt="Preview Image" />
                 </div>
-            ))}
-            <h2>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName}</h2>
-            <p>{singleSpot.description}</p>
-            <h3 className="price">
-                ${singleSpot.price} <span className="night">night</span>
-            </h3>
-            <button type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
-            <h4>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h4>
+                <div className="other-images">
+                    {singleSpot.SpotImages?.slice(1).map((img) => (
+                        <div className="other-image" key={img.id}>
+                            <img src={img.url} alt={singleSpot.name}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <h2 className="host-info">Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName}</h2>
+            <p className="spot-description">{singleSpot.description}</p>
 
-            <section>
-                <h2>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h2>
+            <div className="booking-info">
+                <div className="spot-price-and-review-summary">
+                    <h3 className="price">
+                        ${singleSpot.price} <span className="night">night</span>
+                    </h3>
+                    <h2>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h2>
+                </div>
+                <button className='reserve-button' type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
+            </div>
+            <div className="page-break"></div>
+            <section className="review-section">
+                <h4 className="review-summary-in-review-section">{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h4>
                 {showReviewButton && (
                     <button onClick={handlePostReviewButton}>Post Your Review</button>
                 )}
@@ -86,17 +98,17 @@ const SpotDetails = () => {
                         });
 
                         return (
-                            <div key={index} className="review">
-                                <div>{review.User.firstName}</div>
-                                <div>{createdAt}</div>
-                                <div>{review.review}</div>
+                            <div key={index} className="review-details">
+                                <div className="review-user">{review.User.firstName}</div>
+                                <div className="review-date">{createdAt}</div>
+                                <div className="review">{review.review}</div>
                                 {review.User?.id === currentUser?.id ? <button onClick={() => openModal(<DeleteReviewModal reviewId={review.id} handleDelete={() => handleDeleteButton(review.id)}/>)}>Delete</button> : null}
                             </div>
                         );
                     })
                 }
             </section>
-        </>
+        </div>
     )
 }
 

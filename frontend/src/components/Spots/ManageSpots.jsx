@@ -45,7 +45,7 @@ const ManageSpots = () => {
                             <img src={spot.previewImage} alt=''></img>
                             <p>
                                 {spot.avgRating
-                                    ? `⭐${spot.avgRating}`
+                                    ? `★ ${spot.avgRating}`
                                     : 'NEW!'
                                 }
                             </p>

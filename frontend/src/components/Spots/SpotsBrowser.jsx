@@ -3,6 +3,7 @@ import { getAllSpots } from "../../store/spots"
 import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SpotsBrowser.css";
+import tippy from 'tippy.js';
 
 const SpotsBrowser = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,13 @@ const SpotsBrowser = () => {
     // const allSpots = useSelector(state => Object.values(state.spots.spots))
 
     useEffect(() => {
-        dispatch(getAllSpots())
+        dispatch(getAllSpots());
+        tippy('.spot-name', {
+            placement: 'top', // Position the tooltip on top of the element
+            arrow: true, // Show an arrow pointing to the tooltip
+            delay: [0, 200], // Show the tooltip after 0ms and hide it after 200ms of inactivity
+            theme: 'light' // Use a light theme for the tooltip
+        });
     }, [dispatch])
 
     if (!allSpots ) return <p>Loading spots...</p>
@@ -21,7 +28,9 @@ const SpotsBrowser = () => {
         <div className="spots-browser">
             {allSpots?.map((spot, index) => (
                 <div className='spot-container' onClick={() => navigate(`/spots/${spot.id}`)} key={index}>
-                    {/* <p className="spot-name">{spot.name}</p> */}
+                    <div className="spot-name" data-tippy-content={spot.name}>
+                        {/* {spot.name} */}
+                    </div>
                     <img className="spot-image"src={spot.previewImage} alt=''></img>
                     <div className="spot-details">
                         <div className="spot-details-inside-container">

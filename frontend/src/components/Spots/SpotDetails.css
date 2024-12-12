@@ -1,0 +1,122 @@
+.spot-details-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.spot-images {
+    display: grid;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.spot-images img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.reserve-button {
+    background-color: #ff5a5f; /* Airbnb's signature red */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reserve-button:hover {
+    background-color: #ff4b4f; /* Slightly darker red for hover effect */
+}
+
+.host-info, .spot-description, .price, .review-summary-in-review-section {
+    margin: 20px 0;
+}
+
+.booking-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-break {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+.review-section {
+    margin-top: 20px;
+    border-top: 1px solid #ccc; /* Visual separation */
+    padding: 16px 0;
+}
+
+.review-summary-in-review-section {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.review-details {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .spot-images {
+        grid-template-columns: 1fr; /* Stack images on smaller screens */
+    }
+
+    .reserve-button {
+        width: 100%; /* Full-width button */
+    }
+}
+
+.spot-details-location {
+    /* font-size: 1rem; */
+    font-size: 1.09rem;
+    margin-bottom: 5px;
+    color: #f8f8f2;
+}
+
+.images-container {
+    display: grid;
+    /* grid-template-areas:
+        "preview other other"
+        "preview other other"; */
+    grid-template-columns: 2.5fr 2fr; /* Adjust proportions as needed */
+    gap: 10px; /* Space between images */
+    grid-column: 1 / span 2;
+}
+
+.preview-image {
+    height: 100;
+    width: 100%;
+    object-fit: cover;
+    /* height: auto; */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
+.other-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10 px;
+}
+
+.other-images img {
+    width: 100%;
+    /* height: auto; */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px; /* Optional: Rounded corners */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}

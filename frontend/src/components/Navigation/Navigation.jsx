@@ -13,7 +13,7 @@ const Navigation = ({isLoaded}) => {
                 <li className="logo-item">
                     <NavLink to='/'>
                         {/* <img src='/logo-image.jpg' alt="Dimensional Dwellings Logo" className="logo"/> */}
-                        <h1>Dimensional Dwellings</h1>
+                        <h1>dimensional dwellings</h1>
                     </NavLink>
                 </li>
                 {sessionUser && (
