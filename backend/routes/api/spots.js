@@ -264,15 +264,14 @@ router.get("/", async (req, res, next) => {
             const spotImages = spotData.SpotImages || [];
             const previewImage = spot.SpotImages[0] ? spot.SpotImages[0].url : null;
 
-            delete spotData.SpotImages;
-
+            delete spotData.SpotImages; //raw spotImage data is no longer needed
             delete spotData.Reviews;
 
             return {
                 ...spotData,
                 lat: parseFloat(spotData.lat), // cast to number
-                lng: parseFloat(spotData.lng), // cast to number
-                price: parseFloat(spotData.price), // cast to number
+                lng: parseFloat(spotData.lng),
+                price: parseFloat(spotData.price),
                 avgRating,
                 previewImage,
                 SpotImages: spotImages

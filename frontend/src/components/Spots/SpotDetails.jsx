@@ -61,27 +61,31 @@ const SpotDetails = () => {
             <h2 className="spot-details-location">{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
             <div className="images-container">
                 <div className="preview-image">
-                    <img src={singleSpot.previewImage} alt="Preview Image" />
+                    <img src={previewImage.url} alt="Preview Image" />
                 </div>
-                <div className="other-images">
-                    {singleSpot.SpotImages?.slice(1).map((img) => (
-                        <div className="other-image" key={img.id}>
-                            <img src={img.url} alt={singleSpot.name}/>
-                        </div>
-                    ))}
-                </div>
+                    <div className='other-images'>
+                        {otherImages.map((img) => (
+                            <div key={img.id}>
+                                <img src={img.url} alt={singleSpot.name}/>
+                            </div>
+                        ))}
+                    </div>
             </div>
-            <h2 className="host-info">Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName}</h2>
-            <p className="spot-description">{singleSpot.description}</p>
-
-            <div className="booking-info">
-                <div className="spot-price-and-review-summary">
-                    <h3 className="price">
-                        ${singleSpot.price} <span className="night">night</span>
-                    </h3>
-                    <h2>{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h2>
+            <div className="spot-detailed-information">
+                <div className="host-spot-information">
+                    <h2 className="host-info">Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName}</h2>
+                    <p className="spot-description">{singleSpot.description}</p>
                 </div>
-                <button className='reserve-button' type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
+
+                <div className="booking-info">
+                    <div className="price-and-reviews">
+                        <h3 className="price">
+                            ${singleSpot.price} <span className="night">night</span>
+                        </h3>
+                        <h2 className="reviews">{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h2>
+                    </div>
+                    <button className='reserve-button' type="button" onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
+                </div>
             </div>
             <div className="page-break"></div>
             <section className="review-section">
