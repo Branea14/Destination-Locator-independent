@@ -70,7 +70,7 @@ const reviewReducer = (state = initialState, action) => {
         case GET_ALL_REVIEWS:
             return {...state, reviews: action.allReviews};
 
-        case POST_A_REVIEW:
+        case POST_A_REVIEW:{
             if (!state.singleSpot) return state;
             const updatedSpot = {
                 ...state.singleSpot,
@@ -81,10 +81,10 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 reviews: [...state.reviews, action.review],
                 singleSpot: updatedSpot
-            };
+            }}
 
         case DELETE_REVIEW:
-            if (!state.singleSpot) return state;
+          {  if (!state.singleSpot) return state;
 
             const remainingReviews = state.singleSpot.Reviews.filter(
                 (review) => review.id !== action.reviewId
@@ -100,7 +100,7 @@ const reviewReducer = (state = initialState, action) => {
                 avgStarRating: updatedAvgStarRating,
             };
 
-            return {...state, singleSpot: updatedSingleSpot};
+            return {...state, singleSpot: updatedSingleSpot}}
         default:
             return state;
     }

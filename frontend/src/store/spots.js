@@ -112,13 +112,13 @@ const initialState = {
 //remember state is 'storage' and action intends to change that storage
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_ALL_SPOTS:
+        case GET_ALL_SPOTS:{
             const normalizedSpots = {};
             const spotsArray = Array.isArray(action.spots) ? action.spots : action.spots.Spots;
             spotsArray.forEach((spot) => {
                 normalizedSpots[spot.id] = spot;
             });
-            return { ...state, spots: normalizedSpots };
+            return { ...state, spots: normalizedSpots }}
 
         case GET_SINGLE_SPOT:
             return {...state, singleSpot: action.payload};
@@ -146,7 +146,7 @@ const spotReducer = (state = initialState, action) => {
                  }
             };
 
-        case DELETE_SPOT:
+        case DELETE_SPOT:{
             const updatedSpots = {...state.spots}
             delete updatedSpots[action.spotId]
             return {
@@ -154,7 +154,7 @@ const spotReducer = (state = initialState, action) => {
                 spots: updatedSpots,
                 singleSpot: state.singleSpot?.id === action.spotId ? null : state.singleSpot
             }
-
+        }
         default:
             return state
     }

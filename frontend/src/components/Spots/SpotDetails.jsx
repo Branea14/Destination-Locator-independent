@@ -28,7 +28,7 @@ const SpotDetails = () => {
     const sortedSpotImages = [...(singleSpot?.SpotImages || [])];
     const previewImage = sortedSpotImages.find(image => image.preview)
     const otherImages = previewImage ? sortedSpotImages.filter(image => image !== previewImage) : sortedSpotImages;
-    const finalImages = previewImage ? [previewImage, ...otherImages] : otherImages;
+    // const finalImages = previewImage ? [previewImage, ...otherImages] : otherImages;
 
     const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
     const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
