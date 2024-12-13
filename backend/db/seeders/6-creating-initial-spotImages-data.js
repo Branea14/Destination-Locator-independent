@@ -29,7 +29,7 @@ module.exports = {
       { spotId: 3, url: "https://images.pexels.com/photos/739074/pexels-photo-739074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
       { spotId: 3, url: "https://cdn.openart.ai/uploads/image_m2BkxdcN_1733898016937_raw.jpg", preview: false },
       { spotId: 3, url: "https://images.pexels.com/photos/5472597/pexels-photo-5472597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotid: 3, url: "https://i.imgur.com/43cPQ0X.jpeg", preview: false},
+      { spotId: 3, url: "https://i.imgur.com/43cPQ0X.jpeg", preview: false},
 
       // Spot 4
       { spotId: 4, url: "https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
@@ -43,7 +43,7 @@ module.exports = {
       { spotId: 5, url: "https://cdn.openart.ai/uploads/image_BkvJDcGJ_1733898521284_512.webp", preview: true },
       { spotId: 5, url: "https://cdn.openart.ai/uploads/image_BLkp1lCS_1733897440904_512.webp", preview: false},
       { spotId: 5, url: "https://i.imgur.com/f2ETfRX.jpeg", preview: false},
-      { spotid: 5, url: "https://i.imgur.com/yCeDETj.jpeg", preview: false},
+      { spotId: 5, url: "https://i.imgur.com/yCeDETj.jpeg", preview: false},
       { spotId: 5, url: "https://i.imgur.com/3KTVi1f.jpeg", preview: false},
 
       // Spot 6
@@ -85,10 +85,10 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    options.tableName = "ReviewImages";
+    options.tableName = "SpotImages";
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-     spotId: {[Op.in]: [1, 2, 3]}
+     spotId: {[Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
     }, {})
   }
 };
