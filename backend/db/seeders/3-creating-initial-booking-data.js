@@ -71,36 +71,6 @@ module.exports = {
         startDate: "06/02/2025",
         endDate: "06/09/2025"
       },
-      {
-        spotId: 11,
-        userId: 1,
-        startDate: "07/01/2025",
-        endDate: "07/08/2025"
-      },
-      {
-        spotId: 12,
-        userId: 2,
-        startDate: "07/09/2025",
-        endDate: "07/16/2025"
-      },
-      {
-        spotId: 13,
-        userId: 3,
-        startDate: "07/17/2025",
-        endDate: "07/24/2025"
-      },
-      {
-        spotId: 14,
-        userId: 4,
-        startDate: "07/25/2025",
-        endDate: "08/01/2025"
-      },
-      {
-        spotId: 15,
-        userId: 5,
-        startDate: "08/02/2025",
-        endDate: "08/09/2025"
-      }
     ], { validate: true });
   },
 

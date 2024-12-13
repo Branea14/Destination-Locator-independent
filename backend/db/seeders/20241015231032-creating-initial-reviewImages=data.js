@@ -38,10 +38,6 @@ module.exports = {
         reviewId: 10,
         url: 'https://images.pexels.com/photos/10061386/pexels-photo-10061386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       },
-      {
-        reviewId: 12,
-        url: 'https://images.pexels.com/photos/7510018/pexels-photo-7510018.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      }
     ])
   },
 

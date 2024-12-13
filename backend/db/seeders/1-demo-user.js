@@ -16,35 +16,35 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password'),
         email: 'demo@user.io',
         firstName: 'Momo',
-        lastName: 'Ayase'
+        lastName: 'Aya'
       },
       {
         username: 'TurboFan',
         hashedPassword: bcrypt.hashSync('password2'),
-        email: 'ken.takakura@dandadanbnb.com',
+        email: 'ken.taka@user.com',
         firstName: "Ken",
-        lastName: "Takakura"
+        lastName: "Taka"
       },
       {
         username: 'GrannyVibes',
         hashedPassword: bcrypt.hashSync('password3'),
-        email: 'seiko.takakura@dandadanbnb.com',
+        email: 'seiko.taka@user.com',
         firstName: "Seiko",
-        lastName: "Takakura"
+        lastName: "Taka"
       },
       {
         username: 'PsychicVision',
         hashedPassword: bcrypt.hashSync('password3'),
-        email: 'aira.shiratori@dandadanbnb.com',
+        email: 'aira.shira@user.com',
         firstName: "Aira",
-        lastName: "Shiratori"
+        lastName: "Shira"
       },
       {
-        username: 'TurboOkarun',
+        username: 'TurboRun',
         hashedPassword: bcrypt.hashSync('password3'),
-        email: 'okarun.okarun@dandadanbnb.com',
-        firstName: "Okarun",
-        lastName: "Okarun"
+        email: 'okami.run@user.com',
+        firstName: "Okami",
+        lastName: "Run"
       }
     ], { validate: true });
   },

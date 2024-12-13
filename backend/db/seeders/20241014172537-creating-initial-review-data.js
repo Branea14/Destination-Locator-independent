@@ -71,18 +71,7 @@ module.exports = {
         review: "Perfect for a quiet retreat. The bed was so comfortable!",
         stars: 5
       },
-      {
-        spotId: 12,
-        userId: 1,
-        review: "Spacious and clean, but the neighbors were too noisy.",
-        stars: 3
-      },
-      {
-        spotId: 15,
-        userId: 2,
-        review: "Felt like I stepped into another dimension. Trippy and fun!",
-        stars: 5
-      }
+
     ], { validate: true });
   },
 
