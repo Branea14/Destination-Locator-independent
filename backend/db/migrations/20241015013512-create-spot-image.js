@@ -42,9 +42,27 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
       }
-    }, options);
+    }, options, {});
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."SpotImages"` : "SpotImages"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "SpotImages_id_seq" RESTART WITH 1;`
+      );
+    }
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SpotImages', options);
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."SpotImages"` : "SpotImages"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "SpotImages_id_seq" RESTART WITH 1;`
+      );
+    }
+    await queryInterface.dropTable("SpotImages", options);
   }
 };
