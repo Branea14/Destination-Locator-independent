@@ -5,33 +5,34 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class SpotImage extends Model {
     static associate(models) {
-    SpotImage.belongsTo(models.Spot, {
-      foreignKey: "spotId",
-    })
+      SpotImage.belongsTo(models.Spot, {
+        foreignKey: "spotId",
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   SpotImage.init({
-    spotId:{
-    type:DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      isInt: true
-    },
-    references: {
-      model: "Spots",
-      key: "id"
-    },
-    onDelete: "CASCADE"
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: true
+      },
+      references: {
+        model: "Spots",
+        key: "id"
+      },
     },
     url: {
-     type: DataTypes.STRING,
-     allowNull: false,
-     validate: {
-      isUrl: true
-     }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isUrl: true
+      }
     },
     preview: {
-      type:DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       allowNull: false
     }
   }, {

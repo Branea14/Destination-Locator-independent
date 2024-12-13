@@ -18,10 +18,22 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Spots",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       review: {
         type: Sequelize.STRING,
@@ -41,9 +53,27 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    }, options);
+    }, options, {});
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."Reviews"` : "Reviews"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "Reviews_id_seq" RESTART WITH 1;`
+      );
+    }
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reviews', options);
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."Reviews"` : "Reviews"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "Reviews_id_seq" RESTART WITH 1;`
+      );
+    }
+    await queryInterface.dropTable("Reviews", options);
   }
 };

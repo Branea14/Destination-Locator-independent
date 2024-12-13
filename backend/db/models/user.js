@@ -11,18 +11,21 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'UserReviews',
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         hooks: true
       });
 
       User.hasMany(models.Booking, {
         foreignKey: "userId",
-        onDelete:"CASCADE",
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         hooks: true
       });
 
       User.hasMany(models.Spot, {
         foreignKey: "ownerId",
-        onDelete:"CASCADE",
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         hooks: true
       })
 
@@ -47,19 +50,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-      len: [4, 30],
-      isNotEmail(value) {
-        if(Validator.isEmail(value)) {
-          throw new Error('Cannot be an email')
+        len: [4, 30],
+        isNotEmail(value) {
+          if (Validator.isEmail(value)) {
+            throw new Error('Cannot be an email')
+          }
         }
-      }
       }
     },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
       validate: {
-        len: [60,60]
+        len: [60, 60]
       }
     },
     email: {
@@ -67,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [3,256],
+        len: [3, 256],
         isEmail: true
       }
     },

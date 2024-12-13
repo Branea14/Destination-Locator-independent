@@ -18,7 +18,13 @@ module.exports = {
       reviewId: {
         type: Sequelize.INTEGER,
         allowNull:false,
-        unique: true
+        unique: true,
+        references: {
+          model: "Reviews",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       url: {
         type: Sequelize.STRING,

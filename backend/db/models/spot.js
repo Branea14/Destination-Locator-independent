@@ -8,24 +8,29 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.Review, {
         foreignKey: 'spotId',
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         hooks: true
       });
 
       Spot.hasMany(models.Booking, {
         foreignKey: 'spotId',
-        onDelete: "CASCADE",
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         hooks: true
       })
 
       Spot.belongsTo(models.User, {
         foreignKey: "ownerId",
-        as: 'Owner'
+        as: 'Owner',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       })
 
       Spot.hasMany(models.SpotImage, {
         foreignKey: "spotId",
-        onDelete:"CASCADE",
-        hooks:true
+        hooks: true,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       })
     }
   }
@@ -41,8 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: "Users",
         key: "id"
-      },
-      onDelete: "CASCADE"
+      }
     },
     address: {
       type: DataTypes.STRING,
@@ -75,19 +79,19 @@ module.exports = (sequelize, DataTypes) => {
       // }
     },
     lat: {
-      type: DataTypes.DECIMAL(10,7),
+      type: DataTypes.DECIMAL(10, 7),
       // unique: true,
       allowNull: true
       // validate: {
-        // isDecimal: true
+      // isDecimal: true
       // }
     },
     lng: {
-      type: DataTypes.DECIMAL(10,7),
+      type: DataTypes.DECIMAL(10, 7),
       // unique: true,
       allowNull: true
       // validate: {
-        // isDecimal: true
+      // isDecimal: true
       // }
     },
     name: {
@@ -100,10 +104,10 @@ module.exports = (sequelize, DataTypes) => {
       // }
     },
     price: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       // validate: {
-        // isDecimal: true
+      // isDecimal: true
       // }
     },
     // avgRating: {

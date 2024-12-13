@@ -22,7 +22,8 @@ module.exports = {
           model: "Users",
           key: "id"
         },
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
+        onUpdate: 'CASCADE'
       },
       address: {
         type: Sequelize.STRING,
@@ -79,9 +80,27 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    }, options);
+    }, options, {});
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."Spots"` : "Spots"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "Spots_id_seq" RESTART WITH 1;`
+      );
+    }
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Spots', options);
+    if (process.env.NODE_ENV === "production") {
+      await queryInterface.sequelize.query(
+        `TRUNCATE TABLE ${options.schema ? `"${options.schema}"."Spots"` : "Spots"} RESTART IDENTITY CASCADE;`
+      );
+    } else if (process.env.NODE_ENV === "development") {
+      await queryInterface.sequelize.query(
+        `ALTER SEQUENCE "Spots_id_seq" RESTART WITH 1;`
+      );
+    }
+    await queryInterface.dropTable("Spots", options);
   }
 };
