@@ -315,7 +315,7 @@ router.post("/", requireAuth, validateSpot, async (req,res,next) => {
                 console.log('stored images in backend', images)
             }
 
-            const fullSpot = await Spot.findByPk(spot.id, {
+            const fullSpot = await Spot.findByPk(Number(spot.id), {
                 include: [
                     {
                         model: SpotImage,
@@ -387,7 +387,7 @@ router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
 
     try {
-        const spot = await Spot.findByPk(spotId, {
+        const spot = await Spot.findByPk(Number(spotId), {
             include: [
                 { model: Review, attributes: ['id', 'review', 'stars', 'createdAt', 'updatedAt'], include: [
                     {model: User, as: 'User', attributes: ['id', 'firstName', 'lastName']}
@@ -446,7 +446,7 @@ router.get('/:spotId', async (req, res, next) => {
 /***********************Get All Reviews by a Spot's Id *************************/
 router.get("/:spotId/reviews", async (req, res, next) => {
     const spotId = req.params.spotId;
-    const findSpot = await Spot.findByPk(spotId);
+    const findSpot = await Spot.findByPk(Number(spotId));
 
     if (!findSpot) {
         res.status(404).json({message: "Spot couldn't be found"})
@@ -476,7 +476,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
         const spotId = req.params.spotId;
         const userId = req.user.id
-        const spot = await Spot.findByPk(spotId)
+        const spot = await Spot.findByPk(Number(spotId))
 
         if (!spot) {
             res.status(404).json({
@@ -642,7 +642,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     const { url, preview } = req.body;
 
     try {
-      const spot = await Spot.findByPk(spotId);
+      const spot = await Spot.findByPk(Number(spotId));
       if (!spot) {
         return res.status(404).json({ message: "Spot couldn't be found" });
       }
@@ -651,7 +651,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
       const newImage = await spot.createSpotImage({ url, preview });
 
-      const limitedImage = await SpotImage.findByPk(newImage.id, {
+      const limitedImage = await SpotImage.findByPk(Number(newImage.id), {
         attributes: ['id', 'url', 'preview']
       });
 
@@ -666,7 +666,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
 
     const spotId = req.params.spotId;
-    const findSpotId = await Spot.findByPk(spotId, {
+    const findSpotId = await Spot.findByPk(Number(spotId), {
         include: {model: SpotImage, as: 'SpotImages'}
     });
     const {address, city, state, country, lat, lng, name, description, price} = req.body;
@@ -769,7 +769,7 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     console.log("Attempting to delete spot with ID:", spotId);
 
-    const findSpotId = await Spot.findByPk(spotId);
+    const findSpotId = await Spot.findByPk(Number(spotId));
     if (!findSpotId) {
         console.log("Spot not found:", spotId);
         return res.status(404).json({"message": "Spot couldn't be found"});
@@ -823,7 +823,7 @@ router.post("/:spotId/reviews", requireAuth,  validateReview, async (req,res,nex
     const userId = req.user.id;
     const { spotId } = req.params;
 
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findByPk(Number(spotId));
     const ownerId = spot.dataValues.ownerId
     if (!spot) return res.status(404).json({ "message": "Spot couldn't be found"})
 
@@ -845,7 +845,7 @@ router.post("/:spotId/reviews", requireAuth,  validateReview, async (req,res,nex
                 stars,
             })
 
-            const reviewWithUser = await Review.findByPk(newReview.id, {
+            const reviewWithUser = await Review.findByPk(Number(newReview.id), {
                 include: {
                     model: User,
                     as: 'User',
