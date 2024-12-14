@@ -47,6 +47,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    margin-bottom: -25px;
 }
 
 .profile-button-container:hover {
@@ -103,10 +104,10 @@ button:hover {
     font-size: 1.5rem;
 }
 
-.nav-list li {
-    margin-left: 5px;
+/* .nav-list li { */
+    /* margin-left: 25px; */
     /* moves heading to the right */
-}
+/* } */
 
 .nav-list a {
     text-decoration: none;
