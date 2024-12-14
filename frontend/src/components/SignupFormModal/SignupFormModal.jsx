@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
 // import { Navigate } from "react-router-dom";
@@ -19,20 +19,45 @@ const SignupFormModal = () => {
     // if (user) return <Navigate to='/' replace={true} />;
     // const user = useSelector((state) => state.session.user)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (confirmPassword === password) {
-            setErrors({});
-            return dispatch(sessionActions.signup({username, firstName, lastName, email, password}))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data?.errors) setErrors(data.errors);
-                }
-            )
-        }
-            return setErrors({ confirmPassword: 'Passwords do not match' })
+    const validateFields = () => {
+        const newErrors = {};
+
+        if (!firstName) newErrors.firstName = 'First name is required.';
+        if (!lastName) newErrors.lastName = 'Last name is required.';
+        if (!email) newErrors.email = 'Email is required.';
+        if (!username) newErrors.username = 'Username is required.';
+        else if (username.length < 4) newErrors.username = 'Username must be at least 4 characters.';
+        if (!password) newErrors.password = 'Password is required.';
+        else if (password.length < 6) newErrors.password = 'Password must be at least 6 characters.';
+        if (!confirmPassword) newErrors.confirmPassword = 'Confirm password is required.';
+        else if (confirmPassword !== password) newErrors.confirmPassword = 'Passwords do not match.'
+        return newErrors;
     }
+
+    useEffect(() => {
+        setErrors(validateFields());
+    }, [username, firstName, lastName, email, password, confirmPassword]);
+
+    const disableButton = Object.keys(errors).length > 0;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const fieldErrors = validateFields();
+        if (Object.keys(fieldErrors).length > 0) {
+            setErrors(fieldErrors);
+            return;
+        }
+        setErrors({});
+        try {
+            await dispatch(sessionActions.signup({ username, firstName, lastName, email, password }));
+            closeModal();
+        } catch (res) {
+            const data = await res.json();
+            if (data?.errors) setErrors(data.errors);
+        }
+    }
+
 
     return (
         <div className="modal-background">
@@ -48,7 +73,6 @@ const SignupFormModal = () => {
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.firstName && <p>{errors.firstName}</p>}
@@ -58,7 +82,6 @@ const SignupFormModal = () => {
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.lastName && <p>{errors.lastName}</p>}
@@ -68,7 +91,6 @@ const SignupFormModal = () => {
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.email && <p>{errors.email}</p>}
@@ -78,7 +100,6 @@ const SignupFormModal = () => {
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.username && <p>{errors.username}</p>}
@@ -88,7 +109,6 @@ const SignupFormModal = () => {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.password && <p>{errors.password}</p>}
@@ -98,11 +118,10 @@ const SignupFormModal = () => {
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
                         />
                     </label>
                     {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                    <button type="submit">Sign Up</button>
+                    <button type="submit" disabled={disableButton}>Sign Up</button>
                 </form>
             </div>
         </div>
