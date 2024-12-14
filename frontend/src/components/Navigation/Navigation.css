@@ -38,25 +38,14 @@ h1:hover {
     cursor: pointer;
 }
 
-/* .nav-list li {
-    margin-left: 20px;
-} */
-
 .nav-list a {
     text-decoration: none;
     color: #f8f8f2;
     font-size: 1.2rem;
     transition: color 0.3s, transform 0.3s;
-    /* padding-right: 5px; */
 }
 
 .nav-list a:hover {
     color: #ff79c6;
     transform: scale(1.1);
 }
-
-/* .nav-list a.active {
-    color: #ff79c6;
-    font-weight: bold;
-    border-bottom: 2px solid;
-} */
