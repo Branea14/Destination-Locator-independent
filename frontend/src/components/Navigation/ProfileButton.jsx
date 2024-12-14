@@ -44,7 +44,7 @@ const ProfileButton = ({user}) => {
 
     return (
         <div className="profile-button-container" onClick={toggleMenu}>
-            <div className="menu-icon">
+            <div className="menu-icon" aria-expanded={showMenu}>
                 <div></div>
                 <div></div>
                 <div></div>
@@ -53,8 +53,8 @@ const ProfileButton = ({user}) => {
             <ul className={ulClassName} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>Hello, {user.firstName}</li>
-                        <li>{user.email}</li>
+                        <li className="profile-info">Hello, {user.firstName}!</li>
+                        <li className="profile-info">{user.email}</li>
                         <div></div>
                         <li>
                             <NavLink to='spots/current'>Manage Spots</NavLink>

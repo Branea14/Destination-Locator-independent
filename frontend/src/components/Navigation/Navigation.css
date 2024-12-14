@@ -4,8 +4,14 @@
 
 h1 {
     color: #ff79c6;
-    /* color: white; */
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.8rem;
+    transition: color 0.3s, transform 0.3s;
+}
+
+h1:hover {
+    color: #f8f8f2;
+    transform: scale(1.05);
 }
 
 .navigation {
@@ -17,7 +23,7 @@ h1 {
 .nav-list {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -28,21 +34,29 @@ h1 {
 }
 
 .logo {
-    height: 50px; /* Adjust the size as needed */
+    height: 50px;
     cursor: pointer;
 }
 
-.nav-list li {
+/* .nav-list li {
     margin-left: 20px;
-}
+} */
 
 .nav-list a {
     text-decoration: none;
     color: #f8f8f2;
     font-size: 1.2rem;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s;
+    /* padding-right: 5px; */
 }
 
 .nav-list a:hover {
-    color: #ff79c6; /* Add a hover effect */
+    color: #ff79c6;
+    transform: scale(1.1);
 }
+
+/* .nav-list a.active {
+    color: #ff79c6;
+    font-weight: bold;
+    border-bottom: 2px solid;
+} */
