@@ -17,7 +17,7 @@ const Navigation = ({isLoaded}) => {
                     </NavLink>
                 </li>
                 {sessionUser && (
-                    <li>
+                    <li className="create-spot">
                         <NavLink to='/spots/new'>Create a New Spot</NavLink>
                     </li>
                 )}

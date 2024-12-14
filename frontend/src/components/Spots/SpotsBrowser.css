@@ -36,6 +36,9 @@ body {
 
 .spot-details {
     padding: 10px;
+    /* background-color: #181825; */
+    background-color: #14141d;
+
 }
 
 .spot-details-inside-container {
@@ -49,7 +52,7 @@ body {
     font-size: 1.09rem;
     margin-bottom: 5px;
     color: #f8f8f2;
-    max-width: 120px; /* Adjust the width as needed */
+    max-width: 135px; /* Adjust the width as needed */
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -72,25 +75,7 @@ body {
     font-weight: bold;
 }
 
-/* .tooltiptext { */
-    /* visibility: hidden; /* Hide tooltip by default */
-    /* width: 120px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
-    top: 100%; /* Position below the container */
-    /* left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    opacity: 0; /* Start hidden for smoother transitions */
-    /* transition: opacity 0.3s ease-in-out;
-    height: 283px; */
-/* } */
-
-/* .spot-container:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-} */
+.new {
+    color: yellow;
+    /* margin-bottom: -10px; */
+}

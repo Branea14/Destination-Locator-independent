@@ -47,7 +47,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    margin-bottom: -25px;
+    margin-bottom: -20px;
 }
 
 .profile-button-container:hover {
@@ -114,6 +114,7 @@ button:hover {
     color: #f8f8f2;
     font-size: 1.2rem;
     transition: color 0.3s;
+    /* margin-bottom: -20px; */
 }
 
 .profile-dropdown li:last-child button {
