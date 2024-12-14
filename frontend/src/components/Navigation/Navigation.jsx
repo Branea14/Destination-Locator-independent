@@ -12,7 +12,7 @@ const Navigation = ({isLoaded}) => {
             <ul className="nav-list">
                 <li className="logo-item">
                     <NavLink to='/'>
-                        {/* <img src='/logo-image.jpg' alt="Dimensional Dwellings Logo" className="logo"/> */}
+                        <img src='https://i.imgur.com/sVCfZiR.pngfrontend/dist/logo.ico' alt="Dimensional Dwellings Logo" className="logo"/>
                         <h1>dimensional dwellings</h1>
                     </NavLink>
                 </li>

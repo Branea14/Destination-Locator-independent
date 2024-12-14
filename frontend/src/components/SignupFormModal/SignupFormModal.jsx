@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
 // import { Navigate } from "react-router-dom";
@@ -19,7 +19,7 @@ const SignupFormModal = () => {
     // if (user) return <Navigate to='/' replace={true} />;
     // const user = useSelector((state) => state.session.user)
 
-    const validateFields = () => {
+    const validateFields = useCallback(() => {
         const newErrors = {};
 
         if (!firstName) newErrors.firstName = 'First name is required.';
@@ -32,11 +32,11 @@ const SignupFormModal = () => {
         if (!confirmPassword) newErrors.confirmPassword = 'Confirm password is required.';
         else if (confirmPassword !== password) newErrors.confirmPassword = 'Passwords do not match.'
         return newErrors;
-    }
+    }, [username, firstName, lastName, email, password, confirmPassword]);
 
     useEffect(() => {
         setErrors(validateFields());
-    }, [username, firstName, lastName, email, password, confirmPassword]);
+    }, [username, firstName, lastName, email, password, confirmPassword, validateFields]);
 
     const disableButton = Object.keys(errors).length > 0;
 
