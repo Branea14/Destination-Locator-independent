@@ -65,7 +65,7 @@ const ProfileButton = ({user}) => {
                         </li>
                     </>
                 ) : (
-                    <div className="signup-login-profile-dropdown">
+                    <div>
                         <li>
                             <OpenModalMenuItem
                                 itemText='Sign Up'

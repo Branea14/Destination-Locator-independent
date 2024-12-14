@@ -35,38 +35,6 @@
     font-weight: normal;
 }
 
-.signup-login-profile-dropdown {
-    position: absolute;
-    right: 2%;
-    width: 12%;
-    background-color: #1e1e2e;
-    border: 1px solid #44475a;
-    border: 1px solid #44475a;
-    border-radius: 8px;
-    list-style: none;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    color: #f8f8f2;
-}
-
-.signup-login-profile-dropdown li {
-    padding: 5px 0;
-    font-size: 1rem;
-    text-align: left;
-    padding-left: 0;
-    margin-left: 0;
-}
-
-.signup-login-profile-dropdown li a {
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    color: #f8f8f2;
-    font-size: 1rem;
-    padding-left: 0;
-    transition: color 0.3s, background-color 0.3s;
-}
-
 .profile-button-container {
     display: flex;
     align-items: center;
