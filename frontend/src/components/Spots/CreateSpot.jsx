@@ -37,10 +37,10 @@ const CreateSpot = () => {
         if (!address) validationErrors.address = 'Address is required';
         if (!city) validationErrors.city = 'City is required';
         if (!state) validationErrors.state = 'State is required';
-        if (description.length < 30) validationErrors.description = 'Description needs a minimum of 30 characters';
+        if (!description || description.length < 30) validationErrors.description = 'Description needs a minimum of 30 characters';
         if (!spotName) validationErrors.spotName = 'Name is required';
-        if (!price || isNaN(price) || price <= 0) validationErrors.price = 'Price is required';
-        if (price <= 0) validationErrors.price = 'Price must be greater than $0'
+        if (!price || isNaN(price)) validationErrors.price = 'Price is required';
+        else if (price <= 0) validationErrors.price = 'Price must be greater than $0'
 
         const previewImage = imageUrls[0];
         if (!previewImage) {
