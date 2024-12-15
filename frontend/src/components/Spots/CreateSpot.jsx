@@ -105,7 +105,7 @@ const CreateSpot = () => {
                         onChange={updateCountry} />
                 </label>
                 {errors.country &&
-                    <p>{errors.country}</p>
+                    <p className="errors">{errors.country}</p>
                 }
                 <label>
                     Street Address
@@ -117,7 +117,7 @@ const CreateSpot = () => {
                     />
                 </label>
                 {errors.address &&
-                    <p>{errors.address}</p>
+                    <p className="errors">{errors.address}</p>
                 }
                 <div className="city-and-state">
                     <label className="city">
@@ -130,7 +130,7 @@ const CreateSpot = () => {
                         />
                     </label> <span div className="comma">,</span>
                     {errors.city &&
-                        <p>{errors.city}</p>
+                        <p className="errors">{errors.city}</p>
                     }
                     <label>
                         State
@@ -142,7 +142,7 @@ const CreateSpot = () => {
                         />
                     </label>
                     {errors.state &&
-                        <p>{errors.state}</p>
+                        <p className="errors">{errors.state}</p>
                     }
                 </div>
 
@@ -156,7 +156,7 @@ const CreateSpot = () => {
                     onChange={updateDescription}
                 />
                 {errors.description &&
-                    <p>{errors.description}</p>
+                    <p className="errors">{errors.description}</p>
                 }
 
                 <div className="section-break"></div>
@@ -170,7 +170,7 @@ const CreateSpot = () => {
                     onChange={updateSpotName}
                 />
                 {errors.spotName &&
-                    <p>{errors.spotName}</p>
+                    <p className="errors">{errors.spotName}</p>
                 }
 
                 <div className="section-break"></div>
@@ -185,7 +185,7 @@ const CreateSpot = () => {
                     onChange={updatePrice}
                 />
                 {errors.price &&
-                    <p>{errors.price}</p>
+                    <p className="errors">{errors.price}</p>
                 }
                 </div>
 
@@ -200,7 +200,7 @@ const CreateSpot = () => {
                     onChange={(e) => updateUrl(e, 0)}
                 />
                 {errors.previewImage &&
-                    <p>{errors.previewImage}</p>
+                    <p className="errors">{errors.previewImage}</p>
                 }
 
                 {[1, 2, 3, 4].map(index => (
@@ -211,10 +211,10 @@ const CreateSpot = () => {
                         onChange={(e) => updateUrl(e, index)}
                         />
                 ))}
-                {errors.image1 && <p>{errors.image1}</p>}
-                {errors.image2 && <p>{errors.image2}</p>}
-                {errors.image3 && <p>{errors.image3}</p>}
-                {errors.image4 && <p>{errors.image4}</p>}
+                {errors.image1 && <p className="errors">{errors.image1}</p>}
+                {errors.image2 && <p className="errors">{errors.image2}</p>}
+                {errors.image3 && <p className="errors">{errors.image3}</p>}
+                {errors.image4 && <p className="errors">{errors.image4}</p>}
                 {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
                 <button type="submit" >Create Spot</button>
 
