@@ -128,7 +128,7 @@ const CreateSpot = () => {
                             value={city}
                             onChange={updateCity}
                         />
-                    </label> <span div className="comma">,</span>
+                    </label> <span className="comma">,</span>
                     {errors.city &&
                         <p className="errors">{errors.city}</p>
                     }

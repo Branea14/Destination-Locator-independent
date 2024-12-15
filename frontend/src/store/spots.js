@@ -53,7 +53,7 @@ export const getSingleSpot = (spotId) => async dispatch => {
     }
 }
 
-export const createSpot = (newSpot) => async dispatch => {
+export const createSpot = (newSpot, images) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         body: JSON.stringify(newSpot)
@@ -62,6 +62,19 @@ export const createSpot = (newSpot) => async dispatch => {
     if (response.ok) {
         const data = await response.json();
         dispatch(createNewSpot(data));
+
+        if (images?.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                await csrfFetch(`/api/spots/${data.id}/images`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        url: images[i], // Image URL
+                        preview: i === 0, // Mark the first image as preview
+                    }),
+                });
+            }
+        }
+
         return data;
     }
 }

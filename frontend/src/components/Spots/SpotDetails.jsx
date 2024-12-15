@@ -16,24 +16,16 @@ const SpotDetails = () => {
 
     const singleSpot = useSelector(state => state.spots.singleSpot);
     const currentUser = useSelector(state => state.session.user);
-    // console.log('current User', currentUser)
 
     useEffect(() => {
         setLoading(true);
         dispatch(getSingleSpot(spotId)).finally(() => setLoading(false));
     }, [spotId, dispatch]);
 
-    if (loading || !singleSpot) return <p className="loading-message">Loading spot details...</p>;
+    if (loading) return <p className="loading-message">Loading spot details...</p>;
 
-    const sortedSpotImages = [...(singleSpot?.SpotImages || [])];
-    const previewImage = sortedSpotImages.find(image => image.preview)
-    const otherImages = previewImage ? sortedSpotImages.filter(image => image !== previewImage) : sortedSpotImages;
-    // const finalImages = previewImage ? [previewImage, ...otherImages] : otherImages;
-
-    // console.log('singleSpot', singleSpot)
     const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
     const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
-
 
     const handlePostReviewButton = async (e) => {
         e.preventDefault();
@@ -54,6 +46,15 @@ const SpotDetails = () => {
             return <p className="new">★ NEW!</p>
         }
     }
+
+    const sortedSpotImages = [...(singleSpot?.SpotImages || [])].sort((a, b) => {
+        if (a.preview && !b.preview) return -1; // a (preview image) comes first
+        if (!a.preview && b.preview) return 1;  // b (non-preview image) comes later
+        return 0; // Keep original order if both are equal
+    });
+
+    const previewImage = sortedSpotImages[0]; // First image is guaranteed to be the preview
+    const otherImages = sortedSpotImages.slice(1); // Remaining images
 
     return (
         <div className="spot-details-content">

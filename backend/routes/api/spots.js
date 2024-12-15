@@ -180,11 +180,10 @@ router.get("/", async (req, res, next) => {
             maxLng,
             minPrice,
             maxPrice
-        } = req.query; // extract query parameters from req.query
+        } = req.query;
 
-        // apply pagination with default values and validate them
+        // Pagination Logic
         const pagination = {};
-
         const errors = {};
 
         if (parseInt(page, 10) >= 1 && parseInt(size, 10) >= 1 && parseInt(size, 10) <= 20) {
@@ -195,96 +194,70 @@ router.get("/", async (req, res, next) => {
             errors.size = "Size must be between 1 and 20";
         }
 
-        // Apply filters (lat, long, price) if provided and valid
+        // Filters
         const where = {};
+        if (minLat) where.lat = { [Op.gte]: parseFloat(minLat) };
+        if (maxLat) where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
+        if (minLng) where.lng = { [Op.gte]: parseFloat(minLng) };
+        if (maxLng) where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
+        if (minPrice) where.price = { [Op.gte]: parseFloat(minPrice) };
+        if (maxPrice) where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
 
-        if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
-            errors.minLat = "minLat must be a number between -90 and 90";
-        } else if (minLat) {
-            where.lat = { [Op.gte]: parseFloat(minLat) };
-        }
-
-        if (maxLat && (isNaN(maxLat) || maxLat < -90 || maxLat > 90)) {
-            errors.maxLat = "maxLat must be a number between -90 and 90";
-        } else if (maxLat) {
-            where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
-        }
-
-        if (minLng && (isNaN(minLng) || minLng < -180 || minLng > 180)) {
-            errors.minLng = "minLng must be a number between -180 and 180";
-        } else if (minLng) {
-            where.lng = { [Op.gte]: parseFloat(minLng) };
-        }
-
-        if (maxLng && (isNaN(maxLng) || maxLng < -180 || maxLng > 180)) {
-            errors.maxLng = "maxLng must be a number between -180 and 180";
-        } else if (maxLng) {
-            where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
-        }
-
-        if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
-            errors.minPrice = "minPrice must be a number greater than or equal to 0";
-        } else if (minPrice) {
-            where.price = { [Op.gte]: parseFloat(minPrice) };
-        }
-
-        if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
-            errors.maxPrice = "maxPrice must be a number greater than or equal to 0";
-        } else if (maxPrice) {
-            where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
-        }
-
-        // If there are validation errors, return them
         if (Object.keys(errors).length > 0) {
-            return res.status(400).json({
-                message: "Bad Request",
-                errors
-            });
+            return res.status(400).json({ message: "Bad Request", errors });
         }
 
-        // use spot.findAll() with the 'where' clause and 'pagination' applied.
+        // Fetch all spots
         const spots = await Spot.findAll({
-            include: [
-                { model: Review, attributes: ['stars'] },
-                { model: SpotImage, attributes: ['id', 'url'] }
-            ],
             where,
             ...pagination
         });
 
-        const spotList = spots.map(spot => {
+        // Fetch SpotImages separately for each spot and sort them
+        const spotList = await Promise.all(
+            spots.map(async (spot) => {
+                const spotImages = await SpotImage.findAll({
+                    where: { spotId: spot.id },
+                    attributes: ['id', 'url', 'preview'],
+                    order: [['preview', 'DESC']] // Sort preview: true first
+                });
 
-            const spotData = spot.toJSON();
-            // console.log('look here', spot.toJSON())
+                // Determine the preview image
+                const previewImage = spotImages.length > 0 ? spotImages[0].url : null;
 
-            const avgRating = spotData.Reviews && spotData.Reviews.length > 0
-            ? spotData.Reviews.reduce((acc, review) => acc + review.stars, 0) / spotData.Reviews.length
-            : 0;
+                return {
+                    id: spot.id,
+                    ownerId: spot.ownerId,
+                    address: spot.address,
+                    city: spot.city,
+                    state: spot.state,
+                    country: spot.country,
+                    lat: parseFloat(spot.lat),
+                    lng: parseFloat(spot.lng),
+                    name: spot.name,
+                    description: spot.description,
+                    price: parseFloat(spot.price),
+                    createdAt: spot.createdAt,
+                    updatedAt: spot.updatedAt,
+                    avgRating: 0, // Placeholder for now (can be calculated if needed)
+                    previewImage, // Preview image url
+                };
+            })
+        );
 
-            const spotImages = spotData.SpotImages || [];
-            const previewImage = spot.SpotImages[0] ? spot.SpotImages[0].url : null;
-
-            delete spotData.SpotImages; //raw spotImage data is no longer needed
-            delete spotData.Reviews;
-
-            return {
-                ...spotData,
-                lat: parseFloat(spotData.lat), // cast to number
-                lng: parseFloat(spotData.lng),
-                price: parseFloat(spotData.price),
-                avgRating,
-                previewImage,
-                SpotImages: spotImages
-            };
+        // Return response with pagination
+        res.status(200).json({
+            Spots: spotList,
+            page: parseInt(page, 10),
+            size: parseInt(size, 10),
         });
-
-        // also, include pagination data in the response
-        res.status(200).json({ Spots: spotList, page: parseInt(page, 10), size: parseInt(size, 10) });
 
     } catch (err) {
         next(err);
     }
 });
+
+
 /***************************CREATE A SPOT *****************************/
 router.post("/", requireAuth, validateSpot, async (req,res,next) => {
     console.log('received data', req.body)
@@ -387,61 +360,66 @@ router.get('/:spotId', async (req, res, next) => {
     const spotId = req.params.spotId;
 
     try {
+        // Fetch the spot details without SpotImages
         const spot = await Spot.findByPk(Number(spotId), {
             include: [
-                { model: Review, attributes: ['id', 'review', 'stars', 'createdAt', 'updatedAt'], include: [
-                    {model: User, as: 'User', attributes: ['id', 'firstName', 'lastName']}
-                ] },
-                { model: SpotImage, attributes: ['id', 'url', 'preview'] },
-                { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
-            ]
-        })
+                {
+                    model: Review,
+                    attributes: ['id', 'review', 'stars', 'createdAt', 'updatedAt'],
+                    include: [
+                        { model: User, as: 'User', attributes: ['id', 'firstName', 'lastName'] },
+                    ],
+                },
+                { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] },
+            ],
+        });
 
         if (!spot) {
-            return res.status(404).json({ message: "Spot couldn't be found"})
+            return res.status(404).json({ message: "Spot couldn't be found" });
         }
 
-            const reviews = spot.Reviews || [];
-            const starRatings = reviews.map(review => review.stars);
-            const reviewTexts = reviews.map(review => review.review)
+        // Fetch SpotImages separately and sort them
+        const spotImages = await SpotImage.findAll({
+            where: { spotId: spot.id },
+            attributes: ['id', 'url', 'preview'],
+            order: [['preview', 'DESC']], // Sort preview: true first
+        });
 
-            const avgStarRating = getAverage(starRatings);
-            const numReviews = countReviews(reviewTexts)
+        // Calculate average rating and number of reviews
+        const reviews = spot.Reviews || [];
+        const starRatings = reviews.map((review) => review.stars);
+        const reviewTexts = reviews.map((review) => review.review);
 
-            const spotImages = spot.SpotImages || [];
-            const owner = spot.Owner || {};
+        const avgStarRating = getAverage(starRatings);
+        const numReviews = countReviews(reviewTexts);
 
-            const formattedSpot = {
-                id: spot.id,
-                ownerId: spot.ownerId,
-                address: spot.address,
-                city: spot.city,
-                state: spot.state,
-                country: spot.country,
-                lat: spot.lat,
-                lng: spot.lng,
-                name: spot.name,
-                description: spot.description,
-                price: spot.price,
-                createdAt: spot.createdAt,
-                updatedAt: spot.updatedAt,
-                numReviews,
-                avgStarRating,
-                SpotImages: spotImages,
-                Owner: owner,
-                Reviews: reviews
-            }
+        // Combine the results
+        const formattedSpot = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            price: spot.price,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt,
+            numReviews,
+            avgStarRating,
+            SpotImages: spotImages, // Sorted images
+            Owner: spot.Owner,
+            Reviews: reviews,
+        };
 
-
-
-            return res.status(200).json(formattedSpot);
-
-
+        return res.status(200).json(formattedSpot);
+    } catch (error) {
+        next(error);
     }
-    catch (error) {
-        next(error)
-    }
-})
+});
 
 /***********************Get All Reviews by a Spot's Id *************************/
 router.get("/:spotId/reviews", async (req, res, next) => {
@@ -648,6 +626,12 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
       }
       if (req.user.id !== spot.ownerId) return res.status(403).json({message: "Forbidden"})
 
+        if (preview) {
+            await SpotImage.update(
+                { preview: false }, // Reset preview to false
+                { where: { spotId: spot.id } } // Target images of this spot
+            );
+        }
 
       const newImage = await spot.createSpotImage({ url, preview });
 
