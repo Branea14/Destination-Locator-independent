@@ -1,10 +1,12 @@
 .spot-detail-name {
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: bold;
     color: #ff79c6; /* Add emphasis to the title */
     text-align: left;
     margin-bottom: 8px;
+    font-family: "Montserrat";
 }
+
 
 .spot-details-content {
     max-width: 1000px;
@@ -214,7 +216,8 @@
 
 .reviews {
     font-size: 1rem;
-    color: #888;
+    color: #C88719
+    /* color: #d8d8d8; */
 }
 
 .review-user {
@@ -250,20 +253,29 @@
 }
 
 .new {
-    color: goldenrod;
+    color: #C88719;
     /* margin-bottom: -10px; */
 }
 
 .post-review-button {
-    background: none;
-    /* border: none; */
+    /* background: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
-    color: gold;
+    color: gold; */
     margin-bottom: 15px;
+    display: block;
+    margin-left: 0;
+    padding: 10px 20px;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    color: darkblue;
+    background-color: #4A90E2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .review-message {

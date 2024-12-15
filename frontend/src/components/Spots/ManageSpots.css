@@ -1,0 +1,84 @@
+.manage-spots-header {
+    font-size: 30px;
+      pointer-events: none;
+      font-weight: bold;
+    color: #ff79c6;
+}
+
+body {
+    background-color: #1e1e2e;
+    color: #f8f8f2; /* Light text for contrast */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.manage-spots {
+    padding: 40px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    background-color: #1e1e2e;
+    color: #f8f8f2;
+}
+
+.Create-Button {
+    display: block;
+    margin-left: 0;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: darkblue;
+    background-color: #4A90E2;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.Create-Button:hover {
+    background-color: #3b7ab3;
+    transform: scale(1.05);
+    color: white;
+}
+
+.manage-spots-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.manage-spot-button {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    background-color: #282a36;
+    border-top: 1px solid #44475a;
+}
+
+.manage-buttons {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #f8f8f2;
+    background-color: #6272a4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.manage-buttons:hover {
+    background-color: #bd93f9;
+    transform: scale(1.05);
+}
+
+.no-listings {
+    text-align: left;
+    font-size: 20px;
+    color: #f8f8f2;
+}
