@@ -91,7 +91,7 @@ const SpotDetails = () => {
             <section className="review-section">
                 <h4 className="review-summary-in-review-section">{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h4>
                 {showReviewButton && (
-                    <button className="post-review-button" onClick={handlePostReviewButton}>Post Your Review</button>
+                    <button className="post-review-button" onClick={handlePostReviewButton}>Post Your Review!</button>
                 )}
                 {showReviewButton && singleSpot.Reviews.length === 0 ? (<p className="review-message">Be the first to post a review!</p>) : null}
                 {singleSpot.Reviews.map((review, index) => {
