@@ -7,7 +7,6 @@ import EditSpotForm from "./EditSpotForm";
 const EditSpot = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
-
     const [isLoaded, setIsLoaded] = useState(false);
 
     const spot = useSelector(state => state.spots.singleSpot);

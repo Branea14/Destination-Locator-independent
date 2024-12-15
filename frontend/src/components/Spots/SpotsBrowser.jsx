@@ -17,7 +17,7 @@ const SpotsBrowser = () => {
     }, [dispatch])
 
     if (!allSpots ) return <p>Loading spots...</p>
-
+    console.log(allSpots)
     return (
         <div className="spots-browser">
             {allSpots?.map((spot, index) => (

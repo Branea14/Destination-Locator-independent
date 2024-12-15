@@ -113,7 +113,7 @@ const EditSpotForm = ({spot}) => {
 
     return (
         <section className="new-form-holder centered middled">
-                <h1>Update Your Spot</h1>
+                <div className="form-title">Update Your Spot</div>
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <h2>Where&apos;s your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
@@ -125,7 +125,7 @@ const EditSpotForm = ({spot}) => {
                         onChange={updateCountry} />
                 </label>
                 {errors.country &&
-                    <p>{errors.country}</p>
+                    <p className="errors">{errors.country}</p>
                 }
                 <label>
                     Street Address
@@ -136,82 +136,98 @@ const EditSpotForm = ({spot}) => {
                     />
                 </label>
                 {errors.address &&
-                    <p>{errors.address}</p>
+                    <p className="errors">{errors.address}</p>
                 }
-                <label>
-                    City
-                    <input
-                        type="text"
-                        value={city || ""}
-                        onChange={updateCity}
-                    />
-                </label> ,
-                {errors.city &&
-                    <p>{errors.city}</p>
-                }
-                <label>
-                    State
-                    <input
-                        type="text"
-                        value={state || ""}
-                        onChange={updateState}
-                    />
-                </label>
-                {errors.state &&
-                    <p>{errors.state}</p>
-                }
+                <div className="city-and-state">
+                    <label className="city">
+                        City
+                        <input
+                            type="text"
+                            value={city || ""}
+                            onChange={updateCity}
+                        />
+                    </label> <span div className="comma">,</span>
+                    {errors.city &&
+                        <p className="errors" >{errors.city}</p>
+                    }
+                    <label>
+                        State
+                        <input
+                            type="text"
+                            value={state || ""}
+                            onChange={updateState}
+                        />
+                    </label>
+                    {errors.state &&
+                        <p className="errors">{errors.state}</p>
+                    }
+                </div>
+
+                <div className="section-break"></div>
+
                 <h2>Describe your place to guests</h2>
                 <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                <textarea
+                <textarea className="spot-description-textarea"
                     value={description || ""}
                     onChange={updateDescription}
                 />
                 {errors.description &&
-                    <p>{errors.description}</p>
+                    <p className="errors">{errors.description}</p>
                 }
+
+                <div className="section-break"></div>
+
                 <h2>Create a title for your spot</h2>
                 <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
-                <input
+                <input className="spot-title"
                     type="text"
                     value={spotName || ""}
                     onChange={updateSpotName}
                 />
                 {errors.spotName &&
-                    <p>{errors.spotName}</p>
+                    <p className="errors">{errors.spotName}</p>
                 }
+
+                <div className="section-break"></div>
+
                 <h2>Set a base price for your spot</h2>
                 <p>Competitive price can help your listing stand out and rank higher in search results.</p>
-                $ <input
-                    type="number"
-                    value={price || ""}
-                    onChange={updatePrice}
-                />
-                {errors.price &&
-                    <p>{errors.price}</p>
-                }
+                <div className="full-price">
+                <span className="dollar-sign">$</span> <input
+                        type="number"
+                        value={price || ""}
+                        onChange={updatePrice}
+                    />
+                    {errors.price &&
+                        <p className="errors">{errors.price}</p>
+                    }
+                </div>
+
+                <div className="section-break"></div>
+
                 <h2>Liven up your spot with photos</h2>
                 <p>Submit a link to at least one photo to publish your spot.</p>
-                <input
+                <input className="preview-image"
                     type="text"
                     value={imageUrls[0] || ""}
                     onChange={(e) => updateUrl(e, 0)}
                 />
                 {errors.previewImage &&
-                    <p>{errors.previewImage}</p>
+                    <p className="errors">{errors.previewImage}</p>
                 }
 
                 {[1, 2, 3, 4].map(index => (
-                    <input key={index}
+                    <input key={index} className="images"
                         type="text"
                         value={imageUrls[index] || ""}
                         onChange={(e) => updateUrl(e, index)}
                         />
                 ))}
 
-                {errors.image1 && <p>{errors.image1}</p>}
-                {errors.image2 && <p>{errors.image2}</p>}
-                {errors.image3 && <p>{errors.image3}</p>}
-                {errors.image4 && <p>{errors.image4}</p>}
+                {errors.image1 && <p className="errors">{errors.image1}</p>}
+                {errors.image2 && <p className="errors">{errors.image2}</p>}
+                {errors.image3 && <p className="errors">{errors.image3}</p>}
+                {errors.image4 && <p className="errors">{errors.image4}</p>}
                 {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
                 <button type="submit" >Update Spot</button>
 

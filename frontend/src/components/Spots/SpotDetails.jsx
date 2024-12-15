@@ -23,15 +23,17 @@ const SpotDetails = () => {
         dispatch(getSingleSpot(spotId)).finally(() => setLoading(false));
     }, [spotId, dispatch]);
 
+    if (loading || !singleSpot) return <p className="loading-message">Loading spot details...</p>;
+
     const sortedSpotImages = [...(singleSpot?.SpotImages || [])];
     const previewImage = sortedSpotImages.find(image => image.preview)
     const otherImages = previewImage ? sortedSpotImages.filter(image => image !== previewImage) : sortedSpotImages;
     // const finalImages = previewImage ? [previewImage, ...otherImages] : otherImages;
 
+    // console.log('singleSpot', singleSpot)
     const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
     const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
 
-    if (loading || !singleSpot) return <p className="loading-message">Loading spot details...</p>;
 
     const handlePostReviewButton = async (e) => {
         e.preventDefault();
@@ -64,11 +66,15 @@ const SpotDetails = () => {
                     </div>
                 )}
                     <div className='other-images'>
-                        {otherImages.map((img) => (
-                            <div key={img.id}>
-                                <img src={img.url} alt={singleSpot.name}/>
-                            </div>
+                        {otherImages?.map((img) => (
+                            img.url ? (
+                                <div key={img.id}>
+                                    <img src={img.url} alt={singleSpot.name}/>
+                                </div>
+                            ): null
                         ))}
+
+
                     </div>
             </div>
             <div className="spot-detailed-information">
