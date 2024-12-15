@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createSpot } from "../../store/spots";
+import './CreateSpot.css';
 
 const CreateSpot = () => {
     const [country, setCountry] = useState('');
@@ -54,7 +55,6 @@ const CreateSpot = () => {
                 validationErrors[`image${index}`] = 'Image URL must end in .png, .jpg, or .jpeg';
             }
         })
-
         return validationErrors;
     }
 
@@ -62,9 +62,8 @@ const CreateSpot = () => {
         e.preventDefault();
         setErrors({});
 
-        console.log('form submitted')
         const validationErrors = handleValidation();
-        console.log('validationErrors', validationErrors)
+
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
@@ -84,20 +83,16 @@ const CreateSpot = () => {
             }))
         }
 
-        console.log('payload', payload)
-
         const newSpot = await dispatch(createSpot(payload));
-        console.log('newSpot', newSpot)
+
         if (newSpot) {
             navigate(`/spots/${newSpot.id}`);
-
-            // hideForm();
         }
     }
 
     return (
         <section className="new-form-holder centered middled">
-                <h1>Create a New Spot</h1>
+                <div className="form-title">Create a New Spot</div>
             <form className="create-spot-form" onSubmit={handleSubmit}>
                 <h2>Where&apos;s your place located?</h2>
                 <p>Guests will only get your exact address once they booked a reservation.</p>
@@ -106,7 +101,6 @@ const CreateSpot = () => {
                     <input
                         type="text"
                         placeholder="Country"
-                        // required
                         value={country}
                         onChange={updateCountry} />
                 </label>
@@ -118,7 +112,6 @@ const CreateSpot = () => {
                     <input
                         type="text"
                         placeholder="Address"
-                        // required
                         value={address}
                         onChange={updateAddress}
                     />
@@ -126,70 +119,81 @@ const CreateSpot = () => {
                 {errors.address &&
                     <p>{errors.address}</p>
                 }
-                <label>
-                    City
-                    <input
-                        type="text"
-                        placeholder="City"
-                        // required
-                        value={city}
-                        onChange={updateCity}
-                    />
-                </label> ,
-                {errors.city &&
-                    <p>{errors.city}</p>
-                }
-                <label>
-                    State
-                    <input
-                        type="text"
-                        placeholder="STATE"
-                        // required
-                        value={state}
-                        onChange={updateState}
-                    />
-                </label>
-                {errors.state &&
-                    <p>{errors.state}</p>
-                }
+                <div className="city-and-state">
+                    <label className="city">
+                        City
+                        <input
+                            type="text"
+                            placeholder="City"
+                            value={city}
+                            onChange={updateCity}
+                        />
+                    </label> <span div className="comma">,</span>
+                    {errors.city &&
+                        <p>{errors.city}</p>
+                    }
+                    <label>
+                        State
+                        <input
+                            type="text"
+                            placeholder="State"
+                            value={state}
+                            onChange={updateState}
+                        />
+                    </label>
+                    {errors.state &&
+                        <p>{errors.state}</p>
+                    }
+                </div>
+
+                <div className="section-break"></div>
+
                 <h2>Describe your place to guests</h2>
                 <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
-                <textarea
-                    placeholder="Please write at least 30 characters"
-                    // required
+                <textarea className="spot-description"
+                    placeholder="Please write at least 30 characters."
                     value={description}
                     onChange={updateDescription}
                 />
                 {errors.description &&
                     <p>{errors.description}</p>
                 }
+
+                <div className="section-break"></div>
+
                 <h2>Create a title for your spot</h2>
                 <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
-                <input
+                <input className="spot-title"
                     type="text"
                     placeholder="Name of your spot"
-                    // required
                     value={spotName}
                     onChange={updateSpotName}
                 />
                 {errors.spotName &&
                     <p>{errors.spotName}</p>
                 }
+
+                <div className="section-break"></div>
+
                 <h2>Set a base price for your spot</h2>
                 <p>Competitive price can help your listing stand out and rank higher in search results.</p>
-                $ <input
+                <div className="full-price">
+                <span className="dollar-sign">$</span> <input
                     type="number"
                     placeholder="Price per night (USD)"
-                    // required
                     value={price}
                     onChange={updatePrice}
                 />
                 {errors.price &&
                     <p>{errors.price}</p>
                 }
+                </div>
+
+                <div className="section-break"></div>
+
                 <h2>Liven up your spot with photos</h2>
                 <p>Submit a link to at least one photo to publish your spot.</p>
-                <input
+                <input className="preview-image"
                     type="text"
                     placeholder="Preview Image URL"
                     value={imageUrls[0]}
@@ -200,42 +204,13 @@ const CreateSpot = () => {
                 }
 
                 {[1, 2, 3, 4].map(index => (
-                    <input key={index}
+                    <input key={index} className="images"
                         type="text"
                         placeholder="Image URL"
                         value={imageUrls[index]}
                         onChange={(e) => updateUrl(e, index)}
                         />
                 ))}
-
-                {/* <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[1]}
-                    onChange={(e) => updateUrl(e, 1)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[2]}
-                    onChange={(e) => updateUrl(e, 2)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[3]}
-                    onChange={(e) => updateUrl(e, 3)}
-                    />
-
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={imageUrls[4]}
-                    onChange={(e) => updateUrl(e, 4)}
-                    />  */}
-
                 {errors.image1 && <p>{errors.image1}</p>}
                 {errors.image2 && <p>{errors.image2}</p>}
                 {errors.image3 && <p>{errors.image3}</p>}
