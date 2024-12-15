@@ -1,4 +1,4 @@
-.delete-spot-modal {
+.delete-review-modal {
     background-color: #1e1e2e;
     color: white;
     width: 400px;
@@ -18,19 +18,19 @@
     font-weight: bold;
 }
 
-.delete-spot-modal p {
+.delete-review-modal p {
     color: #f8f8f8;
     font-size: 14px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.delete-spot-buttons {
+.delete-review-buttons {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-top: 20px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .delete-button {

@@ -1,4 +1,5 @@
 import { useModal } from "../../context/Modal";
+import './DeleteReviewModal.css';
 
 const DeleteReviewModal = ({reviewId, handleDelete}) => {
     const {closeModal} = useModal();
@@ -9,12 +10,16 @@ const DeleteReviewModal = ({reviewId, handleDelete}) => {
     }
 
     return (
-        <>
-            <h1>Confirm Delete</h1>
-            <p>Are you sure you want to delete this review?</p>
-            <button onClick={() => handleDeleteButton()}>Yes (Delete Review)</button>
-            <button onClick={closeModal}>No (Keep Review)</button>
-        </>
+        <div className="modal-background">
+            <div className="delete-review-modal">
+                <div className="delete-title">Confirm Delete</div>
+                <p>Are you sure you want to delete this review?</p>
+                <div className="delete-review-buttons">
+                    <button className='delete-button' onClick={() => handleDeleteButton()}>Yes (Delete Review)</button>
+                    <button className='keep-button' onClick={closeModal}>No (Keep Review)</button>
+                </div>
+            </div>
+        </div>
     )
 }
 
