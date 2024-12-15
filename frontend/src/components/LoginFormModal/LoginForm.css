@@ -14,21 +14,24 @@
   .login-modal {
     background-color: #1e1e2e;
     color: white;
+    margin-top: 10px;
     width: 400px;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); */
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     position: relative;
+    /* height: 282px; */
   }
 
-  .login-modal h1 {
+  .login {
     font-size: 28px;
     color: #ff79c6;
     margin-bottom: 15px;
     font-weight: bold;
     pointer-events: none;
+    /* padding-top: 10px; */
   }
 
   .login-modal label {
@@ -46,7 +49,7 @@
   }
 
   .login-modal input {
-    width: 95.5%;
+    width: 100%;
     padding: 8px;
     margin: 2px 0;
     border: 1px solid #444;
@@ -110,6 +113,7 @@
 
 .login-modal button:hover:not(:disabled) {
     background-color: #d854a6;
+    color: white;
     transform: scale(1.02);
     box-shadow: 0 6px 15px rgba(216, 84, 166, 0.5);
 }

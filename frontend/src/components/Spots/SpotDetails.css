@@ -1,3 +1,11 @@
+.spot-detail-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff79c6; /* Add emphasis to the title */
+    text-align: left;
+    margin-bottom: 8px;
+}
+
 .spot-details-content {
     max-width: 1000px;
     margin: 0 auto;
@@ -20,11 +28,11 @@
 
 .reserve-button {
     background-color: #ff5a5f; /* Airbnb's signature red */
-    color: white;
-    font-size: 18px;
+    color: #ffffff;
+    font-size: 1.2rem;
     font-weight: bold;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -40,13 +48,27 @@
     margin: 20px 0;
 }
 
+.spot-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #cccccc;
+}
 
+.host-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.host-spot-information {
+    margin-bottom: 20px;
+}
 
 .page-break {
     width: 100%;
     height: 1px;
     background-color: #ddd;
-    margin: 20px 0;
+    margin: 5px 0;
 }
 
 .review-section {
@@ -56,15 +78,22 @@
 }
 
 .review-summary-in-review-section {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 16px 0;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    color: #ffffff;
+    /* margin: 16px 0; */
+    margin-bottom: 16px;
+    margin-top: -3px;
 }
 
 .review-details {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px;
+    /* margin: 10px 0; */
+    margin-bottom: 12px;
+    background-color: #2a2a3a;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -79,9 +108,10 @@
 
 .spot-details-location {
     /* font-size: 1rem; */
-    font-size: 1.09rem;
-    margin-bottom: 5px;
-    color: #f8f8f2;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    /* color: #f8f8f2; */
+    color: #888;
 }
 
 .images-container {
@@ -128,7 +158,7 @@
     /* height: auto; */
     height: 100%;
     object-fit: cover;
-    border-radius: 5px; /* Optional: Rounded corners */
+    /* border-radius: 5px; Optional: Rounded corners */
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -145,11 +175,14 @@
     justify-content: space-between;
     /* align-items: flex-start; */
     align-items: center;
+    /* text-align: center; */
     border: 1px solid #ccc; /* Border for the container */
-    padding: 16px;
-    border-radius: 8px;
-    margin: 20px auto; /* Center it horizontally */
-    width: 83%;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px auto;
+    width: 100%;
+    background-color: #2a2a3a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .spot-detailed-information {
@@ -162,22 +195,79 @@
     /* flex-direction: col; */
     justify-content: space-between;
     align-items: center;
-    width: 100%
+    width: 100%;
+    margin-bottom: 12px;
 }
 
 .price {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin: 0;
+    color: #ffffff;
 }
 
 .night {
     font-size: 1rem;
     font-weight: normal;
-    color: #888; /* Subtle color for "/night" */
+    color: #cccccc; /* Subtle color for "/night" */
 }
 
 .reviews {
     font-size: 1rem;
     color: #888;
+}
+
+.review-user {
+    /* font-weight: bold; */
+    color: #ff79c6;
+    margin-bottom: 4px;
+}
+
+.review-date {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 5px;
+}
+
+.review {
+    font-size: 1rem;
+    color: #f8f8f2;
+    line-height: 1.4;
+}
+
+.review-details button {
+    margin-top: 8px;
+    padding: 6px 12px;
+    background-color: #ff5a5f;
+    color: white;
+    /* border: none; */
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.review-details button:hover {
+    background-color: #ff4b4f;
+}
+
+.new {
+    color: goldenrod;
+    /* margin-bottom: -10px; */
+}
+
+.post-review-button {
+    background: none;
+    /* border: none; */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+
+}
+
+.review-message {
+    margin-top: 8px; /* Space below the button */
+    font-size: 1rem;
+    font-style: italic;
+    color: #888; /* Subtle gray for less emphasis */
 }

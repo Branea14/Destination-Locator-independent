@@ -153,7 +153,7 @@ const CreateSpot = () => {
                     <p>{errors.state}</p>
                 }
                 <h2>Describe your place to guests</h2>
-                <p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+                <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
                 <textarea
                     placeholder="Please write at least 30 characters"
                     // required

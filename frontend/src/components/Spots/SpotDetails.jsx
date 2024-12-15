@@ -51,14 +51,14 @@ const SpotDetails = () => {
         } else if (avgStarRating && numReviews > 1) {
             return `★ ${avgStarRating} • ${numReviews} Reviews`
         } else {
-            return '★ NEW!'
+            return <p className="new">★ NEW!</p>
         }
     }
 
     return (
         <div className="spot-details-content">
-            <h1 className="spot-detail-name">{singleSpot.name}</h1>
-            <h2 className="spot-details-location">{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
+            <div className="spot-detail-name">{singleSpot.name}</div>
+            <div className="spot-details-location">{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</div>
             <div className="images-container">
                 <div className="preview-image">
                     <img src={previewImage.url} alt="Preview Image" />
@@ -91,11 +91,11 @@ const SpotDetails = () => {
             <section className="review-section">
                 <h4 className="review-summary-in-review-section">{reviewCount(singleSpot.avgStarRating, singleSpot.numReviews)}</h4>
                 {showReviewButton && (
-                    <button onClick={handlePostReviewButton}>Post Your Review</button>
+                    <button className="post-review-button" onClick={handlePostReviewButton}>Post Your Review</button>
                 )}
-                {showReviewButton && singleSpot.Reviews.length === 0 ? (<p>Be the first to post a review!</p>) : null}
+                {showReviewButton && singleSpot.Reviews.length === 0 ? (<p className="review-message">Be the first to post a review!</p>) : null}
                 {singleSpot.Reviews.map((review, index) => {
-                        console.log(review)
+                        // console.log(review)
                         const createdAt = new Date(review.createdAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
@@ -103,8 +103,8 @@ const SpotDetails = () => {
 
                         return (
                             <div key={index} className="review-details">
-                                <div className="review-user">{review.User.firstName}</div>
-                                <div className="review-date">{createdAt}</div>
+                                <div className="review-user">{review.User.firstName} - <span className="review-date">{createdAt}</span></div>
+                                {/* <div className="review-date">{createdAt}</div> */}
                                 <div className="review">{review.review}</div>
                                 {review.User?.id === currentUser?.id ? <button onClick={() => openModal(<DeleteReviewModal reviewId={review.id} handleDelete={() => handleDeleteButton(review.id)}/>)}>Delete</button> : null}
                             </div>

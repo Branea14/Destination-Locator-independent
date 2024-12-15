@@ -65,58 +65,64 @@ const SignupFormModal = () => {
                 className="signup-modal"
                 onClick={(e) => e.stopPropagation()}
             >
-                <h1>Sign Up</h1>
+                <div className="signup">Sign Up</div>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        First Name
+                        {/* First Name */}
                         <input
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
+                            placeholder="First Name"
                         />
                     </label>
                     {errors.firstName && <p>{errors.firstName}</p>}
                     <label>
-                        Last Name
+                        {/* Last Name */}
                         <input
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
+                            placeholder="Last Name"
                         />
                     </label>
                     {errors.lastName && <p>{errors.lastName}</p>}
                     <label>
-                        Email
+                        {/* Email */}
                         <input
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
                         />
                     </label>
                     {errors.email && <p>{errors.email}</p>}
                     <label>
-                        Username
+                        {/* Username */}
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Username"
                         />
                     </label>
                     {errors.username && <p>{errors.username}</p>}
                     <label>
-                        Password
+                        {/* Password */}
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
                         />
                     </label>
                     {errors.password && <p>{errors.password}</p>}
                     <label>
-                        Confirm Password
+                        {/* Confirm Password */}
                         <input
                             type="password"
                             value={confirmPassword}
+                            placeholder="Confirm Password"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </label>
