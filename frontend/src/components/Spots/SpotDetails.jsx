@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSingleSpot } from "../../store/spots";
@@ -12,18 +12,16 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const {openModal} = useModal();
+    const [loading, setLoading] = useState(true);
 
     const singleSpot = useSelector(state => state.spots.singleSpot);
     const currentUser = useSelector(state => state.session.user);
     // console.log('current User', currentUser)
 
-    const isLoading = !singleSpot || !singleSpot.id
-
     useEffect(() => {
-        if (spotId) dispatch(getSingleSpot(spotId));
+        setLoading(true);
+        dispatch(getSingleSpot(spotId)).finally(() => setLoading(false));
     }, [spotId, dispatch]);
-
-    if (isLoading) return <p>Loading...</p>
 
     const sortedSpotImages = [...(singleSpot?.SpotImages || [])];
     const previewImage = sortedSpotImages.find(image => image.preview)
@@ -33,7 +31,7 @@ const SpotDetails = () => {
     const hasReviewed = singleSpot.Reviews?.some((review) => review.User.id === currentUser?.id)
     const showReviewButton = currentUser && !hasReviewed && (singleSpot?.ownerId !== currentUser.id);
 
-    if (!singleSpot) return null;
+    if (loading || !singleSpot) return <p className="loading-message">Loading spot details...</p>;
 
     const handlePostReviewButton = async (e) => {
         e.preventDefault();
@@ -60,9 +58,11 @@ const SpotDetails = () => {
             <div className="spot-detail-name">{singleSpot.name}</div>
             <div className="spot-details-location">{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</div>
             <div className="images-container">
-                <div className="preview-image">
-                    <img src={previewImage.url} alt="Preview Image" />
-                </div>
+                {previewImage && (
+                    <div className="preview-image">
+                        <img src={previewImage.url} alt="Preview Image" />
+                    </div>
+                )}
                     <div className='other-images'>
                         {otherImages.map((img) => (
                             <div key={img.id}>
@@ -94,8 +94,7 @@ const SpotDetails = () => {
                     <button className="post-review-button" onClick={handlePostReviewButton}>Post Your Review!</button>
                 )}
                 {showReviewButton && singleSpot.Reviews.length === 0 ? (<p className="review-message">Be the first to post a review!</p>) : null}
-                {singleSpot.Reviews.map((review, index) => {
-                        // console.log(review)
+                {singleSpot.Reviews?.map((review, index) => {
                         const createdAt = new Date(review.createdAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",

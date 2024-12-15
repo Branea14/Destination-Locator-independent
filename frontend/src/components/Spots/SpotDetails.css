@@ -43,7 +43,8 @@
 }
 
 .reserve-button:hover {
-    background-color: #ff4b4f; /* Slightly darker red for hover effect */
+    background-color:  #e04e50; /* Slightly darker red for hover effect */
+    color: #ffffff;
 }
 
 .host-info, .spot-description, .price, .review-summary-in-review-section {
@@ -241,7 +242,7 @@
 .review-details button {
     margin-top: 8px;
     padding: 6px 12px;
-    background-color: #ff5a5f;
+    background-color: #dc3545;
     color: white;
     /* border: none; */
     border-radius: 4px;
@@ -249,7 +250,7 @@
 }
 
 .review-details button:hover {
-    background-color: #ff4b4f;
+    background-color: #b02a37;
 }
 
 .new {

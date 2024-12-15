@@ -36,7 +36,7 @@
 .delete-button {
     width: 100%;
     padding: 14px;
-    background-color: #ff4d4d;
+    background-color: #dc3545;
     border: none;
     border-radius: 8px;
     color: white;
@@ -46,7 +46,7 @@
 }
 
 .delete-button:hover {
-    background-color: #d84343;
+    background-color: #b02a37;
     color: white;
     transform: scale(1.05);
     box-shadow: 0 0 15px #ff79c6;
