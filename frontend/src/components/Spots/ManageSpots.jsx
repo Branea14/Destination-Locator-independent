@@ -35,7 +35,6 @@ const ManageSpots = () => {
     return (
         <div className="manage-spots">
             <div className="manage-spots-header">Manage Your Spots</div>
-            {/* <button className='Create-Button' onClick={handleNewSpotButton}>Create a New Spot</button> */}
             <div className="container">
                 {userSpots?.length > 0 ? (
                     userSpots.map((spot, index) => (
