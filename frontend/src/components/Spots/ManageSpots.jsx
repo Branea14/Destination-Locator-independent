@@ -35,7 +35,7 @@ const ManageSpots = () => {
     return (
         <div className="manage-spots">
             <div className="manage-spots-header">Manage Your Spots</div>
-            <button className='Create-Button' onClick={handleNewSpotButton}>Create a New Spot</button>
+            {/* <button className='Create-Button' onClick={handleNewSpotButton}>Create a New Spot</button> */}
             <div className="container">
                 {userSpots?.length > 0 ? (
                     userSpots.map((spot, index) => (
@@ -84,7 +84,10 @@ const ManageSpots = () => {
                         </>
                     ))
                 ) : (
+                    <>
+                    <button className='Create-Button' onClick={handleNewSpotButton}>Create a New Spot</button>
                     <p className="no-listings">You don&apos;t have any spots listed yet.</p>
+                    </>
                 )}
             </div>
         </div>
