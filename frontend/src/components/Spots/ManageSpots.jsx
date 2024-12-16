@@ -29,9 +29,11 @@ const ManageSpots = () => {
         dispatch(removeSpot(spotId))
     }
 
+    // console.log('allSpots', allSpots)
+
     // if (!allSpots ) return <p>Loading manage spots</p>
     const userSpots = allSpots?.filter(spot => spot.ownerId === currUser)
-
+    // console.log('userSpots', userSpots)
     return (
         <div className="manage-spots">
             <div className="manage-spots-header">Manage Your Spots</div>

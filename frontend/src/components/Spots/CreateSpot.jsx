@@ -215,8 +215,8 @@ const CreateSpot = () => {
                 {errors.image2 && <p className="errors">{errors.image2}</p>}
                 {errors.image3 && <p className="errors">{errors.image3}</p>}
                 {errors.image4 && <p className="errors">{errors.image4}</p>}
-                {/* <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button> */}
-                <button type="submit" >Create Spot</button>
+                <button type="submit" disabled={Object.keys(errors).length > 0}>Create Spot</button>
+                {/* <button type="submit" >Create Spot</button> */}
 
             </form>
         </section>
