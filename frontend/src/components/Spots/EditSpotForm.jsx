@@ -74,15 +74,15 @@ const EditSpotForm = ({spot}) => {
         e.preventDefault();
         setErrors({});
 
-        console.log('form submitted')
+        // console.log('form submitted')
         const validationErrors = handleValidation();
-        console.log('validationErrors', validationErrors)
+        // console.log('validationErrors', validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
 
-        console.log('spotName', spotName)
+        // console.log('spotName', spotName)
         // console.log('spotId', spot.id)
 
         const payload = {
@@ -99,10 +99,10 @@ const EditSpotForm = ({spot}) => {
                 .map((url, index) => ({ url, preview: index === 0 }))
         }
 
-        console.log('payload', payload)
+        // console.log('payload', payload)
 
         const updatedSpot = await dispatch(editSpot(payload));
-        console.log('newSpot', updatedSpot)
+        // console.log('newSpot', updatedSpot)
         if (updatedSpot?.id) {
             navigate(`/spots/${updatedSpot.id}`);
         }

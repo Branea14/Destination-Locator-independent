@@ -207,22 +207,33 @@ router.get("/", async (req, res, next) => {
             return res.status(400).json({ message: "Bad Request", errors });
         }
 
-        // Fetch all spots
+        // fetch spots with reviews. spotImages was included clause with order but the backend wasn't reading it and placing it arbitary order.
         const spots = await Spot.findAll({
             where,
+            include: [{ model: Review, attributes: ['stars'] }],
             ...pagination
         });
 
-        // Fetch SpotImages separately for each spot and sort them
+        // console.log('spots', spots) array of promises
+
+        // Process spots to calculate avgRating and fetch previewImage
         const spotList = await Promise.all(
             spots.map(async (spot) => {
+                const spotData = spot.toJSON();
+
+                const reviews = spotData.Reviews || [];
+                const avgRating =
+                    reviews.length > 0
+                        ? reviews.reduce((acc, review) => acc + review.stars, 0) / reviews.length
+                        : 0;
+
+                // needed separate query to fetch SpotImages and get preview image
                 const spotImages = await SpotImage.findAll({
                     where: { spotId: spot.id },
                     attributes: ['id', 'url', 'preview'],
-                    order: [['preview', 'DESC']] // Sort preview: true first
+                    order: [['preview', 'DESC']]
                 });
 
-                // Determine the preview image
                 const previewImage = spotImages.length > 0 ? spotImages[0].url : null;
 
                 return {
@@ -239,19 +250,17 @@ router.get("/", async (req, res, next) => {
                     price: parseFloat(spot.price),
                     createdAt: spot.createdAt,
                     updatedAt: spot.updatedAt,
-                    avgRating: 0, // Placeholder for now (can be calculated if needed)
-                    previewImage, // Preview image url
+                    avgRating: parseFloat(avgRating.toFixed(1)),
+                    previewImage,
                 };
             })
         );
 
-        // Return response with pagination
         res.status(200).json({
             Spots: spotList,
             page: parseInt(page, 10),
             size: parseInt(size, 10),
         });
-
     } catch (err) {
         next(err);
     }

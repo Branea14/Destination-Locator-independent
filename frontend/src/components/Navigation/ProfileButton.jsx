@@ -57,7 +57,7 @@ const ProfileButton = ({user}) => {
                         <li className="profile-info">{user.email}</li>
                         <div></div>
                         <li>
-                            <NavLink to='spots/current'>Manage Spots</NavLink>
+                            <NavLink class='link' to='spots/current'>Manage Spots</NavLink>
                         </li>
                         <div></div>
                         <li>

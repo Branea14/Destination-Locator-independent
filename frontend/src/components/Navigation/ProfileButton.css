@@ -109,10 +109,10 @@ button:hover {
     /* moves heading to the right */
 /* } */
 
-.nav-list a {
+.link {
     text-decoration: none;
     color: #f8f8f2;
-    font-size: 1.2rem;
+    font-size: 1rem;
     transition: color 0.3s;
     /* margin-bottom: -20px; */
 }
@@ -120,7 +120,7 @@ button:hover {
 .profile-dropdown li:last-child button {
     text-align: left;
     padding-left: 0;
-    font-size: 1.2rem
+    font-size: 1rem;
 }
 
 .profile-dropdown li a {
