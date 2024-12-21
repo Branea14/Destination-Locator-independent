@@ -32,12 +32,17 @@ module.exports = {
       { spotId: 3, url: "https://imgur.com/DR0i3D0", preview: false},
 
       // Spot 4
-      { spotId: 4, url: "https://imgur.com/unfJfOH", preview: true },
-      { spotId: 4, url: "https://imgur.com/nx28p1Z", preview: false },
-      { spotId: 4, url: "https://imgur.com/lfo7Mcf", preview: false},
-      { spotId: 4, url: "https://imgur.com/55rxfTU", preview: false},
-      { spotId: 4, url: "https://imgur.com/sT8ccej", preview: false},
+      { spotId: 4, url: "https://ibb.co/fSMzfL7", preview: true },
+      { spotId: 4, url: "https://ibb.co/QD959J3", preview: false },
+      { spotId: 4, url: "https://ibb.co/Rg8pjCd", preview: false},
+      { spotId: 4, url: "https://ibb.co/CVjmfFw", preview: false},
+      { spotId: 4, url: "https://ibb.co/5jgSf8K", preview: false},
 
+//       https://ibb.co/fSMzfL7
+// https://ibb.co/QD959J3
+// https://ibb.co/Rg8pjCd
+// https://ibb.co/CVjmfFw
+// https://ibb.co/5jgSf8K
 
       // Spot 5
       { spotId: 5, url: "https://cdn.openart.ai/uploads/image_BkvJDcGJ_1733898521284_512.webp", preview: true },
