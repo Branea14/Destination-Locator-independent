@@ -11,11 +11,11 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await SpotImage.bulkCreate([
       // Spot 1
-      { spotId: 1, url: "https://imgur.com/ao7kudY", preview: true },
-      { spotId: 1, url: "https://imgur.com/XlIl6jj", preview: false },
-      { spotId: 1, url: "https://imgur.com/102Cwlo", preview: false },
-      { spotId: 1, url: "https://imgur.com/DqKfuIK", preview: false },
-      { spotId: 1, url: "https://imgur.com/0qjnX8E", preview: false },
+      { spotId: 1, url: "https://i.imgur.com/ao7kudY.jpeg", preview: true },
+      { spotId: 1, url: "https://i.imgur.com/XlIl6jj.jpeg", preview: false },
+      { spotId: 1, url: "https://i.imgur.com/102Cwlo.jpeg", preview: false },
+      { spotId: 1, url: "https://i.imgur.com/DqKfuIK.jpeg", preview: false },
+      { spotId: 1, url: "https://i.imgur.com/0qjnX8E.jpeg", preview: false },
 
       // Spot 2
       { spotId: 2, url: "https://imgur.com/dasVxkE", preview: true },
@@ -25,7 +25,7 @@ module.exports = {
       { spotId: 2, url: "https://imgur.com/qFBXftF", preview: false},
 
       // Spot 3
-      { spotId: 3, url: "https://imgur.com/UoxsN5x", preview: true },
+      { spotId: 3, url: "https://imgur.com/UoxsN5x.jpeg", preview: true },
       { spotId: 3, url: "https://imgur.com/DGQoigg", preview: false },
       { spotId: 3, url: "https://imgur.com/CGkoJVN", preview: false },
       { spotId: 3, url: "https://imgur.com/GhfBnBi", preview: false },
