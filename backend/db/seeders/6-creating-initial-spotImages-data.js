@@ -18,11 +18,11 @@ module.exports = {
       { spotId: 1, url: "https://i.imgur.com/0qjnX8E.jpeg", preview: false },
 
       // Spot 2
-      { spotId: 2, url: "https://imgur.com/dasVxkE.jpeg", preview: true },
-      { spotId: 2, url: "https://imgur.com/LiuzF3q.jpeg", preview: false },
-      { spotId: 2, url: "https://imgur.com/9v9qEEV.jepg", preview: false},
-      { spotId: 2, url: "https://imgur.com/J98dx3e.jpeg", preview: false},
-      { spotId: 2, url: "https://imgur.com/qFBXftF.jpeg", preview: false},
+      { spotId: 2, url: "https://i.imgur.com/dasVxkE.png", preview: true },
+      { spotId: 2, url: "https://i.imgur.com/qFBXftF.png", preview: false },
+      { spotId: 2, url: "https://i.imgur.com/LiuzF3q.png", preview: false},
+      { spotId: 2, url: "https://i.imgur.com/J98dx3e.png", preview: false},
+      { spotId: 2, url: "https://i.imgur.com/9v9qEEV.png", preview: false},
 
       // Spot 3
       { spotId: 3, url: "https://imgur.com/UoxsN5x.jpeg", preview: true },
