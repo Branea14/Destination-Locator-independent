@@ -26,10 +26,10 @@ module.exports = {
 
       // Spot 3
       { spotId: 3, url: "https://imgur.com/UoxsN5x.jpeg", preview: true },
-      { spotId: 3, url: "https://imgur.com/DGQoigg", preview: false },
-      { spotId: 3, url: "https://imgur.com/CGkoJVN", preview: false },
-      { spotId: 3, url: "https://imgur.com/GhfBnBi", preview: false },
-      { spotId: 3, url: "https://imgur.com/DR0i3D0", preview: false},
+      { spotId: 3, url: "https://imgur.com/DGQoigg.jpeg", preview: false },
+      { spotId: 3, url: "https://imgur.com/CGkoJVN.jpeg", preview: false },
+      { spotId: 3, url: "https://imgur.com/GhfBnBi.jpeg", preview: false },
+      { spotId: 3, url: "https://imgur.com/DR0i3D0.jpeg", preview: false},
 
       // Spot 4
       { spotId: 4, url: "https://ibb.co/fSMzfL7.jpeg", preview: true },
