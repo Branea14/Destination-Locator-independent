@@ -18,11 +18,11 @@ module.exports = {
       { spotId: 1, url: "https://i.imgur.com/0qjnX8E.jpeg", preview: false },
 
       // Spot 2
-      { spotId: 2, url: "https://imgur.com/dasVxkE", preview: true },
-      { spotId: 2, url: "https://imgur.com/LiuzF3q", preview: false },
-      { spotId: 2, url: "https://imgur.com/9v9qEEV", preview: false},
-      { spotId: 2, url: "https://imgur.com/J98dx3e", preview: false},
-      { spotId: 2, url: "https://imgur.com/qFBXftF", preview: false},
+      { spotId: 2, url: "https://imgur.com/dasVxkE.jpeg", preview: true },
+      { spotId: 2, url: "https://imgur.com/LiuzF3q.jpeg", preview: false },
+      { spotId: 2, url: "https://imgur.com/9v9qEEV.jepg", preview: false},
+      { spotId: 2, url: "https://imgur.com/J98dx3e.jpeg", preview: false},
+      { spotId: 2, url: "https://imgur.com/qFBXftF.jpeg", preview: false},
 
       // Spot 3
       { spotId: 3, url: "https://imgur.com/UoxsN5x.jpeg", preview: true },
@@ -32,11 +32,11 @@ module.exports = {
       { spotId: 3, url: "https://imgur.com/DR0i3D0", preview: false},
 
       // Spot 4
-      { spotId: 4, url: "https://ibb.co/fSMzfL7", preview: true },
-      { spotId: 4, url: "https://ibb.co/QD959J3", preview: false },
-      { spotId: 4, url: "https://ibb.co/Rg8pjCd", preview: false},
-      { spotId: 4, url: "https://ibb.co/CVjmfFw", preview: false},
-      { spotId: 4, url: "https://ibb.co/5jgSf8K", preview: false},
+      { spotId: 4, url: "https://ibb.co/fSMzfL7.jpeg", preview: true },
+      { spotId: 4, url: "https://ibb.co/QD959J3.jpeg", preview: false },
+      { spotId: 4, url: "https://ibb.co/Rg8pjCd.jpeg", preview: false},
+      { spotId: 4, url: "https://ibb.co/CVjmfFw.jpeg", preview: false},
+      { spotId: 4, url: "https://ibb.co/5jgSf8K.jpeg", preview: false},
 
 //       https://ibb.co/fSMzfL7
 // https://ibb.co/QD959J3
