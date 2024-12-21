@@ -11,32 +11,32 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await SpotImage.bulkCreate([
       // Spot 1
-      { spotId: 1, url: "https://images.pexels.com/photos/29677946/pexels-photo-29677946/free-photo-of-modern-geometric-apartment-building.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 1, url: "https://images.pexels.com/photos/27490330/pexels-photo-27490330/free-photo-of-a-city-street-with-tall-buildings-and-a-street-sign.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 1, url: "https://images.pexels.com/photos/4067759/pexels-photo-4067759.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 1, url: "https://images.pexels.com/photos/6177607/pexels-photo-6177607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 1, url: "https://cdn.openart.ai/uploads/image_wRWo1tTm_1733898794342_raw.jpg", preview: false },
+      { spotId: 1, url: "https://imgur.com/ao7kudY", preview: true },
+      { spotId: 1, url: "https://imgur.com/XlIl6jj", preview: false },
+      { spotId: 1, url: "https://imgur.com/102Cwlo", preview: false },
+      { spotId: 1, url: "https://imgur.com/DqKfuIK", preview: false },
+      { spotId: 1, url: "https://imgur.com/0qjnX8E", preview: false },
 
       // Spot 2
-      { spotId: 2, url: "https://images.pexels.com/photos/23024072/pexels-photo-23024072/free-photo-of-yokohama-waterfront-at-dusk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 2, url: "https://images.pexels.com/photos/6070061/pexels-photo-6070061.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 2, url: "https://cdn.openart.ai/uploads/image_FyW3SmaE_1733897892895_raw.jpg", preview: false},
-      { spotId: 2, url: "https://i.imgur.com/DQAow5H.jpeg", preview: false},
-      { spotId: 2, url: "https://i.imgur.com/5F1P5Aj.jpeg", preview: false},
+      { spotId: 2, url: "https://imgur.com/dasVxkE", preview: true },
+      { spotId: 2, url: "https://imgur.com/LiuzF3q", preview: false },
+      { spotId: 2, url: "https://imgur.com/9v9qEEV", preview: false},
+      { spotId: 2, url: "https://imgur.com/J98dx3e", preview: false},
+      { spotId: 2, url: "https://imgur.com/qFBXftF", preview: false},
 
       // Spot 3
-      { spotId: 3, url: "https://images.pexels.com/photos/327483/pexels-photo-327483.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 3, url: "https://images.pexels.com/photos/739074/pexels-photo-739074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 3, url: "https://cdn.openart.ai/uploads/image_m2BkxdcN_1733898016937_raw.jpg", preview: false },
-      { spotId: 3, url: "https://images.pexels.com/photos/5472597/pexels-photo-5472597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 3, url: "https://i.imgur.com/43cPQ0X.jpeg", preview: false},
+      { spotId: 3, url: "https://imgur.com/UoxsN5x", preview: true },
+      { spotId: 3, url: "https://imgur.com/DGQoigg", preview: false },
+      { spotId: 3, url: "https://imgur.com/CGkoJVN", preview: false },
+      { spotId: 3, url: "https://imgur.com/GhfBnBi", preview: false },
+      { spotId: 3, url: "https://imgur.com/DR0i3D0", preview: false},
 
       // Spot 4
-      { spotId: 4, url: "https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 4, url: "https://images.pexels.com/photos/5644745/pexels-photo-5644745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 4, url: "https://cdn.openart.ai/uploads/image_piNhAu5A_1733898643991_raw.jpg", preview: false},
-      { spotId: 4, url: "https://i.imgur.com/3ysAXSv.jpeg", preview: false},
-      { spotId: 4, url: "https://i.imgur.com/CFU9sSv.jpeg", preview: false},
+      { spotId: 4, url: "https://imgur.com/unfJfOH", preview: true },
+      { spotId: 4, url: "https://imgur.com/nx28p1Z", preview: false },
+      { spotId: 4, url: "https://imgur.com/lfo7Mcf", preview: false},
+      { spotId: 4, url: "https://imgur.com/55rxfTU", preview: false},
+      { spotId: 4, url: "https://imgur.com/sT8ccej", preview: false},
 
 
       // Spot 5
