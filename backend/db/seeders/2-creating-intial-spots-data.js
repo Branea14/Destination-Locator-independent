@@ -103,7 +103,7 @@ module.exports = {
       country: "Japan",
       lat: 34.6851,
       lng: 135.8048,
-      name: "Retro Retreat",
+      name: "The Deer Park Hideaway",
       price: 100.00,
       description: "A charming house with vintage decor near Nara's famous deer park."
     },
