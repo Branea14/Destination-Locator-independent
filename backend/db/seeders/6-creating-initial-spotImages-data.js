@@ -32,59 +32,53 @@ module.exports = {
       { spotId: 3, url: "https://imgur.com/DR0i3D0.jpeg", preview: false},
 
       // Spot 4
-      { spotId: 4, url: "https://ibb.co/fSMzfL7.jpeg", preview: true },
-      { spotId: 4, url: "https://ibb.co/QD959J3.jpeg", preview: false },
-      { spotId: 4, url: "https://ibb.co/Rg8pjCd.jpeg", preview: false},
-      { spotId: 4, url: "https://ibb.co/CVjmfFw.jpeg", preview: false},
-      { spotId: 4, url: "https://ibb.co/5jgSf8K.jpeg", preview: false},
-
-//       https://ibb.co/fSMzfL7
-// https://ibb.co/QD959J3
-// https://ibb.co/Rg8pjCd
-// https://ibb.co/CVjmfFw
-// https://ibb.co/5jgSf8K
+      { spotId: 4, url: "https://i.imgur.com/unfJfOH.jpeg", preview: true },
+      { spotId: 4, url: "https://i.imgur.com/nx28p1Z.jpeg", preview: false },
+      { spotId: 4, url: "https://i.imgur.com/lfo7Mcf.jpeg", preview: false},
+      { spotId: 4, url: "https://i.imgur.com/55rxfTU.jpeg", preview: false},
+      { spotId: 4, url: "https://i.imgur.com/sT8ccej.jpeg", preview: false},
 
       // Spot 5
-      { spotId: 5, url: "https://cdn.openart.ai/uploads/image_BkvJDcGJ_1733898521284_512.webp", preview: true },
-      { spotId: 5, url: "https://cdn.openart.ai/uploads/image_BLkp1lCS_1733897440904_512.webp", preview: false},
-      { spotId: 5, url: "https://i.imgur.com/f2ETfRX.jpeg", preview: false},
-      { spotId: 5, url: "https://i.imgur.com/yCeDETj.jpeg", preview: false},
-      { spotId: 5, url: "https://i.imgur.com/3KTVi1f.jpeg", preview: false},
+      { spotId: 5, url: "https://i.imgur.com/tLgOqYJ.jpeg", preview: true },
+      { spotId: 5, url: "https://i.imgur.com/DO1QPNR.jpeg", preview: false},
+      { spotId: 5, url: "https://i.imgur.com/XuvwRn9.jpeg", preview: false},
+      { spotId: 5, url: "hhttps://i.imgur.com/VRrthgP.jpeg", preview: false},
+      { spotId: 5, url: "https://i.imgur.com/CmdspBX.jpeg", preview: false},
 
       // Spot 6
-      { spotId: 6, url: "https://images.pexels.com/photos/19046832/pexels-photo-19046832/free-photo-of-cyclist-on-sidewalk-in-city.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 6, url: "https://i.imgur.com/skQk4AZ.jpeg", preview: false},
-      { spotId: 6, url: "https://i.imgur.com/33HYXzY.jpeg", preview: false},
-      { spotId: 6, url: "https://i.imgur.com/SG4By4V.jpeg", preview: false},
-      { spotId: 6, url: "https://i.imgur.com/3ysAXSv.jpeg", preview: false},
+      { spotId: 6, url: "https://i.imgur.com/H1sKr9d.jpeg", preview: true },
+      { spotId: 6, url: "https://i.imgur.com/1RnvwKD.jpeg", preview: false},
+      { spotId: 6, url: "https://i.imgur.com/sRY0x7l.jpeg", preview: false},
+      { spotId: 6, url: "https://i.imgur.com/B0h8wJE.jpeg", preview: false},
+      { spotId: 6, url: "https://i.imgur.com/ZBTnbjW.jpeg", preview: false},
 
       // Spot 7
-      { spotId: 7, url: "https://images.pexels.com/photos/8193014/pexels-photo-8193014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 7, url: "https://i.imgur.com/bUgY6Ak.jpeg", preview: false},
-      { spotId: 7, url: "https://i.imgur.com/R4VkASY.jpeg", preview: false},
-      { spotId: 7, url: "https://i.imgur.com/qMI3jPw.jpeg", preview: false},
-      { spotId: 7, url: "https://i.imgur.com/hkYmuTE.jpeg", preview: false},
+      { spotId: 7, url: "https://i.imgur.com/PvsJmYZ.png", preview: true },
+      { spotId: 7, url: "https://i.imgur.com/ZM71wEu.png", preview: false},
+      { spotId: 7, url: "https://i.imgur.com/dq98oP4.png", preview: false},
+      { spotId: 7, url: "https://i.imgur.com/WGsWz25.png", preview: false},
+      { spotId: 7, url: "https://i.imgur.com/66nK6Ih.png", preview: false},
 
       // Spot 8
-      { spotId: 8, url: "https://images.pexels.com/photos/6249415/pexels-photo-6249415.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 8, url: "https://i.imgur.com/cjegv5y.jpeg", preview: false},
-      { spotId: 8, url: "https://i.imgur.com/f2ETfRX.jpeg", preview: false},
-      { spotId: 8, url: "https://i.imgur.com/yCeDETj.jpeg", preview: false},
-      { spotId: 8, url: "https://i.imgur.com/3KTVi1f.jpeg", preview: false},
+      { spotId: 8, url: "https://i.imgur.com/j3WFXkC.png", preview: true },
+      { spotId: 8, url: "https://i.imgur.com/n3YGjUn.png", preview: false},
+      { spotId: 8, url: "https://i.imgur.com/fBzx6Pb.png", preview: false},
+      { spotId: 8, url: "https://i.imgur.com/TmVvtJj.png", preview: false},
+      { spotId: 8, url: "https://i.imgur.com/YPpqAWg.png", preview: false},
 
       // Spot 9
-      { spotId: 9, url: "https://images.pexels.com/photos/17274539/pexels-photo-17274539/free-photo-of-cityscape-of-kobe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 9, url: "https://i.imgur.com/oLug0yN.jpeg", preview: false},
-      { spotId: 9, url: "https://i.imgur.com/skQk4AZ.jpeg", preview: false},
-      { spotId: 9, url: "https://i.imgur.com/33HYXzY.jpeg", preview: false},
-      { spotId: 9, url: "https://i.imgur.com/SG4By4V.jpeg", preview: false},
+      { spotId: 9, url: "https://i.imgur.com/z6bkFqK.jpeg", preview: true },
+      { spotId: 9, url: "https://i.imgur.com/KCYS6vs.png", preview: false},
+      { spotId: 9, url: "https://i.imgur.com/hdMfpoI.jpeg", preview: false},
+      { spotId: 9, url: "https://i.imgur.com/lB5f0GB.jpeg", preview: false},
+      { spotId: 9, url: "https://i.imgur.com/9au71mX.jpeg", preview: false},
 
       // Spot 10
-      { spotId: 10, url: "https://images.pexels.com/photos/5846615/pexels-photo-5846615.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: true },
-      { spotId: 10, url: "https://images.pexels.com/photos/29696164/pexels-photo-29696164/free-photo-of-modern-scandinavian-living-room-interior-design.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 10, url: "https://images.pexels.com/photos/18810867/pexels-photo-18810867/free-photo-of-a-building-by-a-lake.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", preview: false },
-      { spotId: 10, url: "https://i.imgur.com/wuYgbcO.jpeg", preview: false},
-      { spotId: 10, url: "https://i.imgur.com/tiEeCdJ.jpeg", preview: false}
+      { spotId: 10, url: "https://i.imgur.com/cnRsYcd.png", preview: true },
+      { spotId: 10, url: "https://i.imgur.com/g7JpbMD.png", preview: false },
+      { spotId: 10, url: "https://i.imgur.com/S7Ofn7A.png", preview: false },
+      { spotId: 10, url: "https://i.imgur.com/RdBFwlV.png", preview: false},
+      { spotId: 10, url: "https://i.imgur.com/Rd4NOxI.png", preview: false}
 
     ], { validate: true });
   },
