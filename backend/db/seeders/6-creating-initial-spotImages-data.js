@@ -42,7 +42,7 @@ module.exports = {
       { spotId: 5, url: "https://i.imgur.com/tLgOqYJ.jpeg", preview: true },
       { spotId: 5, url: "https://i.imgur.com/DO1QPNR.jpeg", preview: false},
       { spotId: 5, url: "https://i.imgur.com/XuvwRn9.jpeg", preview: false},
-      { spotId: 5, url: "hhttps://i.imgur.com/VRrthgP.jpeg", preview: false},
+      { spotId: 5, url: "https://i.imgur.com/VRrthgP.jpeg", preview: false},
       { spotId: 5, url: "https://i.imgur.com/CmdspBX.jpeg", preview: false},
 
       // Spot 6
