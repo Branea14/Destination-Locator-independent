@@ -35,15 +35,15 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     firstName: {
       type: DataTypes.STRING,
-      validate: {
-        isAlphanumeric: true
-      }
+      // validate: {
+      //   isAlphanumeric: true
+      // }
     },
     lastName: {
       type: DataTypes.STRING,
-      validate: {
-        isAlphanumeric: true
-      }
+      // validate: {
+      //   isAlphanumeric: true
+      // }
     },
     username: {
       type: DataTypes.STRING,
